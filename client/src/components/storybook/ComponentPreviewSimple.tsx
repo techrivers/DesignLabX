@@ -15,6 +15,14 @@ import {
   FormHelperText,
   Radio,
   RadioGroup,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  IconButton,
+  Drawer,
   Switch,
   Slider,
   Rating,
@@ -52,6 +60,11 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import InboxIcon from '@mui/icons-material/Inbox';
+import DraftsIcon from '@mui/icons-material/Drafts';
+import MailIcon from '@mui/icons-material/Mail';
+import MenuIcon from '@mui/icons-material/Menu';
+import SendIcon from '@mui/icons-material/Send';
 
 interface ComponentControls {
   [key: string]: any;
@@ -299,20 +312,6 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             disabled={controls.disabled || false}
             size={controls.size || "medium"}
             renderInput={(params) => <TextField {...params} label={controls.label || "Autocomplete"} />}
-          />
-        );
-      case "Radio":
-        return (
-          <FormControlLabel
-            control={
-              <MuiRadio
-                checked={controls.checked || false}
-                color={controls.color || "primary"}
-                size={controls.size || "medium"}
-                disabled={controls.disabled || false}
-              />
-            }
-            label={controls.label || "Radio"}
           />
         );
 
