@@ -88,8 +88,35 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             rows={controls.rows || 1}
           />
         );
+      case "Card":
+        return (
+          <Card sx={{ maxWidth: 345 }}>
+            <CardContent>
+              <Typography gutterBottom variant="h5" component="div">
+                {controls.title || "Card Title"}
+              </Typography>
+              <Typography variant="body2" color="text.secondary">
+                {controls.content || "This is a sample card component with content."}
+              </Typography>
+            </CardContent>
+          </Card>
+        );
+      case "Checkbox":
+        return (
+          <FormControlLabel
+            control={
+              <Checkbox 
+                checked={controls.checked || false}
+                disabled={controls.disabled || false}
+                color={controls.color || "primary"}
+                size={controls.size || "medium"}
+              />
+            }
+            label={controls.label || "Checkbox"}
+          />
+        );
       default:
-        return <div style={{ padding: '20px', color: '#666' }}>Component preview for {component}</div>;
+        return <div style={{ padding: '20px', color: '#666' }}>Select a component to preview</div>;
     }
   };
 
@@ -166,23 +193,81 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
       case "Card":
         return (
-          <Card sx={{ maxWidth: 345 }}>
-            <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
-                Card Title
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                This is a sample card component with content.
-              </Typography>
-            </CardContent>
-          </Card>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Cards</h3>
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap' }}>
+                <Card sx={{ maxWidth: 300 }}>
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                      Simple Card
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Basic card with content only.
+                    </Typography>
+                  </CardContent>
+                </Card>
+                <Card sx={{ maxWidth: 300 }} variant="outlined">
+                  <CardContent>
+                    <Typography gutterBottom variant="h6" component="div">
+                      Outlined Card
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                      Card with outlined variant.
+                    </Typography>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Actions</h3>
+              <Card sx={{ maxWidth: 300 }}>
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">
+                    Interactive Card
+                  </Typography>
+                  <Typography variant="body2" color="text.secondary">
+                    Card with action buttons.
+                  </Typography>
+                </CardContent>
+                <CardActions>
+                  <MuiButton size="small">Share</MuiButton>
+                  <MuiButton size="small">Learn More</MuiButton>
+                </CardActions>
+              </Card>
+            </div>
+          </div>
         );
       case "Checkbox":
         return (
-          <FormControlLabel
-            control={<Checkbox defaultChecked />}
-            label="Checkbox"
-          />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic States</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <FormControlLabel control={<Checkbox />} label="Unchecked" />
+                <FormControlLabel control={<Checkbox checked />} label="Checked" />
+                <FormControlLabel control={<Checkbox indeterminate />} label="Indeterminate" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <FormControlLabel control={<Checkbox checked color="primary" />} label="Primary" />
+                <FormControlLabel control={<Checkbox checked color="secondary" />} label="Secondary" />
+                <FormControlLabel control={<Checkbox checked color="success" />} label="Success" />
+                <FormControlLabel control={<Checkbox checked color="error" />} label="Error" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes & States</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <FormControlLabel control={<Checkbox checked size="small" />} label="Small" />
+                <FormControlLabel control={<Checkbox checked size="medium" />} label="Medium" />
+                <FormControlLabel control={<Checkbox disabled />} label="Disabled" />
+                <FormControlLabel control={<Checkbox checked disabled />} label="Checked Disabled" />
+              </div>
+            </div>
+          </div>
         );
       case "Select":
         return (
