@@ -293,10 +293,10 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         return (
           <Box sx={{ flexGrow: 1 }}>
             <Grid container spacing={2}>
-              <Grid size={6}>
+              <Grid item xs={6}>
                 <Paper sx={{ p: 2 }}>Item 1</Paper>
               </Grid>
-              <Grid size={6}>
+              <Grid item xs={6}>
                 <Paper sx={{ p: 2 }}>Item 2</Paper>
               </Grid>
             </Grid>
