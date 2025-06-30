@@ -28,40 +28,21 @@ import {
   Chip,
   Avatar,
   Badge,
-  Tooltip,
-  Accordion,
-  AccordionSummary,
-  AccordionDetails,
+  Alert,
+  CircularProgress,
+  LinearProgress,
+  Paper,
+  Box,
+  Pagination,
+  AppBar,
+  Toolbar,
+  Tabs,
+  Tab,
   Breadcrumbs,
   Link,
   Stepper,
   Step,
-  StepLabel,
-  BottomNavigation,
-  BottomNavigationAction,
-  Menu,
-  Pagination,
-  SpeedDial,
-  SpeedDialAction,
-  Alert,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  Snackbar,
-  CircularProgress,
-  LinearProgress,
-  Skeleton,
-  Container,
-  Box,
-  Stack,
-  Divider,
-  Paper,
-  AppBar,
-  Toolbar,
-  Drawer,
-  Tabs,
-  Tab
+  StepLabel
 } from '@mui/material';
 
 interface ComponentPreviewProps {
@@ -79,10 +60,9 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const [currentView, setCurrentView] = useState<'canvas' | 'design'>('canvas');
 
   const renderComponent = () => {
-    try {
-      switch (component) {
-        case "Button":
-          return <MuiButton variant="contained" color="primary">Button</MuiButton>;
+    switch (component) {
+      case "Button":
+        return <MuiButton variant="contained" color="primary">Button</MuiButton>;
       case "TextField":
         return <TextField label="Text Field" variant="outlined" />;
       case "Card":
@@ -121,13 +101,12 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           <RadioGroup defaultValue="option1">
             <FormControlLabel value="option1" control={<Radio />} label="Option 1" />
             <FormControlLabel value="option2" control={<Radio />} label="Option 2" />
-            <FormControlLabel value="option3" control={<Radio />} label="Option 3" />
           </RadioGroup>
         );
       case "Switch":
         return <FormControlLabel control={<Switch defaultChecked />} label="Switch" />;
       case "Slider":
-        return <Slider defaultValue={30} />;
+        return <Slider defaultValue={30} sx={{ width: 200 }} />;
       case "Rating":
         return <Rating value={4} readOnly />;
       case "Autocomplete":
@@ -157,22 +136,18 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
       case "Fab":
         return (
           <Fab color="primary">
-            <span className="material-icons">add</span>
+            <span style={{ fontSize: '18px' }}>+</span>
           </Fab>
         );
       case "List":
         return (
           <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
             <ListItem>
-              <ListItemIcon>
-                <span className="material-icons">inbox</span>
-              </ListItemIcon>
+              <ListItemIcon>📧</ListItemIcon>
               <ListItemText primary="Inbox" />
             </ListItem>
             <ListItem>
-              <ListItemIcon>
-                <span className="material-icons">drafts</span>
-              </ListItemIcon>
+              <ListItemIcon>📄</ListItemIcon>
               <ListItemText primary="Drafts" />
             </ListItem>
           </List>
@@ -184,24 +159,11 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
       case "Badge":
         return (
           <Badge badgeContent={4} color="primary">
-            <span className="material-icons">mail</span>
+            <span style={{ fontSize: '24px' }}>📧</span>
           </Badge>
         );
       case "Typography":
         return <Typography variant="h4">Typography</Typography>;
-      case "Accordion":
-        return (
-          <Accordion>
-            <AccordionSummary expandIcon={<span className="material-icons">expand_more</span>}>
-              <Typography>Accordion 1</Typography>
-            </AccordionSummary>
-            <AccordionDetails>
-              <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </Typography>
-            </AccordionDetails>
-          </Accordion>
-        );
       case "Alert":
         return <Alert severity="info">This is an info alert</Alert>;
       case "Progress":
@@ -214,24 +176,21 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
       case "Table":
         return (
           <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <table style={{ width: '100%' }}>
+            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
               <thead>
                 <tr>
-                  <th style={{ padding: '16px', textAlign: 'left' }}>Name</th>
-                  <th style={{ padding: '16px', textAlign: 'left' }}>Calories</th>
-                  <th style={{ padding: '16px', textAlign: 'left' }}>Fat</th>
+                  <th style={{ padding: '16px', textAlign: 'left', borderBottom: '1px solid #ddd' }}>Name</th>
+                  <th style={{ padding: '16px', textAlign: 'left', borderBottom: '1px solid #ddd' }}>Calories</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td style={{ padding: '16px' }}>Frozen yoghurt</td>
-                  <td style={{ padding: '16px' }}>159</td>
-                  <td style={{ padding: '16px' }}>6.0</td>
+                  <td style={{ padding: '16px', borderBottom: '1px solid #eee' }}>Frozen yoghurt</td>
+                  <td style={{ padding: '16px', borderBottom: '1px solid #eee' }}>159</td>
                 </tr>
                 <tr>
-                  <td style={{ padding: '16px' }}>Ice cream sandwich</td>
-                  <td style={{ padding: '16px' }}>237</td>
-                  <td style={{ padding: '16px' }}>9.0</td>
+                  <td style={{ padding: '16px', borderBottom: '1px solid #eee' }}>Ice cream</td>
+                  <td style={{ padding: '16px', borderBottom: '1px solid #eee' }}>237</td>
                 </tr>
               </tbody>
             </table>
@@ -282,146 +241,168 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
       default:
         return (
-          <div className="p-8 border-2 border-dashed border-muted-foreground/25 rounded-lg text-center">
-            <span className="material-icons text-4xl text-muted-foreground mb-2">widgets</span>
-            <p className="text-muted-foreground">Component preview for {component} coming soon</p>
+          <div style={{ 
+            padding: '32px', 
+            border: '2px dashed #ccc', 
+            borderRadius: '8px', 
+            textAlign: 'center' 
+          }}>
+            <div style={{ fontSize: '48px', marginBottom: '16px' }}>📦</div>
+            <p style={{ color: '#666' }}>Component preview for {component} coming soon</p>
           </div>
         );
     }
   };
 
-  const renderCanvasView = () => (
-    <div style={{ 
-      padding: '24px', 
-      backgroundColor: isDark ? '#1a1a1a' : '#ffffff', 
-      minHeight: '400px', 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center' 
-    }}>
-      {renderComponent()}
-    </div>
-  );
-
-  const renderDesignView = () => (
-    <div style={{ 
-      padding: '24px', 
-      background: isDark 
-        ? 'linear-gradient(135deg, #374151 0%, #1f2937 100%)' 
-        : 'linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%)', 
-      minHeight: '400px', 
-      display: 'flex', 
-      alignItems: 'center', 
-      justifyContent: 'center',
-      position: 'relative'
-    }}>
-      <div style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        display: 'grid',
-        gridTemplateColumns: 'repeat(12, 1fr)',
-        gap: '16px',
-        opacity: 0.2
-      }}>
-        {Array.from({ length: 48 }).map((_, i) => (
-          <div key={i} style={{ 
-            backgroundColor: isDark ? '#6b7280' : '#3b82f6', 
-            height: '16px' 
-          }}></div>
-        ))}
-      </div>
-      <div style={{ position: 'relative', zIndex: 10 }}>
-        {renderComponent()}
-      </div>
-    </div>
-  );
+  const canvasBackground = isDark ? '#1a1a1a' : '#ffffff';
+  const designBackground = isDark 
+    ? 'linear-gradient(135deg, #374151 0%, #1f2937 100%)' 
+    : 'linear-gradient(135deg, #eff6ff 0%, #e0e7ff 100%)';
 
   return (
-    <div className="h-full flex flex-col">
+    <div style={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
       {/* Top Bar */}
-      <div className="flex items-center justify-between p-4 border-b border-muted">
-        <div className="flex items-center space-x-4">
-          <div className="flex bg-muted rounded-lg p-1">
+      <div style={{ 
+        display: 'flex', 
+        alignItems: 'center', 
+        justifyContent: 'space-between', 
+        padding: '16px', 
+        borderBottom: '1px solid #e0e0e0' 
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ 
+            display: 'flex', 
+            backgroundColor: '#f5f5f5', 
+            borderRadius: '8px', 
+            padding: '4px' 
+          }}>
             <button
               onClick={() => setCurrentView('canvas')}
-              className={`px-3 py-1 text-sm rounded-md transition-colors ${
-                currentView === 'canvas'
-                  ? 'bg-background text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
+              style={{
+                padding: '8px 16px',
+                fontSize: '14px',
+                borderRadius: '6px',
+                border: 'none',
+                cursor: 'pointer',
+                backgroundColor: currentView === 'canvas' ? '#ffffff' : 'transparent',
+                color: currentView === 'canvas' ? '#000000' : '#666666',
+                boxShadow: currentView === 'canvas' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'
+              }}
             >
               Canvas
             </button>
             <button
               onClick={() => setCurrentView('design')}
-              className={`px-3 py-1 text-sm rounded-md transition-colors ${
-                currentView === 'design'
-                  ? 'bg-background text-foreground shadow-sm'
-                  : 'text-muted-foreground hover:text-foreground'
-              }`}
+              style={{
+                padding: '8px 16px',
+                fontSize: '14px',
+                borderRadius: '6px',
+                border: 'none',
+                cursor: 'pointer',
+                backgroundColor: currentView === 'design' ? '#ffffff' : 'transparent',
+                color: currentView === 'design' ? '#000000' : '#666666',
+                boxShadow: currentView === 'design' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none'
+              }}
             >
               Design
             </button>
           </div>
         </div>
 
-        <div className="flex items-center space-x-4">
-          <div className="flex items-center space-x-2">
-            <label className="text-sm text-muted-foreground">Viewport:</label>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+            <label style={{ fontSize: '14px', color: '#666' }}>Viewport:</label>
             <select 
               value={selectedViewport}
               onChange={(e) => setSelectedViewport(e.target.value)}
-              className="text-sm border border-muted rounded px-2 py-1"
+              style={{ fontSize: '14px', border: '1px solid #ddd', borderRadius: '4px', padding: '4px 8px' }}
             >
               <option value="mobile">Mobile</option>
               <option value="tablet">Tablet</option>
               <option value="desktop">Desktop</option>
             </select>
           </div>
-          <div className="flex items-center space-x-2">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <button
               onClick={() => setCurrentZoom(Math.max(0.5, currentZoom - 0.1))}
-              className="p-1 text-muted-foreground hover:text-foreground"
+              style={{ 
+                padding: '4px', 
+                border: 'none', 
+                background: 'none', 
+                cursor: 'pointer', 
+                fontSize: '16px' 
+              }}
             >
-              <span className="material-icons text-sm">zoom_out</span>
+              🔍-
             </button>
-            <span className="text-sm text-muted-foreground min-w-12 text-center">
+            <span style={{ fontSize: '14px', color: '#666', minWidth: '48px', textAlign: 'center' }}>
               {Math.round(currentZoom * 100)}%
             </span>
             <button
               onClick={() => setCurrentZoom(Math.min(2, currentZoom + 0.1))}
-              className="p-1 text-muted-foreground hover:text-foreground"
+              style={{ 
+                padding: '4px', 
+                border: 'none', 
+                background: 'none', 
+                cursor: 'pointer', 
+                fontSize: '16px' 
+              }}
             >
-              <span className="material-icons text-sm">zoom_in</span>
+              🔍+
             </button>
           </div>
           <button
             onClick={() => setIsDark(!isDark)}
-            className="p-2 text-muted-foreground hover:text-foreground"
+            style={{ 
+              padding: '8px', 
+              border: 'none', 
+              background: 'none', 
+              cursor: 'pointer', 
+              fontSize: '16px' 
+            }}
           >
-            <span className="material-icons text-sm">
-              {isDark ? 'light_mode' : 'dark_mode'}
-            </span>
+            {isDark ? '☀️' : '🌙'}
           </button>
         </div>
       </div>
 
       {/* Preview Content */}
-      <div className="flex-1 overflow-auto" style={{ backgroundColor: '#f5f5f5' }}>
+      <div style={{ flex: 1, overflow: 'auto', backgroundColor: '#f5f5f5' }}>
         <div 
           style={{ 
             transform: `scale(${currentZoom})`, 
             transformOrigin: 'top left',
             width: selectedViewport === 'mobile' ? '375px' : 
                    selectedViewport === 'tablet' ? '768px' : '100%',
-            margin: '0 auto',
-            backgroundColor: 'transparent'
+            margin: '0 auto'
           }}
         >
-          {currentView === 'canvas' ? renderCanvasView() : renderDesignView()}
+          <div style={{ 
+            padding: '24px', 
+            backgroundColor: currentView === 'canvas' ? canvasBackground : 'transparent',
+            background: currentView === 'design' ? designBackground : undefined,
+            minHeight: '400px', 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: 'center',
+            position: 'relative'
+          }}>
+            {currentView === 'design' && (
+              <div style={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                background: 'repeating-linear-gradient(90deg, transparent, transparent 49px, rgba(0,0,0,0.1) 50px, rgba(0,0,0,0.1) 50px), repeating-linear-gradient(0deg, transparent, transparent 49px, rgba(0,0,0,0.1) 50px, rgba(0,0,0,0.1) 50px)',
+                opacity: 0.3
+              }}
+              />
+            )}
+            <div style={{ position: 'relative', zIndex: 10 }}>
+              {renderComponent()}
+            </div>
+          </div>
         </div>
       </div>
     </div>
