@@ -4,6 +4,7 @@ import {
   TextField, 
   Card, 
   CardContent, 
+  CardActions,
   Typography,
   Checkbox,
   FormControlLabel,
@@ -11,6 +12,7 @@ import {
   MenuItem,
   FormControl,
   InputLabel,
+  FormHelperText,
   Radio,
   RadioGroup,
   Switch,
@@ -271,35 +273,229 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
       case "Select":
         return (
-          <FormControl sx={{ minWidth: 120 }}>
-            <InputLabel>Select</InputLabel>
-            <Select value="option1" label="Select">
-              <MenuItem value="option1">Option 1</MenuItem>
-              <MenuItem value="option2">Option 2</MenuItem>
-              <MenuItem value="option3">Option 3</MenuItem>
-            </Select>
-          </FormControl>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '200px' }}>
+                <FormControl fullWidth>
+                  <InputLabel>Standard</InputLabel>
+                  <Select value="option1" label="Standard">
+                    <MenuItem value="option1">Option 1</MenuItem>
+                    <MenuItem value="option2">Option 2</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl variant="outlined" fullWidth>
+                  <InputLabel>Outlined</InputLabel>
+                  <Select value="option1" label="Outlined">
+                    <MenuItem value="option1">Option 1</MenuItem>
+                    <MenuItem value="option2">Option 2</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl variant="filled" fullWidth>
+                  <InputLabel>Filled</InputLabel>
+                  <Select value="option1" label="Filled">
+                    <MenuItem value="option1">Option 1</MenuItem>
+                    <MenuItem value="option2">Option 2</MenuItem>
+                  </Select>
+                </FormControl>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes & States</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '200px' }}>
+                <FormControl size="small" fullWidth>
+                  <InputLabel>Small</InputLabel>
+                  <Select value="option1" label="Small">
+                    <MenuItem value="option1">Small Option</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl fullWidth disabled>
+                  <InputLabel>Disabled</InputLabel>
+                  <Select value="option1" label="Disabled">
+                    <MenuItem value="option1">Disabled Option</MenuItem>
+                  </Select>
+                </FormControl>
+                <FormControl fullWidth error>
+                  <InputLabel>Error</InputLabel>
+                  <Select value="option1" label="Error">
+                    <MenuItem value="option1">Error Option</MenuItem>
+                  </Select>
+                  <FormHelperText>Error message</FormHelperText>
+                </FormControl>
+              </div>
+            </div>
+          </div>
         );
       case "Radio":
         return (
-          <RadioGroup defaultValue="option1">
-            <FormControlLabel value="option1" control={<Radio />} label="Option 1" />
-            <FormControlLabel value="option2" control={<Radio />} label="Option 2" />
-          </RadioGroup>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Radio Group</h3>
+              <RadioGroup defaultValue="option1">
+                <FormControlLabel value="option1" control={<Radio />} label="Option 1" />
+                <FormControlLabel value="option2" control={<Radio />} label="Option 2" />
+                <FormControlLabel value="option3" control={<Radio />} label="Option 3" />
+              </RadioGroup>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <FormControlLabel control={<Radio checked color="primary" />} label="Primary" />
+                <FormControlLabel control={<Radio checked color="secondary" />} label="Secondary" />
+                <FormControlLabel control={<Radio checked color="success" />} label="Success" />
+                <FormControlLabel control={<Radio checked color="error" />} label="Error" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes & States</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <FormControlLabel control={<Radio checked size="small" />} label="Small" />
+                <FormControlLabel control={<Radio checked size="medium" />} label="Medium" />
+                <FormControlLabel control={<Radio disabled />} label="Disabled" />
+                <FormControlLabel control={<Radio checked disabled />} label="Checked Disabled" />
+              </div>
+            </div>
+          </div>
         );
       case "Switch":
-        return <FormControlLabel control={<Switch defaultChecked />} label="Switch" />;
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Switches</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <FormControlLabel control={<Switch />} label="Off" />
+                <FormControlLabel control={<Switch checked />} label="On" />
+                <FormControlLabel control={<Switch defaultChecked />} label="Default Checked" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <FormControlLabel control={<Switch checked color="primary" />} label="Primary" />
+                <FormControlLabel control={<Switch checked color="secondary" />} label="Secondary" />
+                <FormControlLabel control={<Switch checked color="success" />} label="Success" />
+                <FormControlLabel control={<Switch checked color="error" />} label="Error" />
+                <FormControlLabel control={<Switch checked color="warning" />} label="Warning" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes & States</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                <FormControlLabel control={<Switch checked size="small" />} label="Small" />
+                <FormControlLabel control={<Switch checked size="medium" />} label="Medium" />
+                <FormControlLabel control={<Switch disabled />} label="Disabled" />
+                <FormControlLabel control={<Switch checked disabled />} label="Checked Disabled" />
+              </div>
+            </div>
+          </div>
+        );
       case "Slider":
-        return <Slider defaultValue={30} sx={{ width: 200 }} />;
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Sliders</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
+                <Slider defaultValue={30} />
+                <Slider defaultValue={[20, 37]} />
+                <Slider defaultValue={50} disabled />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
+                <Slider defaultValue={30} color="primary" />
+                <Slider defaultValue={30} color="secondary" />
+                <Slider defaultValue={30} color="success" />
+                <Slider defaultValue={30} color="error" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Marks</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
+                <Slider defaultValue={30} step={10} marks min={0} max={100} />
+                <Slider defaultValue={[20, 37]} marks={[
+                  { value: 0, label: '0°C' },
+                  { value: 20, label: '20°C' },
+                  { value: 37, label: '37°C' },
+                  { value: 100, label: '100°C' }
+                ]} />
+              </div>
+            </div>
+          </div>
+        );
       case "Rating":
-        return <Rating value={4} readOnly />;
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Rating</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Rating value={4} />
+                <Rating value={2.5} precision={0.5} />
+                <Rating value={3} readOnly />
+                <Rating value={4} disabled />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Rating value={4} size="small" />
+                <Rating value={4} size="medium" />
+                <Rating value={4} size="large" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Customization</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Rating value={4} max={10} />
+                <Rating value={4} precision={0.5} />
+                <Rating value={null} />
+              </div>
+            </div>
+          </div>
+        );
       case "Autocomplete":
         return (
-          <Autocomplete
-            options={['Option 1', 'Option 2', 'Option 3']}
-            sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Autocomplete" />}
-          />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Autocomplete</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
+                <Autocomplete
+                  options={['Option 1', 'Option 2', 'Option 3']}
+                  renderInput={(params) => <TextField {...params} label="Basic" />}
+                />
+                <Autocomplete
+                  multiple
+                  options={['Option 1', 'Option 2', 'Option 3']}
+                  renderInput={(params) => <TextField {...params} label="Multiple" />}
+                />
+                <Autocomplete
+                  freeSolo
+                  options={['Option 1', 'Option 2', 'Option 3']}
+                  renderInput={(params) => <TextField {...params} label="Free Solo" />}
+                />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes & States</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
+                <Autocomplete
+                  size="small"
+                  options={['Small Option 1', 'Small Option 2']}
+                  renderInput={(params) => <TextField {...params} label="Small" />}
+                />
+                <Autocomplete
+                  disabled
+                  options={['Disabled Option 1', 'Disabled Option 2']}
+                  renderInput={(params) => <TextField {...params} label="Disabled" />}
+                />
+                <Autocomplete
+                  loading
+                  options={['Loading Option 1', 'Loading Option 2']}
+                  renderInput={(params) => <TextField {...params} label="Loading" />}
+                />
+              </div>
+            </div>
+          </div>
         );
       case "ToggleButton":
         return (
