@@ -23,6 +23,13 @@ import {
   TableRow,
   IconButton,
   Drawer,
+  Tooltip,
+  BottomNavigation,
+  BottomNavigationAction,
+  Menu,
+  SpeedDial,
+  SpeedDialIcon,
+  SpeedDialAction,
   Switch,
   Slider,
   Rating,
@@ -65,6 +72,14 @@ import DraftsIcon from '@mui/icons-material/Drafts';
 import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import SendIcon from '@mui/icons-material/Send';
+import RestoreIcon from '@mui/icons-material/Restore';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import LocationOnIcon from '@mui/icons-material/LocationOn';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon2 from '@mui/icons-material/ExpandMore';
+import EditIcon from '@mui/icons-material/Edit';
+import ShareIcon from '@mui/icons-material/Share';
+import PrintIcon from '@mui/icons-material/Print';
 
 interface ComponentControls {
   [key: string]: any;
@@ -168,7 +183,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               height: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40
             }}
           >
-            {controls.children || "A"}
+            {controls.text || "JD"}
           </Avatar>
         );
 
@@ -315,6 +330,118 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           />
         );
 
+      case "ToggleButton":
+        return (
+          <ToggleButton
+            value={controls.value || "value"}
+            selected={controls.selected || false}
+            color={controls.color || "primary"}
+            size={controls.size || "medium"}
+            disabled={controls.disabled || false}
+            onChange={() => {}}
+          >
+            {controls.label || "Toggle"}
+          </ToggleButton>
+        );
+
+      case "ButtonGroup":
+        return (
+          <ButtonGroup
+            variant={controls.variant || "contained"}
+            color={controls.color || "primary"}
+            size={controls.size || "medium"}
+            orientation={controls.orientation || "horizontal"}
+            disabled={controls.disabled || false}
+          >
+            <MuiButton>One</MuiButton>
+            <MuiButton>Two</MuiButton>
+            <MuiButton>Three</MuiButton>
+          </ButtonGroup>
+        );
+
+      case "Fab":
+        return (
+          <Fab
+            color={controls.color || "primary"}
+            size={controls.size || "medium"}
+            variant={controls.variant || "circular"}
+            disabled={controls.disabled || false}
+          >
+            <SendIcon />
+          </Fab>
+        );
+
+      case "Tooltip":
+        return (
+          <Tooltip title={controls.title || "Tooltip text"} placement={controls.placement || "top"}>
+            <MuiButton variant="contained">
+              {controls.buttonText || "Hover me"}
+            </MuiButton>
+          </Tooltip>
+        );
+
+      case "BottomNavigation":
+        return (
+          <BottomNavigation
+            value={controls.value || 0}
+            onChange={() => {}}
+            showLabels={controls.showLabels !== false}
+          >
+            <BottomNavigationAction label="Recents" icon={<RestoreIcon />} />
+            <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+            <BottomNavigationAction label="Nearby" icon={<LocationOnIcon />} />
+          </BottomNavigation>
+        );
+
+      case "Menu":
+        return (
+          <div>
+            <MuiButton variant="contained">
+              {controls.buttonText || "Open Menu"}
+            </MuiButton>
+            <Menu
+              open={true}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+            >
+              <MenuItem>Profile</MenuItem>
+              <MenuItem>My account</MenuItem>
+              <MenuItem>Logout</MenuItem>
+            </Menu>
+          </div>
+        );
+
+      case "Pagination":
+        return (
+          <Pagination
+            count={controls.count || 10}
+            page={controls.page || 1}
+            color={controls.color || "primary"}
+            size={controls.size || "medium"}
+            variant={controls.variant || "text"}
+            disabled={controls.disabled || false}
+            showFirstButton={controls.showFirstButton || false}
+            showLastButton={controls.showLastButton || false}
+            onChange={() => {}}
+          />
+        );
+
+      case "SpeedDial":
+        return (
+          <SpeedDial
+            ariaLabel="SpeedDial"
+            icon={<SpeedDialIcon />}
+            open={controls.open || false}
+            direction={controls.direction || "up"}
+          >
+            <SpeedDialAction icon={<EditIcon />} tooltipTitle="Edit" />
+            <SpeedDialAction icon={<ShareIcon />} tooltipTitle="Share" />
+            <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
+          </SpeedDial>
+        );
+
       case "Typography":
         return (
           <Typography
@@ -326,6 +453,39 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           >
             {controls.children || "Typography text content"}
           </Typography>
+        );
+
+      case "Breadcrumbs":
+        return (
+          <Breadcrumbs
+            separator={controls.separator || "/"}
+            maxItems={controls.maxItems || 8}
+            itemsAfterCollapse={controls.itemsAfterCollapse || 1}
+            itemsBeforeCollapse={controls.itemsBeforeCollapse || 1}
+          >
+            <Link color="inherit" href="/">
+              Home
+            </Link>
+            <Link color="inherit" href="/category">
+              Category
+            </Link>
+            <Typography color="textPrimary">Current Page</Typography>
+          </Breadcrumbs>
+        );
+
+      case "Stepper":
+        return (
+          <Stepper activeStep={controls.activeStep || 1} orientation={controls.orientation || "horizontal"}>
+            <Step>
+              <StepLabel>Select campaign settings</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Create an ad group</StepLabel>
+            </Step>
+            <Step>
+              <StepLabel>Create an ad</StepLabel>
+            </Step>
+          </Stepper>
         );
 
       case "List":
