@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Sidebar } from "./Sidebar";
-import { ComponentPreview } from "./ComponentPreview";
+import { ComponentPreview } from "./ComponentPreviewFixed";
 import { ControlsPanel } from "./ControlsPanel";
 import { DocumentationPanel } from "./DocumentationPanel";
 
