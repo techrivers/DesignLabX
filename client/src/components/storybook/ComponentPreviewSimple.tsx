@@ -55,37 +55,20 @@ interface ComponentPreviewProps {
 
 export function ComponentPreview({ component, story, controls, viewport, zoom }: ComponentPreviewProps) {
   const [selectedViewport, setSelectedViewport] = useState(viewport || 'desktop');
-  const [currentZoom, setCurrentZoom] = useState(zoom || 1);
+  const [currentZoom, setCurrentZoom] = useState(zoom && zoom > 0 ? zoom / 100 : 1);
   const [isDark, setIsDark] = useState(false);
   const [currentView, setCurrentView] = useState<'canvas' | 'design'>('canvas');
 
   const renderComponent = () => {
-    console.log('Rendering component:', component);
-    
-    // Test component to ensure visibility
-    const TestComponent = () => (
-      <div style={{ 
-        padding: '20px', 
-        background: '#f0f0f0', 
-        border: '2px solid #333',
-        borderRadius: '8px',
-        fontSize: '16px',
-        fontWeight: 'bold'
-      }}>
-        TEST: {component} Component
-      </div>
-    );
-    
     switch (component) {
       case "Button":
         return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
-            <TestComponent />
-            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-              <MuiButton variant="contained" color="primary" size="large">Primary</MuiButton>
-              <MuiButton variant="outlined" color="primary" size="large">Outlined</MuiButton>
-              <MuiButton variant="text" color="primary" size="large">Text</MuiButton>
-            </div>
+          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <MuiButton variant="contained" color="primary" size="large">Primary</MuiButton>
+            <MuiButton variant="outlined" color="primary" size="large">Outlined</MuiButton>
+            <MuiButton variant="text" color="primary" size="large">Text</MuiButton>
+            <MuiButton variant="contained" color="secondary" size="large">Secondary</MuiButton>
+            <MuiButton variant="contained" disabled size="large">Disabled</MuiButton>
           </div>
         );
       case "TextField":
