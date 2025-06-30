@@ -301,6 +301,152 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             renderInput={(params) => <TextField {...params} label={controls.label || "Autocomplete"} />}
           />
         );
+      case "Radio":
+        return (
+          <FormControlLabel
+            control={
+              <MuiRadio
+                checked={controls.checked || false}
+                color={controls.color || "primary"}
+                size={controls.size || "medium"}
+                disabled={controls.disabled || false}
+              />
+            }
+            label={controls.label || "Radio"}
+          />
+        );
+
+      case "Typography":
+        return (
+          <Typography
+            variant={controls.variant || "body1"}
+            color={controls.color || "inherit"}
+            align={controls.align || "inherit"}
+            gutterBottom={controls.gutterBottom || false}
+            noWrap={controls.noWrap || false}
+          >
+            {controls.children || "Typography text content"}
+          </Typography>
+        );
+
+      case "List":
+        return (
+          <List
+            dense={controls.dense || false}
+            disablePadding={controls.disablePadding || false}
+          >
+            <ListItem>
+              <ListItemIcon>
+                <InboxIcon />
+              </ListItemIcon>
+              <ListItemText primary="Inbox" />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <DraftsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Drafts" />
+            </ListItem>
+          </List>
+        );
+
+      case "Table":
+        const tableData = [
+          { name: 'John Doe', age: 30, city: 'New York' },
+          { name: 'Jane Smith', age: 25, city: 'Los Angeles' },
+          { name: 'Bob Johnson', age: 35, city: 'Chicago' }
+        ];
+
+        return (
+          <TableContainer component={Paper}>
+            <Table
+              size={controls.size || "medium"}
+              stickyHeader={controls.stickyHeader || false}
+            >
+              <TableHead>
+                <TableRow>
+                  <TableCell>Name</TableCell>
+                  <TableCell align="right">Age</TableCell>
+                  <TableCell align="right">City</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {tableData.map((row) => (
+                  <TableRow key={row.name}>
+                    <TableCell component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell align="right">{row.age}</TableCell>
+                    <TableCell align="right">{row.city}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        );
+
+      case "AppBar":
+        return (
+          <AppBar
+            position={controls.position || "static"}
+            color={controls.color || "primary"}
+          >
+            <Toolbar>
+              <IconButton
+                size="large"
+                edge="start"
+                color="inherit"
+                aria-label="menu"
+                sx={{ mr: 2 }}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                {controls.title || "App Bar Title"}
+              </Typography>
+              <MuiButton color="inherit">Login</MuiButton>
+            </Toolbar>
+          </AppBar>
+        );
+
+      case "Drawer":
+        return (
+          <Box sx={{ display: 'flex', width: '100%', height: 240 }}>
+            <Drawer
+              variant={controls.variant || "temporary"}
+              anchor={controls.anchor || "left"}
+              open={controls.open || true}
+              sx={{
+                width: 240,
+                flexShrink: 0,
+                '& .MuiDrawer-paper': {
+                  width: 240,
+                  boxSizing: 'border-box',
+                },
+              }}
+            >
+              <Toolbar />
+              <Box sx={{ overflow: 'auto' }}>
+                <List>
+                  {['Home', 'About', 'Contact'].map((text, index) => (
+                    <ListItem key={text}>
+                      <ListItemIcon>
+                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                      </ListItemIcon>
+                      <ListItemText primary={text} />
+                    </ListItem>
+                  ))}
+                </List>
+              </Box>
+            </Drawer>
+            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+              <Typography>
+                Main content area with drawer navigation.
+              </Typography>
+            </Box>
+          </Box>
+        );
+
       default:
         return (
           <div style={{ 
