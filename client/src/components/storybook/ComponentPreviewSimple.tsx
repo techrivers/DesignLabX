@@ -62,11 +62,40 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const renderComponent = () => {
     console.log('Rendering component:', component);
     
+    // Test component to ensure visibility
+    const TestComponent = () => (
+      <div style={{ 
+        padding: '20px', 
+        background: '#f0f0f0', 
+        border: '2px solid #333',
+        borderRadius: '8px',
+        fontSize: '16px',
+        fontWeight: 'bold'
+      }}>
+        TEST: {component} Component
+      </div>
+    );
+    
     switch (component) {
       case "Button":
-        return <MuiButton variant="contained" color="primary">Button Component</MuiButton>;
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', alignItems: 'center' }}>
+            <TestComponent />
+            <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+              <MuiButton variant="contained" color="primary" size="large">Primary</MuiButton>
+              <MuiButton variant="outlined" color="primary" size="large">Outlined</MuiButton>
+              <MuiButton variant="text" color="primary" size="large">Text</MuiButton>
+            </div>
+          </div>
+        );
       case "TextField":
-        return <TextField label="Text Field" variant="outlined" />;
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
+            <TextField label="Standard" variant="standard" />
+            <TextField label="Filled" variant="filled" />
+            <TextField label="Outlined" variant="outlined" />
+          </div>
+        );
       case "Card":
         return (
           <Card sx={{ maxWidth: 345 }}>
@@ -383,11 +412,13 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           <div style={{ 
             padding: '24px', 
             background: currentView === 'canvas' ? canvasBackground : designBackground,
-            minHeight: '400px', 
+            minHeight: '500px', 
             display: 'flex', 
             alignItems: 'center', 
             justifyContent: 'center',
-            position: 'relative'
+            position: 'relative',
+            width: '100%',
+            height: '100%'
           }}>
             {currentView === 'design' && (
               <div style={{
@@ -401,16 +432,16 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               }}
               />
             )}
-            <div style={{ position: 'relative', zIndex: 10 }}>
-              <div style={{ 
-                background: 'white', 
-                padding: '20px', 
-                borderRadius: '8px', 
-                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
-                border: '1px solid #e0e0e0'
-              }}>
-                {renderComponent()}
-              </div>
+            <div style={{ 
+              position: 'relative', 
+              zIndex: 10,
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              minWidth: '200px',
+              minHeight: '100px'
+            }}>
+              {renderComponent()}
             </div>
           </div>
         </div>
