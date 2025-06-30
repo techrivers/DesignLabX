@@ -96,8 +96,17 @@ This is a full-stack application built with React, Express, and Material-UI that
 - `npm run db:push`: Database schema deployment
 
 ## Changelog
-- June 30, 2025. Initial setup
+- June 30, 2025. Initial setup with React Storybook v8 and complete Material-UI component library
+- June 30, 2025. Added comprehensive component collection including:
+  - Input Components: Button, TextField, Checkbox, Select, Radio, Switch, Slider, Rating, Autocomplete, ToggleButton, ButtonGroup, Fab
+  - Data Display: Table, Card, List, Chip, Avatar, Badge, Tooltip, Typography, Accordion, Timeline, TreeView
+  - Navigation: AppBar, Drawer, Tabs, Breadcrumbs, Stepper, BottomNavigation, Menu, Pagination, SpeedDial
+  - Feedback: Alert, Dialog, Snackbar, Progress, Skeleton, Backdrop, CircularProgress, LinearProgress
+  - Layout: Grid, Container, Box, Stack, Divider, Paper, ImageList
+  - Surfaces: AppBar, Paper, Card, Accordion
+  - Utils: ClickAwayListener, Portal, TextareaAutosize, Popper, Grow, Fade, Slide, Zoom
 
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+Request: Complete all Material-UI components with comprehensive stories and documentation.
