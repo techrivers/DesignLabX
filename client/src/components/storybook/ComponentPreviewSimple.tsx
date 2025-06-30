@@ -232,6 +232,44 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           </Box>
         );
 
+      case "Drawer":
+        return (
+          <Box>
+            <MuiButton 
+              variant="contained" 
+              onClick={() => {}}
+            >
+              {controls.buttonText || "Open Drawer"}
+            </MuiButton>
+            <Drawer
+              anchor={controls.anchor || "left"}
+              open={controls.open || false}
+              variant={controls.variant || "temporary"}
+              onClose={() => {}}
+            >
+              <Box
+                sx={{ width: controls.width || 250 }}
+                role="presentation"
+              >
+                <List>
+                  <ListItem>
+                    <ListItemIcon>
+                      <InboxIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Inbox" />
+                  </ListItem>
+                  <ListItem>
+                    <ListItemIcon>
+                      <MailIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="Starred" />
+                  </ListItem>
+                </List>
+              </Box>
+            </Drawer>
+          </Box>
+        );
+
       case "Accordion":
         return (
           <Accordion 
