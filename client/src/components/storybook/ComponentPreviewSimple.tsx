@@ -59,24 +59,109 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const [isDark, setIsDark] = useState(false);
   const [currentView, setCurrentView] = useState<'canvas' | 'design'>('canvas');
 
-  const renderComponent = () => {
+  const renderControlledComponent = () => {
     switch (component) {
       case "Button":
         return (
-          <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-            <MuiButton variant="contained" color="primary" size="large">Primary</MuiButton>
-            <MuiButton variant="outlined" color="primary" size="large">Outlined</MuiButton>
-            <MuiButton variant="text" color="primary" size="large">Text</MuiButton>
-            <MuiButton variant="contained" color="secondary" size="large">Secondary</MuiButton>
-            <MuiButton variant="contained" disabled size="large">Disabled</MuiButton>
+          <MuiButton 
+            variant={controls.variant || "contained"}
+            color={controls.color || "primary"}
+            size={controls.size || "medium"}
+            disabled={controls.disabled || false}
+            fullWidth={controls.fullWidth || false}
+            disableElevation={controls.disableElevation || false}
+          >
+            {controls.children || "Button"}
+          </MuiButton>
+        );
+      case "TextField":
+        return (
+          <TextField 
+            label={controls.label || "Text Field"}
+            variant={controls.variant || "outlined"}
+            size={controls.size || "medium"}
+            disabled={controls.disabled || false}
+            fullWidth={controls.fullWidth || false}
+            error={controls.error || false}
+            helperText={controls.helperText || ""}
+            multiline={controls.multiline || false}
+            rows={controls.rows || 1}
+          />
+        );
+      default:
+        return <div style={{ padding: '20px', color: '#666' }}>Component preview for {component}</div>;
+    }
+  };
+
+  const renderVariantShowcase = () => {
+    switch (component) {
+      case "Button":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <MuiButton variant="contained" color="primary">Contained</MuiButton>
+                <MuiButton variant="outlined" color="primary">Outlined</MuiButton>
+                <MuiButton variant="text" color="primary">Text</MuiButton>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <MuiButton variant="contained" color="primary">Primary</MuiButton>
+                <MuiButton variant="contained" color="secondary">Secondary</MuiButton>
+                <MuiButton variant="contained" color="success">Success</MuiButton>
+                <MuiButton variant="contained" color="error">Error</MuiButton>
+                <MuiButton variant="contained" color="warning">Warning</MuiButton>
+                <MuiButton variant="contained" color="info">Info</MuiButton>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <MuiButton variant="contained" size="small">Small</MuiButton>
+                <MuiButton variant="contained" size="medium">Medium</MuiButton>
+                <MuiButton variant="contained" size="large">Large</MuiButton>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>States</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <MuiButton variant="contained">Default</MuiButton>
+                <MuiButton variant="contained" disabled>Disabled</MuiButton>
+                <MuiButton variant="contained" fullWidth style={{ maxWidth: '200px' }}>Full Width</MuiButton>
+              </div>
+            </div>
           </div>
         );
       case "TextField":
         return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
-            <TextField label="Standard" variant="standard" />
-            <TextField label="Filled" variant="filled" />
-            <TextField label="Outlined" variant="outlined" />
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
+                <TextField label="Standard" variant="standard" />
+                <TextField label="Filled" variant="filled" />
+                <TextField label="Outlined" variant="outlined" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
+                <TextField label="Small" variant="outlined" size="small" />
+                <TextField label="Medium" variant="outlined" size="medium" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>States</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
+                <TextField label="Default" variant="outlined" />
+                <TextField label="Disabled" variant="outlined" disabled />
+                <TextField label="Error" variant="outlined" error helperText="Error message" />
+                <TextField label="Multiline" variant="outlined" multiline rows={3} />
+              </div>
+            </div>
           </div>
         );
       case "Card":
@@ -424,7 +509,28 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               minWidth: '200px',
               minHeight: '100px'
             }}>
-              {renderComponent()}
+              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '800px' }}>
+                {/* Main controlled component */}
+                <div style={{ 
+                  padding: '32px', 
+                  border: '2px solid #e0e0e0', 
+                  borderRadius: '12px', 
+                  backgroundColor: 'white',
+                  marginBottom: '24px',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  minHeight: '120px',
+                  width: '100%'
+                }}>
+                  {renderControlledComponent()}
+                </div>
+                
+                {/* Variant showcase */}
+                <div style={{ width: '100%' }}>
+                  {renderVariantShowcase()}
+                </div>
+              </div>
             </div>
           </div>
         </div>
