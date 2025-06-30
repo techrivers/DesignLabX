@@ -80,7 +80,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         return (
           <TextField 
             label={controls.label || "Text Field"}
-            variant={controls.variant || "outlined"}
+            variant={controls.variant === "contained" ? "outlined" : (controls.variant || "outlined")}
             size={controls.size || "medium"}
             disabled={controls.disabled || false}
             fullWidth={controls.fullWidth || false}
