@@ -44,13 +44,90 @@ import {
   Link,
   Stepper,
   Step,
-  StepLabel
+  StepLabel,
+  Accordion,
+  AccordionSummary,
+  AccordionDetails
 } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CloseIcon from '@mui/icons-material/Close';
+import NotificationsIcon from '@mui/icons-material/Notifications';
+
+interface ComponentControls {
+  // Common properties
+  variant?: string;
+  color?: string;
+  size?: string;
+  disabled?: boolean;
+  
+  // Button specific
+  children?: string;
+  fullWidth?: boolean;
+  disableElevation?: boolean;
+  
+  // TextField specific
+  label?: string;
+  error?: boolean;
+  helperText?: string;
+  multiline?: boolean;
+  rows?: number;
+  
+  // Card specific
+  title?: string;
+  content?: string;
+  elevation?: number;
+  raised?: boolean;
+  
+  // Alert specific
+  severity?: 'error' | 'warning' | 'info' | 'success';
+  message?: string;
+  onClose?: boolean;
+  icon?: boolean;
+  
+  // Chip specific
+  clickable?: boolean;
+  deletable?: boolean;
+  
+  // Badge specific
+  badgeContent?: string;
+  max?: number;
+  invisible?: boolean;
+  showZero?: boolean;
+  
+  // Form controls
+  checked?: boolean;
+  value?: any;
+  
+  // Slider specific
+  min?: number;
+  max?: number;
+  step?: number;
+  
+  // Rating specific
+  precision?: number;
+  readOnly?: boolean;
+  
+  // Autocomplete specific
+  multiple?: boolean;
+  freeSolo?: boolean;
+  
+  // Progress specific
+  
+  // Tabs specific
+  orientation?: 'horizontal' | 'vertical';
+  centered?: boolean;
+  scrollButtons?: boolean;
+  
+  // Accordion specific
+  summary?: string;
+  details?: string;
+  expanded?: boolean;
+}
 
 interface ComponentPreviewProps {
   component: string;
   story: string;
-  controls: any;
+  controls: ComponentControls;
   viewport: string;
   zoom: number;
 }
@@ -58,6 +135,7 @@ interface ComponentPreviewProps {
 export function ComponentPreview({ component, story, controls, viewport, zoom }: ComponentPreviewProps) {
   const [selectedViewport, setSelectedViewport] = useState(viewport || 'desktop');
   const [currentZoom, setCurrentZoom] = useState(zoom && zoom > 0 ? zoom / 100 : 1);
+  const [tabValue, setTabValue] = useState(controls.value || 0);
   const [isDark, setIsDark] = useState(false);
   const [currentView, setCurrentView] = useState<'canvas' | 'design'>('canvas');
 
@@ -92,16 +170,124 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
       case "Card":
         return (
-          <Card sx={{ maxWidth: 345 }}>
+          <Card 
+            variant={controls.variant || "elevation"}
+            elevation={controls.elevation || 1}
+            raised={controls.raised || false}
+            sx={{ maxWidth: 345 }}
+          >
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                Card Title
+                {controls.title || "Card Title"}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                This is a sample card component with content.
+                {controls.content || "This is a sample card component with content."}
               </Typography>
             </CardContent>
           </Card>
+        );
+
+      case "Alert":
+        return (
+          <Alert 
+            severity={controls.severity || "info"}
+            variant={controls.variant || "standard"}
+            onClose={controls.onClose ? () => {} : undefined}
+            icon={controls.icon || undefined}
+          >
+            {controls.message || "This is an alert message"}
+          </Alert>
+        );
+
+      case "Chip":
+        return (
+          <Chip 
+            label={controls.label || "Chip"}
+            variant={controls.variant || "filled"}
+            color={controls.color || "default"}
+            size={controls.size || "medium"}
+            clickable={controls.clickable || false}
+            onDelete={controls.deletable ? () => {} : undefined}
+            disabled={controls.disabled || false}
+            icon={controls.icon ? <NotificationsIcon /> : undefined}
+          />
+        );
+
+      case "Avatar":
+        return (
+          <Avatar 
+            variant={controls.variant || "circular"}
+            sx={{ 
+              width: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40,
+              height: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40
+            }}
+          >
+            {controls.children || "A"}
+          </Avatar>
+        );
+
+      case "Badge":
+        return (
+          <Badge 
+            badgeContent={controls.badgeContent || "4"}
+            color={controls.color || "default"}
+            variant={controls.variant || "standard"}
+            max={controls.max || 99}
+            invisible={controls.invisible || false}
+            showZero={controls.showZero || false}
+          >
+            <NotificationsIcon />
+          </Badge>
+        );
+
+      case "Progress":
+        return (
+          <LinearProgress 
+            variant={controls.variant || "determinate"}
+            value={controls.value || 50}
+            color={controls.color || "primary"}
+            sx={{ width: '100%', minWidth: 200 }}
+          />
+        );
+
+      case "Tabs":
+        const [tabValue, setTabValue] = useState(controls.value || 0);
+        return (
+          <Box sx={{ width: '100%' }}>
+            <Tabs 
+              value={tabValue}
+              onChange={(event, newValue) => setTabValue(newValue)}
+              orientation={controls.orientation || "horizontal"}
+              variant={controls.variant || "standard"}
+              centered={controls.centered || false}
+              scrollButtons={controls.scrollButtons || false}
+            >
+              <Tab label="Tab 1" />
+              <Tab label="Tab 2" />
+              <Tab label="Tab 3" />
+            </Tabs>
+            <Box sx={{ p: 2 }}>
+              <Typography>Content for Tab {tabValue + 1}</Typography>
+            </Box>
+          </Box>
+        );
+
+      case "Accordion":
+        return (
+          <Accordion 
+            expanded={controls.expanded || false}
+            disabled={controls.disabled || false}
+            variant={controls.variant || "elevation"}
+          >
+            <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+              <Typography>{controls.summary || "Accordion Summary"}</Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Typography>
+                {controls.details || "Accordion details content goes here."}
+              </Typography>
+            </AccordionDetails>
+          </Accordion>
         );
       case "Checkbox":
         return (
