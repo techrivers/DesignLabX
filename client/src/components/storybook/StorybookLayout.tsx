@@ -24,23 +24,31 @@ export function StorybookLayout() {
   const componentCategories = [
     {
       name: "Input Components",
-      components: ["Button", "TextField", "Checkbox", "Select", "Radio", "Switch"]
+      components: ["Button", "TextField", "Checkbox", "Select", "Radio", "Switch", "Slider", "Rating", "Autocomplete", "ToggleButton", "ButtonGroup", "Fab"]
     },
     {
       name: "Data Display",
-      components: ["Table", "Card", "List", "Chip", "Avatar", "Badge"]
+      components: ["Table", "Card", "List", "Chip", "Avatar", "Badge", "Tooltip", "Typography", "Accordion", "Timeline", "TreeView"]
     },
     {
       name: "Navigation",
-      components: ["AppBar", "Drawer", "Tabs", "Breadcrumbs", "Stepper"]
+      components: ["AppBar", "Drawer", "Tabs", "Breadcrumbs", "Stepper", "BottomNavigation", "Menu", "Pagination", "SpeedDial"]
     },
     {
       name: "Feedback",
-      components: ["Alert", "Dialog", "Snackbar", "Progress", "Skeleton"]
+      components: ["Alert", "Dialog", "Snackbar", "Progress", "Skeleton", "Backdrop", "CircularProgress", "LinearProgress"]
     },
     {
       name: "Layout",
-      components: ["Grid", "Container", "Box", "Stack", "Divider"]
+      components: ["Grid", "Container", "Box", "Stack", "Divider", "Paper", "ImageList"]
+    },
+    {
+      name: "Surfaces",
+      components: ["AppBar", "Paper", "Card", "Accordion"]
+    },
+    {
+      name: "Utils",
+      components: ["ClickAwayListener", "Portal", "TextareaAutosize", "Popper", "Grow", "Fade", "Slide", "Zoom"]
     }
   ];
 
@@ -49,7 +57,48 @@ export function StorybookLayout() {
     TextField: ["Basic", "Outlined", "Filled", "Error", "Disabled", "Multiline"],
     Card: ["Basic", "With Media", "With Actions", "Outlined"],
     Table: ["Basic", "Dense", "With Pagination", "Sortable"],
-    AppBar: ["Default", "Dense", "With Menu", "Elevated"]
+    AppBar: ["Default", "Dense", "With Menu", "Elevated"],
+    Checkbox: ["Basic", "With Label", "Disabled", "Indeterminate", "Color Variants"],
+    Select: ["Basic", "With Helper Text", "Error", "Multiple", "Small"],
+    Radio: ["Basic", "With Label", "Disabled", "Color Variants"],
+    Switch: ["Basic", "With Label", "Disabled", "Color Variants"],
+    Slider: ["Basic", "Range", "Disabled", "Marks", "Vertical"],
+    Rating: ["Basic", "Read Only", "Half Rating", "Custom Icon"],
+    Autocomplete: ["Basic", "Multiple", "Grouped", "Free Solo"],
+    ToggleButton: ["Basic", "Multiple", "Size Variants"],
+    ButtonGroup: ["Basic", "Vertical", "Split Button"],
+    Fab: ["Basic", "Extended", "Size Variants"],
+    List: ["Basic", "With Icons", "With Avatars", "Interactive"],
+    Chip: ["Basic", "Deletable", "Clickable", "Avatar"],
+    Avatar: ["Basic", "With Image", "Group", "Size Variants"],
+    Badge: ["Basic", "Dot", "Custom", "Color Variants"],
+    Tooltip: ["Basic", "Positioned", "Custom"],
+    Typography: ["Headers", "Body", "Colors"],
+    Accordion: ["Basic", "Controlled", "Detailed"],
+    Timeline: ["Basic", "Alternate", "Custom"],
+    Drawer: ["Temporary", "Permanent", "Right Anchor"],
+    Tabs: ["Basic", "Scrollable", "Vertical", "Centered"],
+    Breadcrumbs: ["Basic", "Custom Separator", "With Icons"],
+    Stepper: ["Horizontal", "Vertical", "Non Linear"],
+    BottomNavigation: ["Basic", "With Badge"],
+    Menu: ["Basic", "Positioned", "Dense"],
+    Pagination: ["Basic", "Outlined", "Size Variants"],
+    SpeedDial: ["Basic", "Direction", "Persistent"],
+    Alert: ["Basic", "Severity", "Action", "Filled"],
+    Dialog: ["Basic", "Form", "Full Screen"],
+    Snackbar: ["Basic", "Action", "Positioned"],
+    Progress: ["Circular", "Linear", "With Label"],
+    Skeleton: ["Text", "Rectangular", "Circular"],
+    Backdrop: ["Basic", "Custom"],
+    CircularProgress: ["Basic", "Determinate", "Size Variants"],
+    LinearProgress: ["Basic", "Determinate", "Buffer"],
+    Grid: ["Basic", "Spacing", "Breakpoints"],
+    Container: ["Basic", "Max Width", "Fixed"],
+    Box: ["Basic", "System Props"],
+    Stack: ["Basic", "Direction", "Spacing"],
+    Divider: ["Basic", "Vertical", "With Text"],
+    Paper: ["Basic", "Elevation", "Outlined"],
+    ImageList: ["Standard", "Quilted", "Woven"]
   };
 
   const toggleTheme = () => {
