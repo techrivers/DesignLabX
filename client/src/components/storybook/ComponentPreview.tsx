@@ -292,14 +292,10 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
       case "Grid":
         return (
           <Box sx={{ flexGrow: 1 }}>
-            <Grid container spacing={2}>
-              <Grid item xs={6}>
-                <Paper sx={{ p: 2 }}>Item 1</Paper>
-              </Grid>
-              <Grid item xs={6}>
-                <Paper sx={{ p: 2 }}>Item 2</Paper>
-              </Grid>
-            </Grid>
+            <div className="grid grid-cols-2 gap-4">
+              <Paper sx={{ p: 2 }}>Item 1</Paper>
+              <Paper sx={{ p: 2 }}>Item 2</Paper>
+            </div>
           </Box>
         );
       case "Stack":
@@ -321,6 +317,158 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
       case "Pagination":
         return (
           <Pagination count={10} />
+        );
+      case "ToggleButton":
+        return (
+          <ToggleButtonGroup value="left" exclusive>
+            <ToggleButton value="left">Left</ToggleButton>
+            <ToggleButton value="center">Center</ToggleButton>
+            <ToggleButton value="right">Right</ToggleButton>
+          </ToggleButtonGroup>
+        );
+      case "ButtonGroup":
+        return (
+          <ButtonGroup variant="contained">
+            <MuiButton>One</MuiButton>
+            <MuiButton>Two</MuiButton>
+            <MuiButton>Three</MuiButton>
+          </ButtonGroup>
+        );
+      case "Fab":
+        return (
+          <Fab color="primary">
+            <span className="material-icons">add</span>
+          </Fab>
+        );
+      case "List":
+        return (
+          <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+            <ListItem>
+              <ListItemIcon>
+                <span className="material-icons">inbox</span>
+              </ListItemIcon>
+              <ListItemText primary="Inbox" />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <span className="material-icons">drafts</span>
+              </ListItemIcon>
+              <ListItemText primary="Drafts" />
+            </ListItem>
+          </List>
+        );
+      case "Table":
+        return (
+          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+            <table style={{ width: '100%' }}>
+              <thead>
+                <tr>
+                  <th style={{ padding: '16px', textAlign: 'left' }}>Name</th>
+                  <th style={{ padding: '16px', textAlign: 'left' }}>Calories</th>
+                  <th style={{ padding: '16px', textAlign: 'left' }}>Fat</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td style={{ padding: '16px' }}>Frozen yoghurt</td>
+                  <td style={{ padding: '16px' }}>159</td>
+                  <td style={{ padding: '16px' }}>6.0</td>
+                </tr>
+                <tr>
+                  <td style={{ padding: '16px' }}>Ice cream sandwich</td>
+                  <td style={{ padding: '16px' }}>237</td>
+                  <td style={{ padding: '16px' }}>9.0</td>
+                </tr>
+              </tbody>
+            </table>
+          </Paper>
+        );
+      case "Menu":
+        return (
+          <Paper sx={{ width: 200 }}>
+            <List component="nav">
+              <ListItem button>
+                <ListItemText primary="Profile" />
+              </ListItem>
+              <ListItem button>
+                <ListItemText primary="My account" />
+              </ListItem>
+              <ListItem button>
+                <ListItemText primary="Logout" />
+              </ListItem>
+            </List>
+          </Paper>
+        );
+      case "Dialog":
+        return (
+          <Paper sx={{ p: 3, maxWidth: 400 }}>
+            <Typography variant="h6" gutterBottom>
+              Dialog Title
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              This is a dialog preview. Dialogs inform users about a task and can contain critical information.
+            </Typography>
+            <Box sx={{ mt: 2, display: 'flex', justifyContent: 'flex-end', gap: 1 }}>
+              <MuiButton variant="outlined">Cancel</MuiButton>
+              <MuiButton variant="contained">Confirm</MuiButton>
+            </Box>
+          </Paper>
+        );
+      case "Snackbar":
+        return (
+          <Paper sx={{ p: 2, display: 'flex', alignItems: 'center', gap: 2 }}>
+            <Typography variant="body2">
+              This is a snackbar message
+            </Typography>
+            <MuiButton size="small" color="primary">
+              ACTION
+            </MuiButton>
+          </Paper>
+        );
+      case "Progress":
+        return (
+          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
+            <CircularProgress />
+            <LinearProgress />
+          </Box>
+        );
+      case "Backdrop":
+        return (
+          <Paper sx={{ p: 4, position: 'relative', height: 200, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Typography>Content behind backdrop</Typography>
+            <Box sx={{ 
+              position: 'absolute', 
+              top: 0, 
+              left: 0, 
+              right: 0, 
+              bottom: 0, 
+              bgcolor: 'rgba(0, 0, 0, 0.5)', 
+              display: 'flex', 
+              alignItems: 'center', 
+              justifyContent: 'center',
+              color: 'white'
+            }}>
+              <CircularProgress color="inherit" />
+            </Box>
+          </Paper>
+        );
+      case "Container":
+        return (
+          <Container maxWidth="sm" sx={{ bgcolor: '#f5f5f5', p: 2 }}>
+            <Typography>Container content</Typography>
+          </Container>
+        );
+      case "ImageList":
+        return (
+          <Box sx={{ width: 400, height: 200 }}>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 8 }}>
+              {[1, 2, 3, 4, 5, 6].map((item) => (
+                <Paper key={item} sx={{ height: 80, display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: '#f0f0f0' }}>
+                  <Typography variant="caption">Item {item}</Typography>
+                </Paper>
+              ))}
+            </div>
+          </Box>
         );
       default:
         return (
