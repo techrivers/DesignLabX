@@ -54,74 +54,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 
 interface ComponentControls {
-  // Common properties
-  variant?: string;
-  color?: string;
-  size?: string;
-  disabled?: boolean;
-  
-  // Button specific
-  children?: string;
-  fullWidth?: boolean;
-  disableElevation?: boolean;
-  
-  // TextField specific
-  label?: string;
-  error?: boolean;
-  helperText?: string;
-  multiline?: boolean;
-  rows?: number;
-  
-  // Card specific
-  title?: string;
-  content?: string;
-  elevation?: number;
-  raised?: boolean;
-  
-  // Alert specific
-  severity?: 'error' | 'warning' | 'info' | 'success';
-  message?: string;
-  onClose?: boolean;
-  icon?: boolean;
-  
-  // Chip specific
-  clickable?: boolean;
-  deletable?: boolean;
-  
-  // Badge specific
-  badgeContent?: string;
-  max?: number;
-  invisible?: boolean;
-  showZero?: boolean;
-  
-  // Form controls
-  checked?: boolean;
-  value?: any;
-  
-  // Slider specific
-  min?: number;
-  max?: number;
-  step?: number;
-  
-  // Rating specific
-  precision?: number;
-  readOnly?: boolean;
-  
-  // Autocomplete specific
-  multiple?: boolean;
-  freeSolo?: boolean;
-  
-  // Progress specific
-  
-  // Tabs specific
-  orientation?: 'horizontal' | 'vertical';
-  centered?: boolean;
-  scrollButtons?: boolean;
-  
-  // Accordion specific
-  summary?: string;
-  details?: string;
-  expanded?: boolean;
+  [key: string]: any;
 }
 
 interface ComponentPreviewProps {
@@ -251,7 +184,6 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "Tabs":
-        const [tabValue, setTabValue] = useState(controls.value || 0);
         return (
           <Box sx={{ width: '100%' }}>
             <Tabs 
