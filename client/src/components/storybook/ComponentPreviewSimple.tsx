@@ -95,10 +95,10 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           <Card sx={{ maxWidth: 345 }}>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {controls.title || "Card Title"}
+                Card Title
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {controls.content || "This is a sample card component with content."}
+                This is a sample card component with content.
               </Typography>
             </CardContent>
           </Card>
@@ -117,8 +117,90 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             label={controls.label || "Checkbox"}
           />
         );
+      case "Select":
+        return (
+          <FormControl sx={{ minWidth: 120 }}>
+            <InputLabel>Select</InputLabel>
+            <Select value={controls.value || "option1"} label="Select">
+              <MenuItem value="option1">Option 1</MenuItem>
+              <MenuItem value="option2">Option 2</MenuItem>
+              <MenuItem value="option3">Option 3</MenuItem>
+            </Select>
+          </FormControl>
+        );
+      case "Radio":
+        return (
+          <RadioGroup value={controls.value || "option1"}>
+            <FormControlLabel value="option1" control={<Radio />} label="Option 1" />
+            <FormControlLabel value="option2" control={<Radio />} label="Option 2" />
+          </RadioGroup>
+        );
+      case "Switch":
+        return (
+          <FormControlLabel 
+            control={
+              <Switch 
+                checked={controls.checked || false}
+                color={controls.color || "primary"}
+                size={controls.size || "medium"}
+              />
+            } 
+            label={controls.label || "Switch"} 
+          />
+        );
+      case "Slider":
+        return (
+          <Slider 
+            defaultValue={controls.value || 30} 
+            min={controls.min || 0}
+            max={controls.max || 100}
+            step={controls.step || 1}
+            disabled={controls.disabled || false}
+            color={controls.color || "primary"}
+            sx={{ width: 200 }} 
+          />
+        );
+      case "Rating":
+        return (
+          <Rating 
+            value={controls.value || 4} 
+            max={controls.max || 5}
+            precision={controls.precision || 1}
+            size={controls.size || "medium"}
+            readOnly={controls.readOnly || false}
+            disabled={controls.disabled || false}
+          />
+        );
+      case "Autocomplete":
+        return (
+          <Autocomplete
+            options={['Option 1', 'Option 2', 'Option 3']}
+            sx={{ width: 300 }}
+            multiple={controls.multiple || false}
+            freeSolo={controls.freeSolo || false}
+            disabled={controls.disabled || false}
+            size={controls.size || "medium"}
+            renderInput={(params) => <TextField {...params} label={controls.label || "Autocomplete"} />}
+          />
+        );
       default:
-        return <div style={{ padding: '20px', color: '#666' }}>Select a component to preview</div>;
+        return (
+          <div style={{ 
+            padding: '40px 20px', 
+            textAlign: 'center',
+            color: '#666',
+            border: '2px dashed #e0e0e0',
+            borderRadius: '8px',
+            backgroundColor: '#fafafa'
+          }}>
+            <Typography variant="h6" gutterBottom>
+              Controls Coming Soon
+            </Typography>
+            <Typography variant="body2">
+              Interactive controls for this component will be available in the next update.
+            </Typography>
+          </div>
+        );
     }
   };
 
