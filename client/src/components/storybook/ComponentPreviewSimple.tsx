@@ -60,9 +60,11 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const [currentView, setCurrentView] = useState<'canvas' | 'design'>('canvas');
 
   const renderComponent = () => {
+    console.log('Rendering component:', component);
+    
     switch (component) {
       case "Button":
-        return <MuiButton variant="contained" color="primary">Button</MuiButton>;
+        return <MuiButton variant="contained" color="primary">Button Component</MuiButton>;
       case "TextField":
         return <TextField label="Text Field" variant="outlined" />;
       case "Card":
@@ -371,16 +373,16 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         <div 
           style={{ 
             transform: `scale(${currentZoom})`, 
-            transformOrigin: 'top left',
+            transformOrigin: 'top center',
             width: selectedViewport === 'mobile' ? '375px' : 
                    selectedViewport === 'tablet' ? '768px' : '100%',
+            minWidth: selectedViewport === 'desktop' ? '1200px' : undefined,
             margin: '0 auto'
           }}
         >
           <div style={{ 
             padding: '24px', 
-            backgroundColor: currentView === 'canvas' ? canvasBackground : 'transparent',
-            background: currentView === 'design' ? designBackground : undefined,
+            background: currentView === 'canvas' ? canvasBackground : designBackground,
             minHeight: '400px', 
             display: 'flex', 
             alignItems: 'center', 
@@ -400,7 +402,15 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               />
             )}
             <div style={{ position: 'relative', zIndex: 10 }}>
-              {renderComponent()}
+              <div style={{ 
+                background: 'white', 
+                padding: '20px', 
+                borderRadius: '8px', 
+                boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+                border: '1px solid #e0e0e0'
+              }}>
+                {renderComponent()}
+              </div>
             </div>
           </div>
         </div>
