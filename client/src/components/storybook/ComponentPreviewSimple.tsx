@@ -2354,6 +2354,751 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           </div>
         );
 
+      case "Grid":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Grid Layout</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e3f2fd' }}>Item 1</Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e8f5e8' }}>Item 2</Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} md={4}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#f3e5f5' }}>Item 3</Paper>
+                </Grid>
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Responsive Layout</h3>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={8}>
+                  <Paper sx={{ p: 3, textAlign: 'center', height: 100, bgcolor: '#fff3e0' }}>Main Content (8/12)</Paper>
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Paper sx={{ p: 3, textAlign: 'center', height: 100, bgcolor: '#fce4ec' }}>Sidebar (4/12)</Paper>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+        );
+
+      case "Container":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>MaxWidth Variants</h3>
+              <Stack spacing={2}>
+                <Container maxWidth="xs" sx={{ bgcolor: '#f5f5f5', p: 2 }}>
+                  <Typography>xs: maxWidth 444px</Typography>
+                </Container>
+                <Container maxWidth="sm" sx={{ bgcolor: '#e8f5e8', p: 2 }}>
+                  <Typography>sm: maxWidth 600px</Typography>
+                </Container>
+                <Container maxWidth="md" sx={{ bgcolor: '#e3f2fd', p: 2 }}>
+                  <Typography>md: maxWidth 900px</Typography>
+                </Container>
+              </Stack>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Fixed vs Fluid</h3>
+              <Stack spacing={2}>
+                <Container fixed sx={{ bgcolor: '#fff3e0', p: 2 }}>
+                  <Typography>Fixed Container</Typography>
+                </Container>
+                <Container sx={{ bgcolor: '#fce4ec', p: 2 }}>
+                  <Typography>Fluid Container (default)</Typography>
+                </Container>
+              </Stack>
+            </div>
+          </div>
+        );
+
+      case "Box":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Flexbox Examples</h3>
+              <Stack spacing={2}>
+                <Box sx={{ display: 'flex', gap: 1, p: 2, bgcolor: '#f5f5f5' }}>
+                  <Paper sx={{ p: 1, flex: 1, textAlign: 'center' }}>Flex 1</Paper>
+                  <Paper sx={{ p: 1, flex: 2, textAlign: 'center' }}>Flex 2</Paper>
+                  <Paper sx={{ p: 1, flex: 1, textAlign: 'center' }}>Flex 1</Paper>
+                </Box>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', p: 2, bgcolor: '#e8f5e8' }}>
+                  <Paper sx={{ p: 1 }}>Start</Paper>
+                  <Paper sx={{ p: 1 }}>Middle</Paper>
+                  <Paper sx={{ p: 1 }}>End</Paper>
+                </Box>
+              </Stack>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>CSS Grid</h3>
+              <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: 2, p: 2, bgcolor: '#f3e5f5' }}>
+                <Paper sx={{ p: 2, textAlign: 'center' }}>Grid 1</Paper>
+                <Paper sx={{ p: 2, textAlign: 'center' }}>Grid 2</Paper>
+                <Paper sx={{ p: 2, textAlign: 'center' }}>Grid 3</Paper>
+              </Box>
+            </div>
+          </div>
+        );
+
+      case "Stack":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Direction & Spacing</h3>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={6}>
+                  <Typography variant="body2" gutterBottom>Vertical Stack</Typography>
+                  <Stack spacing={1} sx={{ bgcolor: '#f5f5f5', p: 2 }}>
+                    <Paper sx={{ p: 1, textAlign: 'center' }}>Item 1</Paper>
+                    <Paper sx={{ p: 1, textAlign: 'center' }}>Item 2</Paper>
+                    <Paper sx={{ p: 1, textAlign: 'center' }}>Item 3</Paper>
+                  </Stack>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <Typography variant="body2" gutterBottom>Horizontal Stack</Typography>
+                  <Stack direction="row" spacing={1} sx={{ bgcolor: '#e8f5e8', p: 2 }}>
+                    <Paper sx={{ p: 1, textAlign: 'center', flex: 1 }}>Item 1</Paper>
+                    <Paper sx={{ p: 1, textAlign: 'center', flex: 1 }}>Item 2</Paper>
+                    <Paper sx={{ p: 1, textAlign: 'center', flex: 1 }}>Item 3</Paper>
+                  </Stack>
+                </Grid>
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Dividers</h3>
+              <Stack spacing={2} divider={<Divider orientation="horizontal" flexItem />} sx={{ bgcolor: '#e3f2fd', p: 2 }}>
+                <Typography>Section 1</Typography>
+                <Typography>Section 2</Typography>
+                <Typography>Section 3</Typography>
+              </Stack>
+            </div>
+          </div>
+        );
+
+      case "Divider":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Dividers</h3>
+              <Stack spacing={2}>
+                <Typography>Content above</Typography>
+                <Divider />
+                <Typography>Content below</Typography>
+                <Divider variant="middle" />
+                <Typography>Middle variant</Typography>
+                <Divider variant="inset" />
+                <Typography>Inset variant</Typography>
+              </Stack>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Vertical Dividers</h3>
+              <Stack direction="row" spacing={2} divider={<Divider orientation="vertical" flexItem />} sx={{ height: 60 }}>
+                <Box sx={{ display: 'flex', alignItems: 'center', px: 2, bgcolor: '#f5f5f5' }}>Section 1</Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', px: 2, bgcolor: '#e8f5e8' }}>Section 2</Box>
+                <Box sx={{ display: 'flex', alignItems: 'center', px: 2, bgcolor: '#e3f2fd' }}>Section 3</Box>
+              </Stack>
+            </div>
+          </div>
+        );
+
+      case "Paper":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Elevation Levels</h3>
+              <Grid container spacing={3}>
+                {[0, 1, 2, 4, 8, 12].map((elevation) => (
+                  <Grid item xs={6} sm={4} md={2} key={elevation}>
+                    <Paper elevation={elevation} sx={{ p: 2, textAlign: 'center' }}>
+                      <Typography variant="body2">Elevation {elevation}</Typography>
+                    </Paper>
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Paper Variants</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={4}>
+                  <Paper elevation={2} sx={{ p: 3 }}>
+                    <Typography variant="subtitle2" gutterBottom>Default</Typography>
+                    <Typography variant="body2">Standard elevation</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Paper variant="outlined" sx={{ p: 3 }}>
+                    <Typography variant="subtitle2" gutterBottom>Outlined</Typography>
+                    <Typography variant="body2">Border instead of shadow</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Paper elevation={0} sx={{ p: 3, bgcolor: 'grey.50' }}>
+                    <Typography variant="subtitle2" gutterBottom>Custom</Typography>
+                    <Typography variant="body2">Custom background</Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+        );
+
+      case "ImageList":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Standard Grid</h3>
+              <ImageList sx={{ width: '100%', height: 150 }} cols={3} rowHeight={60}>
+                {[1, 2, 3, 4, 5, 6].map((item) => (
+                  <ImageListItem key={item}>
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: '100%',
+                        bgcolor: `hsl(${item * 60}, 70%, 80%)`,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <Typography variant="body2">Image {item}</Typography>
+                    </Box>
+                  </ImageListItem>
+                ))}
+              </ImageList>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Quilted Layout</h3>
+              <ImageList variant="quilted" sx={{ width: '100%', height: 150 }} cols={4} rowHeight={50}>
+                {[{ cols: 2, rows: 2 }, { cols: 1, rows: 1 }, { cols: 1, rows: 1 }, { cols: 2, rows: 1 }].map((item, index) => (
+                  <ImageListItem key={index} cols={item.cols} rows={item.rows}>
+                    <Box
+                      sx={{
+                        width: '100%',
+                        height: '100%',
+                        bgcolor: `hsl(${index * 50}, 60%, 75%)`,
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }}
+                    >
+                      <Typography variant="body2">{item.cols}×{item.rows}</Typography>
+                    </Box>
+                  </ImageListItem>
+                ))}
+              </ImageList>
+            </div>
+          </div>
+        );
+
+      case "ClickAwayListener":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Click Away Detection</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={12} md={6}>
+                  <ClickAwayListener onClickAway={() => {}}>
+                    <Paper sx={{ p: 3, textAlign: 'center', bgcolor: '#e3f2fd', cursor: 'pointer' }}>
+                      <Typography variant="h6">Clickable Area 1</Typography>
+                      <Typography variant="body2">Click outside to trigger event</Typography>
+                    </Paper>
+                  </ClickAwayListener>
+                </Grid>
+                <Grid item xs={12} md={6}>
+                  <ClickAwayListener onClickAway={() => {}}>
+                    <Paper sx={{ p: 3, textAlign: 'center', bgcolor: '#e8f5e8', cursor: 'pointer' }}>
+                      <Typography variant="h6">Clickable Area 2</Typography>
+                      <Typography variant="body2">Independent detection</Typography>
+                    </Paper>
+                  </ClickAwayListener>
+                </Grid>
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Common Use Cases</h3>
+              <Stack spacing={2}>
+                <Paper sx={{ p: 2, bgcolor: '#f3e5f5' }}>
+                  <Typography variant="body2">💡 Dropdown menus</Typography>
+                </Paper>
+                <Paper sx={{ p: 2, bgcolor: '#fff3e0' }}>
+                  <Typography variant="body2">🗨️ Modal dialogs</Typography>
+                </Paper>
+                <Paper sx={{ p: 2, bgcolor: '#fce4ec' }}>
+                  <Typography variant="body2">📝 Form validation</Typography>
+                </Paper>
+              </Stack>
+            </div>
+          </div>
+        );
+
+      case "Portal":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Portal Usage</h3>
+              <Paper sx={{ p: 3, bgcolor: '#f5f5f5' }}>
+                <Typography variant="body1" gutterBottom>
+                  Portal renders content outside the normal DOM hierarchy
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Check the top-right corner when Portal is enabled in controls
+                </Typography>
+              </Paper>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Common Use Cases</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={4}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e8f5e8' }}>
+                    <Typography variant="body2">🗂️ Modal Dialogs</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#f3e5f5' }}>
+                    <Typography variant="body2">🔔 Notifications</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#fff3e0' }}>
+                    <Typography variant="body2">💡 Tooltips</Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+        );
+
+      case "TextareaAutosize":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Size Configurations</h3>
+              <Grid container spacing={3}>
+                <Grid item xs={12} md={4}>
+                  <Typography variant="body2" gutterBottom>Minimal (1-3 rows)</Typography>
+                  <TextareaAutosize
+                    minRows={1}
+                    maxRows={3}
+                    placeholder="Compact textarea..."
+                    style={{
+                      width: '100%',
+                      padding: '8px',
+                      border: '1px solid #ccc',
+                      borderRadius: '4px',
+                      fontSize: '14px',
+                      fontFamily: 'inherit'
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Typography variant="body2" gutterBottom>Standard (3-6 rows)</Typography>
+                  <TextareaAutosize
+                    minRows={3}
+                    maxRows={6}
+                    placeholder="Standard textarea..."
+                    style={{
+                      width: '100%',
+                      padding: '12px',
+                      border: '1px solid #ccc',
+                      borderRadius: '4px',
+                      fontSize: '14px',
+                      fontFamily: 'inherit'
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} md={4}>
+                  <Typography variant="body2" gutterBottom>Extended (4-10 rows)</Typography>
+                  <TextareaAutosize
+                    minRows={4}
+                    maxRows={10}
+                    placeholder="Extended textarea..."
+                    style={{
+                      width: '100%',
+                      padding: '16px',
+                      border: '1px solid #ccc',
+                      borderRadius: '4px',
+                      fontSize: '14px',
+                      fontFamily: 'inherit'
+                    }}
+                  />
+                </Grid>
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Styled Variations</h3>
+              <Stack spacing={2}>
+                <TextareaAutosize
+                  minRows={2}
+                  maxRows={4}
+                  placeholder="Modern style with border..."
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    border: '2px solid #e3f2fd',
+                    borderRadius: '8px',
+                    fontSize: '14px',
+                    fontFamily: 'inherit',
+                    backgroundColor: '#fafafa'
+                  }}
+                />
+                <TextareaAutosize
+                  minRows={2}
+                  maxRows={4}
+                  placeholder="Green style with outline..."
+                  style={{
+                    width: '100%',
+                    padding: '12px',
+                    border: '2px solid #4caf50',
+                    borderRadius: '12px',
+                    fontSize: '14px',
+                    fontFamily: 'inherit',
+                    backgroundColor: '#e8f5e8'
+                  }}
+                />
+              </Stack>
+            </div>
+          </div>
+        );
+
+      case "Popper":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Placement Options</h3>
+              <Grid container spacing={2}>
+                {['top', 'bottom', 'left', 'right', 'top-start', 'bottom-end'].map((placement) => (
+                  <Grid item xs={6} sm={4} md={2} key={placement}>
+                    <MuiButton variant="outlined" size="small" fullWidth sx={{ textTransform: 'none' }}>
+                      {placement}
+                    </MuiButton>
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Interactive Example</h3>
+              <Box sx={{ display: 'flex', justifyContent: 'center', p: 4, bgcolor: '#f5f5f5' }}>
+                <Typography variant="body2">
+                  Use the controls to test Popper positioning and behavior
+                </Typography>
+              </Box>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Common Use Cases</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e8f5e8' }}>
+                    <Typography variant="body2">🗂️ Dropdown Menus</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#f3e5f5' }}>
+                    <Typography variant="body2">💡 Tooltips</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#fff3e0' }}>
+                    <Typography variant="body2">📅 Date Pickers</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#fce4ec' }}>
+                    <Typography variant="body2">🔍 Search Results</Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+        );
+
+      case "Grow":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Timing Variations</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="body2" gutterBottom>Fast (200ms)</Typography>
+                  <Grow in={true} timeout={200}>
+                    <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e3f2fd' }}>
+                      <Typography>Fast Grow</Typography>
+                    </Paper>
+                  </Grow>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="body2" gutterBottom>Normal (500ms)</Typography>
+                  <Grow in={true} timeout={500}>
+                    <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e8f5e8' }}>
+                      <Typography>Normal Grow</Typography>
+                    </Paper>
+                  </Grow>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="body2" gutterBottom>Slow (1000ms)</Typography>
+                  <Grow in={true} timeout={1000}>
+                    <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#f3e5f5' }}>
+                      <Typography>Slow Grow</Typography>
+                    </Paper>
+                  </Grow>
+                </Grid>
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Transform Origins</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={6} sm={3}>
+                  <Grow in={true} style={{ transformOrigin: 'top left' }}>
+                    <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#fff3e0' }}>
+                      <Typography variant="body2">Top Left</Typography>
+                    </Paper>
+                  </Grow>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Grow in={true} style={{ transformOrigin: 'center' }}>
+                    <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#fce4ec' }}>
+                      <Typography variant="body2">Center</Typography>
+                    </Paper>
+                  </Grow>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Grow in={true} style={{ transformOrigin: 'bottom right' }}>
+                    <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#f1f8e9' }}>
+                      <Typography variant="body2">Bottom Right</Typography>
+                    </Paper>
+                  </Grow>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Grow in={true} style={{ transformOrigin: 'top center' }}>
+                    <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#f3e5f5' }}>
+                      <Typography variant="body2">Top Center</Typography>
+                    </Paper>
+                  </Grow>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+        );
+
+      case "Fade":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Timing Variations</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="body2" gutterBottom>Quick Fade (150ms)</Typography>
+                  <Fade in={true} timeout={150}>
+                    <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e3f2fd' }}>
+                      <Typography>Quick Fade</Typography>
+                    </Paper>
+                  </Fade>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="body2" gutterBottom>Standard (300ms)</Typography>
+                  <Fade in={true} timeout={300}>
+                    <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e8f5e8' }}>
+                      <Typography>Standard Fade</Typography>
+                    </Paper>
+                  </Fade>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="body2" gutterBottom>Smooth (800ms)</Typography>
+                  <Fade in={true} timeout={800}>
+                    <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#f3e5f5' }}>
+                      <Typography>Smooth Fade</Typography>
+                    </Paper>
+                  </Fade>
+                </Grid>
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Staggered Animation</h3>
+              <Grid container spacing={1}>
+                {[0, 200, 400, 600, 800].map((delay, index) => (
+                  <Grid item xs={12} sm={6} md key={index}>
+                    <Fade in={true} timeout={500} style={{ transitionDelay: `${delay}ms` }}>
+                      <Paper sx={{ p: 2, textAlign: 'center', bgcolor: `hsl(${index * 40}, 60%, 85%)` }}>
+                        <Typography variant="body2">Item {index + 1}</Typography>
+                        <Typography variant="caption">{delay}ms delay</Typography>
+                      </Paper>
+                    </Fade>
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
+          </div>
+        );
+
+      case "Slide":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Slide Directions</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={6} sm={3}>
+                  <Typography variant="body2" gutterBottom>Slide Up</Typography>
+                  <Box sx={{ height: 80, overflow: 'hidden', bgcolor: '#f5f5f5', position: 'relative' }}>
+                    <Slide direction="up" in={true} mountOnEnter unmountOnExit>
+                      <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e3f2fd', position: 'absolute', width: '100%' }}>
+                        <Typography variant="body2">Up</Typography>
+                      </Paper>
+                    </Slide>
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Typography variant="body2" gutterBottom>Slide Down</Typography>
+                  <Box sx={{ height: 80, overflow: 'hidden', bgcolor: '#f5f5f5', position: 'relative' }}>
+                    <Slide direction="down" in={true} mountOnEnter unmountOnExit>
+                      <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e8f5e8', position: 'absolute', width: '100%' }}>
+                        <Typography variant="body2">Down</Typography>
+                      </Paper>
+                    </Slide>
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Typography variant="body2" gutterBottom>Slide Left</Typography>
+                  <Box sx={{ height: 80, overflow: 'hidden', bgcolor: '#f5f5f5', position: 'relative' }}>
+                    <Slide direction="left" in={true} mountOnEnter unmountOnExit>
+                      <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#f3e5f5', position: 'absolute', width: '100%' }}>
+                        <Typography variant="body2">Left</Typography>
+                      </Paper>
+                    </Slide>
+                  </Box>
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  <Typography variant="body2" gutterBottom>Slide Right</Typography>
+                  <Box sx={{ height: 80, overflow: 'hidden', bgcolor: '#f5f5f5', position: 'relative' }}>
+                    <Slide direction="right" in={true} mountOnEnter unmountOnExit>
+                      <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#fff3e0', position: 'absolute', width: '100%' }}>
+                        <Typography variant="body2">Right</Typography>
+                      </Paper>
+                    </Slide>
+                  </Box>
+                </Grid>
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sequential Animation</h3>
+              <Box sx={{ height: 100, overflow: 'hidden', bgcolor: '#f5f5f5', position: 'relative' }}>
+                {['First', 'Second', 'Third'].map((text, index) => (
+                  <Slide 
+                    key={index}
+                    direction="left" 
+                    in={true} 
+                    timeout={500}
+                    style={{ transitionDelay: `${index * 200}ms` }}
+                    mountOnEnter 
+                    unmountOnExit
+                  >
+                    <Paper 
+                      sx={{ 
+                        p: 2, 
+                        textAlign: 'center', 
+                        bgcolor: `hsl(${index * 60}, 60%, 80%)`,
+                        position: 'absolute',
+                        top: index * 25,
+                        left: 0,
+                        right: 0
+                      }}
+                    >
+                      <Typography variant="body2">{text} Card</Typography>
+                    </Paper>
+                  </Slide>
+                ))}
+              </Box>
+            </div>
+          </div>
+        );
+
+      case "Zoom":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Timing Variations</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="body2" gutterBottom>Quick Zoom (200ms)</Typography>
+                  <Zoom in={true} timeout={200}>
+                    <Paper sx={{ p: 3, textAlign: 'center', bgcolor: '#e3f2fd' }}>
+                      <Typography>Quick</Typography>
+                    </Paper>
+                  </Zoom>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="body2" gutterBottom>Standard (500ms)</Typography>
+                  <Zoom in={true} timeout={500}>
+                    <Paper sx={{ p: 3, textAlign: 'center', bgcolor: '#e8f5e8' }}>
+                      <Typography>Standard</Typography>
+                    </Paper>
+                  </Zoom>
+                </Grid>
+                <Grid item xs={12} sm={4}>
+                  <Typography variant="body2" gutterBottom>Dramatic (1000ms)</Typography>
+                  <Zoom in={true} timeout={1000}>
+                    <Paper sx={{ p: 3, textAlign: 'center', bgcolor: '#f3e5f5' }}>
+                      <Typography>Dramatic</Typography>
+                    </Paper>
+                  </Zoom>
+                </Grid>
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Staggered Zoom Effects</h3>
+              <Grid container spacing={1}>
+                {[0, 100, 200, 300, 400, 500].map((delay, index) => (
+                  <Grid item xs={6} sm={4} md={2} key={index}>
+                    <Zoom 
+                      in={true} 
+                      timeout={400}
+                      style={{ transitionDelay: `${delay}ms` }}
+                    >
+                      <Paper sx={{ 
+                        p: 2, 
+                        textAlign: 'center', 
+                        bgcolor: `hsl(${index * 50}, 65%, 80%)`,
+                        aspectRatio: '1'
+                      }}>
+                        <Typography variant="body2">{index + 1}</Typography>
+                        <Typography variant="caption">{delay}ms</Typography>
+                      </Paper>
+                    </Zoom>
+                  </Grid>
+                ))}
+              </Grid>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Common Use Cases</h3>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#fff3e0' }}>
+                    <Typography variant="body2">🎯 Focus Elements</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#fce4ec' }}>
+                    <Typography variant="body2">🎉 Success States</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#f1f8e9' }}>
+                    <Typography variant="body2">📷 Image Previews</Typography>
+                  </Paper>
+                </Grid>
+                <Grid item xs={12} sm={6} md={3}>
+                  <Paper sx={{ p: 2, textAlign: 'center', bgcolor: '#e8eaf6' }}>
+                    <Typography variant="body2">⭐ Highlights</Typography>
+                  </Paper>
+                </Grid>
+              </Grid>
+            </div>
+          </div>
+        );
+
       default:
         return (
           <div style={{ 
