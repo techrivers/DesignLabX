@@ -123,6 +123,10 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const [currentView, setCurrentView] = useState<'canvas' | 'design'>('canvas');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [popperAnchor, setPopperAnchor] = useState<null | HTMLElement>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [snackbarOpen, setSnackbarOpen] = useState(false);
 
   const popperOpen = Boolean(popperAnchor);
 
@@ -650,10 +654,18 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
       case "Drawer":
         return (
           <Box sx={{ display: 'flex', width: '100%', height: 240 }}>
+            <MuiButton 
+              variant="contained" 
+              onClick={() => setDrawerOpen(true)}
+              sx={{ mb: 2 }}
+            >
+              Open Drawer
+            </MuiButton>
             <Drawer
               variant={controls.variant || "temporary"}
               anchor={controls.anchor || "left"}
-              open={controls.open || true}
+              open={controls.open !== undefined ? controls.open : drawerOpen}
+              onClose={() => setDrawerOpen(false)}
               sx={{
                 width: 240,
                 flexShrink: 0,
@@ -702,13 +714,13 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           <div>
             <MuiButton 
               variant="contained" 
-              onClick={() => {}}
+              onClick={() => setDialogOpen(true)}
             >
-              {controls.open ? "Dialog Open" : "Dialog Closed"} (Use controls)
+              Open Dialog
             </MuiButton>
             <Dialog
-              open={controls.open || false}
-              onClose={() => {}}
+              open={controls.open !== undefined ? controls.open : dialogOpen}
+              onClose={() => setDialogOpen(false)}
               maxWidth={controls.maxWidth || "sm"}
               fullWidth={controls.fullWidth || false}
               fullScreen={controls.fullScreen || false}
@@ -720,8 +732,8 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
-                <MuiButton onClick={() => {}}>Cancel</MuiButton>
-                <MuiButton variant="contained" onClick={() => {}}>Confirm</MuiButton>
+                <MuiButton onClick={() => setDialogOpen(false)}>Cancel</MuiButton>
+                <MuiButton variant="contained" onClick={() => setDialogOpen(false)}>Confirm</MuiButton>
               </DialogActions>
             </Dialog>
           </div>
@@ -730,13 +742,13 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
       case "Snackbar":
         return (
           <div>
-            <MuiButton variant="contained" onClick={() => {}}>
-              {controls.open ? "Snackbar Open" : "Snackbar Closed"} (Use controls)
+            <MuiButton variant="contained" onClick={() => setSnackbarOpen(true)}>
+              Open Snackbar
             </MuiButton>
             <Snackbar
-              open={controls.open || false}
+              open={controls.open !== undefined ? controls.open : snackbarOpen}
               autoHideDuration={controls.autoHideDuration || 6000}
-              onClose={() => {}}
+              onClose={() => setSnackbarOpen(false)}
               message={controls.message || "This is a snackbar message"}
               anchorOrigin={{
                 vertical: controls.anchorOrigin?.includes('top') ? 'top' : 'bottom',
@@ -744,7 +756,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
                           controls.anchorOrigin?.includes('right') ? 'right' : 'left'
               }}
               action={controls.action ? (
-                <MuiButton color="secondary" size="small" onClick={() => {}}>
+                <MuiButton color="secondary" size="small" onClick={() => setSnackbarOpen(false)}>
                   UNDO
                 </MuiButton>
               ) : undefined}
