@@ -3,11 +3,8 @@ import { Sidebar } from "./Sidebar";
 import { ComponentPreview } from "./ComponentPreviewSimple";
 import { ControlsPanel } from "./ControlsPanel";
 import { DocumentationPanel } from "./DocumentationPanel";
-import { ThemeUploader } from "../theme/ThemeUploader";
-import { useDynamicTheme } from "../theme/DynamicThemeProvider";
 
 export function StorybookLayout() {
-  const { currentTheme, setTheme: setDynamicTheme } = useDynamicTheme();
   const [selectedComponent, setSelectedComponent] = useState("Button");
   const [selectedStory, setSelectedStory] = useState("Primary");
   const [viewMode, setViewMode] = useState<"canvas" | "docs">("canvas");
@@ -229,23 +226,13 @@ export function StorybookLayout() {
         {/* Main Content */}
         {viewMode === "canvas" ? (
           <div className="flex-1 flex">
-            <div className="flex-1 flex flex-col">
-              <div className="p-4">
-                <ThemeUploader
-                  onThemeChange={setDynamicTheme}
-                  currentTheme={currentTheme}
-                />
-              </div>
-              <div className="flex-1">
-                <ComponentPreview
-                  component={selectedComponent}
-                  story={selectedStory}
-                  controls={controls}
-                  viewport={viewport}
-                  zoom={zoom}
-                />
-              </div>
-            </div>
+            <ComponentPreview
+              component={selectedComponent}
+              story={selectedStory}
+              controls={controls}
+              viewport={viewport}
+              zoom={zoom}
+            />
             <ControlsPanel
               controls={controls}
               onUpdateControl={updateControl}
@@ -253,15 +240,7 @@ export function StorybookLayout() {
             />
           </div>
         ) : (
-          <div className="flex-1 flex flex-col">
-            <div className="p-4">
-              <ThemeUploader
-                onThemeChange={setDynamicTheme}
-                currentTheme={currentTheme}
-              />
-            </div>
-            <DocumentationPanel component={selectedComponent} />
-          </div>
+          <DocumentationPanel component={selectedComponent} />
         )}
       </div>
     </div>
