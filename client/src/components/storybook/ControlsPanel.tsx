@@ -2040,6 +2040,468 @@ export function ControlsPanel({ controls, onUpdateControl, component }: Controls
           </>
         );
 
+      case "Grid":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">spacing</label>
+              <input
+                type="range"
+                min="0"
+                max="8"
+                value={controls.spacing || 2}
+                onChange={(e) => onUpdateControl("spacing", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.spacing || 2}</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">direction</label>
+              <select
+                value={controls.direction || "row"}
+                onChange={(e) => onUpdateControl("direction", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="row">row</option>
+                <option value="column">column</option>
+                <option value="row-reverse">row-reverse</option>
+                <option value="column-reverse">column-reverse</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">justifyContent</label>
+              <select
+                value={controls.justifyContent || "flex-start"}
+                onChange={(e) => onUpdateControl("justifyContent", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="flex-start">flex-start</option>
+                <option value="center">center</option>
+                <option value="flex-end">flex-end</option>
+                <option value="space-between">space-between</option>
+                <option value="space-around">space-around</option>
+                <option value="space-evenly">space-evenly</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">alignItems</label>
+              <select
+                value={controls.alignItems || "stretch"}
+                onChange={(e) => onUpdateControl("alignItems", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="stretch">stretch</option>
+                <option value="flex-start">flex-start</option>
+                <option value="center">center</option>
+                <option value="flex-end">flex-end</option>
+                <option value="baseline">baseline</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">Item xs</label>
+              <input
+                type="range"
+                min="1"
+                max="12"
+                value={controls.itemXs || 12}
+                onChange={(e) => onUpdateControl("itemXs", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.itemXs || 12}</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">Item sm</label>
+              <input
+                type="range"
+                min="1"
+                max="12"
+                value={controls.itemSm || 6}
+                onChange={(e) => onUpdateControl("itemSm", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.itemSm || 6}</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">Item md</label>
+              <input
+                type="range"
+                min="1"
+                max="12"
+                value={controls.itemMd || 4}
+                onChange={(e) => onUpdateControl("itemMd", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.itemMd || 4}</div>
+            </div>
+          </>
+        );
+
+      case "Container":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">maxWidth</label>
+              <select
+                value={controls.maxWidth || "md"}
+                onChange={(e) => onUpdateControl("maxWidth", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="xs">xs</option>
+                <option value="sm">sm</option>
+                <option value="md">md</option>
+                <option value="lg">lg</option>
+                <option value="xl">xl</option>
+                <option value={false}>false (no max width)</option>
+              </select>
+            </div>
+            <div className="space-y-3">
+              {["fixed", "disableGutters"].map((prop) => (
+                <div key={prop} className="flex items-center justify-between">
+                  <label className="text-xs font-medium text-muted-foreground">{prop}</label>
+                  <input
+                    type="checkbox"
+                    checked={controls[prop] || false}
+                    onChange={(e) => onUpdateControl(prop, e.target.checked)}
+                    className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        );
+
+      case "Box":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">component</label>
+              <select
+                value={controls.component || "div"}
+                onChange={(e) => onUpdateControl("component", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="div">div</option>
+                <option value="span">span</option>
+                <option value="section">section</option>
+                <option value="article">article</option>
+                <option value="main">main</option>
+                <option value="aside">aside</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">padding</label>
+              <input
+                type="range"
+                min="0"
+                max="8"
+                value={controls.padding || 2}
+                onChange={(e) => onUpdateControl("padding", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.padding || 2}</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">margin</label>
+              <input
+                type="range"
+                min="0"
+                max="8"
+                value={controls.margin || 1}
+                onChange={(e) => onUpdateControl("margin", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.margin || 1}</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">borderRadius</label>
+              <input
+                type="range"
+                min="0"
+                max="16"
+                value={controls.borderRadius || 0}
+                onChange={(e) => onUpdateControl("borderRadius", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.borderRadius || 0}px</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">backgroundColor</label>
+              <input
+                type="color"
+                value={controls.backgroundColor || "#ffffff"}
+                onChange={(e) => onUpdateControl("backgroundColor", e.target.value)}
+                className="w-full h-10 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">textAlign</label>
+              <select
+                value={controls.textAlign || "left"}
+                onChange={(e) => onUpdateControl("textAlign", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="left">left</option>
+                <option value="center">center</option>
+                <option value="right">right</option>
+                <option value="justify">justify</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">display</label>
+              <select
+                value={controls.display || "block"}
+                onChange={(e) => onUpdateControl("display", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="block">block</option>
+                <option value="flex">flex</option>
+                <option value="inline">inline</option>
+                <option value="inline-block">inline-block</option>
+                <option value="none">none</option>
+              </select>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">border</label>
+                <input
+                  type="checkbox"
+                  checked={controls.border || false}
+                  onChange={(e) => onUpdateControl("border", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case "Stack":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">direction</label>
+              <select
+                value={controls.direction || "column"}
+                onChange={(e) => onUpdateControl("direction", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="column">column</option>
+                <option value="row">row</option>
+                <option value="column-reverse">column-reverse</option>
+                <option value="row-reverse">row-reverse</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">spacing</label>
+              <input
+                type="range"
+                min="0"
+                max="8"
+                value={controls.spacing || 2}
+                onChange={(e) => onUpdateControl("spacing", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.spacing || 2}</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">justifyContent</label>
+              <select
+                value={controls.justifyContent || "flex-start"}
+                onChange={(e) => onUpdateControl("justifyContent", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="flex-start">flex-start</option>
+                <option value="center">center</option>
+                <option value="flex-end">flex-end</option>
+                <option value="space-between">space-between</option>
+                <option value="space-around">space-around</option>
+                <option value="space-evenly">space-evenly</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">alignItems</label>
+              <select
+                value={controls.alignItems || "stretch"}
+                onChange={(e) => onUpdateControl("alignItems", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="stretch">stretch</option>
+                <option value="flex-start">flex-start</option>
+                <option value="center">center</option>
+                <option value="flex-end">flex-end</option>
+                <option value="baseline">baseline</option>
+              </select>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">divider</label>
+                <input
+                  type="checkbox"
+                  checked={controls.divider || false}
+                  onChange={(e) => onUpdateControl("divider", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case "Divider":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">orientation</label>
+              <select
+                value={controls.orientation || "horizontal"}
+                onChange={(e) => onUpdateControl("orientation", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="horizontal">horizontal</option>
+                <option value="vertical">vertical</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">variant</label>
+              <select
+                value={controls.variant || "fullWidth"}
+                onChange={(e) => onUpdateControl("variant", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="fullWidth">fullWidth</option>
+                <option value="inset">inset</option>
+                <option value="middle">middle</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">textAlign</label>
+              <select
+                value={controls.textAlign || "center"}
+                onChange={(e) => onUpdateControl("textAlign", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="center">center</option>
+                <option value="left">left</option>
+                <option value="right">right</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">children</label>
+              <input
+                type="text"
+                value={controls.children || "Divider Text"}
+                onChange={(e) => onUpdateControl("children", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">flexItem</label>
+                <input
+                  type="checkbox"
+                  checked={controls.flexItem || false}
+                  onChange={(e) => onUpdateControl("flexItem", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case "Paper":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">elevation</label>
+              <input
+                type="range"
+                min="0"
+                max="24"
+                value={controls.elevation || 1}
+                onChange={(e) => onUpdateControl("elevation", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.elevation || 1}</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">variant</label>
+              <select
+                value={controls.variant || "elevation"}
+                onChange={(e) => onUpdateControl("variant", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="elevation">elevation</option>
+                <option value="outlined">outlined</option>
+              </select>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">square</label>
+                <input
+                  type="checkbox"
+                  checked={controls.square || false}
+                  onChange={(e) => onUpdateControl("square", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case "ImageList":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">cols</label>
+              <input
+                type="range"
+                min="1"
+                max="6"
+                value={controls.cols || 3}
+                onChange={(e) => onUpdateControl("cols", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.cols || 3}</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">rowHeight</label>
+              <input
+                type="range"
+                min="120"
+                max="300"
+                step="20"
+                value={controls.rowHeight || 164}
+                onChange={(e) => onUpdateControl("rowHeight", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.rowHeight || 164}px</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">variant</label>
+              <select
+                value={controls.variant || "standard"}
+                onChange={(e) => onUpdateControl("variant", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="standard">standard</option>
+                <option value="quilted">quilted</option>
+                <option value="woven">woven</option>
+                <option value="masonry">masonry</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">gap</label>
+              <input
+                type="range"
+                min="0"
+                max="24"
+                value={controls.gap || 8}
+                onChange={(e) => onUpdateControl("gap", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.gap || 8}px</div>
+            </div>
+          </>
+        );
+
       default:
         return (
           <div className="text-center text-muted-foreground">

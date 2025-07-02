@@ -38,6 +38,13 @@ import {
   ToggleButtonGroup,
   ButtonGroup,
   Fab,
+  Grid2 as Grid,
+  Container,
+  Box,
+  Stack,
+  Divider,
+  ImageList,
+  ImageListItem,
   List,
   ListItem,
   ListItemText,
@@ -57,7 +64,6 @@ import {
   Skeleton,
   Backdrop,
   Paper,
-  Box,
   Pagination,
   AppBar,
   Toolbar,
@@ -783,6 +789,159 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               <CircularProgress color="inherit" />
             </Backdrop>
           </div>
+        );
+
+      case "Grid":
+        return (
+          <Grid 
+            container 
+            spacing={controls.spacing || 2}
+            direction={controls.direction || "row"}
+            justifyContent={controls.justifyContent || "flex-start"}
+            alignItems={controls.alignItems || "stretch"}
+            wrap={controls.wrap || "wrap"}
+          >
+            <Grid item xs={controls.itemXs || 12} sm={controls.itemSm || 6} md={controls.itemMd || 4}>
+              <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: '#e3f2fd' }}>
+                Grid Item 1
+              </Paper>
+            </Grid>
+            <Grid item xs={controls.itemXs || 12} sm={controls.itemSm || 6} md={controls.itemMd || 4}>
+              <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: '#f3e5f5' }}>
+                Grid Item 2
+              </Paper>
+            </Grid>
+            <Grid item xs={controls.itemXs || 12} sm={controls.itemSm || 6} md={controls.itemMd || 4}>
+              <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: '#e8f5e8' }}>
+                Grid Item 3
+              </Paper>
+            </Grid>
+          </Grid>
+        );
+
+      case "Container":
+        return (
+          <Container
+            maxWidth={controls.maxWidth || "md"}
+            fixed={controls.fixed || false}
+            disableGutters={controls.disableGutters || false}
+          >
+            <Paper sx={{ p: 3, textAlign: 'center', backgroundColor: '#f5f5f5' }}>
+              <Typography variant="h6" gutterBottom>
+                Container Content
+              </Typography>
+              <Typography variant="body1">
+                This content is inside a {controls.maxWidth || "md"} container.
+                Container provides consistent max-widths and centering.
+              </Typography>
+            </Paper>
+          </Container>
+        );
+
+      case "Box":
+        return (
+          <Box
+            component={controls.component || "div"}
+            sx={{
+              padding: controls.padding || 2,
+              margin: controls.margin || 1,
+              border: controls.border ? '1px solid #ccc' : 'none',
+              borderRadius: controls.borderRadius || 0,
+              backgroundColor: controls.backgroundColor || 'transparent',
+              textAlign: controls.textAlign || 'left',
+              display: controls.display || 'block'
+            }}
+          >
+            <Typography variant="body1">
+              This is a Box component with customizable styling.
+              Box is the most primitive layout component in Material-UI.
+            </Typography>
+          </Box>
+        );
+
+      case "Stack":
+        return (
+          <Stack
+            direction={controls.direction || "column"}
+            spacing={controls.spacing || 2}
+            divider={controls.divider ? <Divider orientation={controls.direction === "row" ? "vertical" : "horizontal"} flexItem /> : undefined}
+            justifyContent={controls.justifyContent || "flex-start"}
+            alignItems={controls.alignItems || "stretch"}
+          >
+            <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: '#e3f2fd' }}>Stack Item 1</Paper>
+            <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: '#f3e5f5' }}>Stack Item 2</Paper>
+            <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: '#e8f5e8' }}>Stack Item 3</Paper>
+          </Stack>
+        );
+
+      case "Divider":
+        return (
+          <Box>
+            <Typography variant="body1" sx={{ mb: 2 }}>Content above divider</Typography>
+            <Divider 
+              orientation={controls.orientation || "horizontal"}
+              variant={controls.variant || "fullWidth"}
+              flexItem={controls.flexItem || false}
+              textAlign={controls.textAlign || "center"}
+              sx={{ my: 2 }}
+            >
+              {controls.children || "Divider Text"}
+            </Divider>
+            <Typography variant="body1" sx={{ mt: 2 }}>Content below divider</Typography>
+          </Box>
+        );
+
+      case "Paper":
+        return (
+          <Paper
+            elevation={controls.elevation || 1}
+            variant={controls.variant || "elevation"}
+            square={controls.square || false}
+            sx={{ 
+              p: 3, 
+              maxWidth: 400,
+              textAlign: 'center'
+            }}
+          >
+            <Typography variant="h6" gutterBottom>
+              Paper Component
+            </Typography>
+            <Typography variant="body1">
+              Paper provides elevation and background for content.
+              Current elevation: {controls.elevation || 1}
+            </Typography>
+          </Paper>
+        );
+
+      case "ImageList":
+        const imageListData = [
+          { img: 'https://images.unsplash.com/photo-1518756131217-31eb79b20e8f', title: 'Fern' },
+          { img: 'https://images.unsplash.com/photo-1597645587822-e99fa5d45d25', title: 'Mushrooms' },
+          { img: 'https://images.unsplash.com/photo-1567306301408-9b74779a11af', title: 'Tomato basil' },
+          { img: 'https://images.unsplash.com/photo-1471357674240-e1a485acb3e1', title: 'Sea star' },
+          { img: 'https://images.unsplash.com/photo-1589118949245-7d38baf380d6', title: 'Bike' },
+          { img: 'https://images.unsplash.com/photo-1551782450-a2132b4ba21d', title: 'Burger' }
+        ];
+
+        return (
+          <ImageList
+            sx={{ width: 500, height: 300 }}
+            cols={controls.cols || 3}
+            rowHeight={controls.rowHeight || 164}
+            variant={controls.variant || "standard"}
+            gap={controls.gap || 8}
+          >
+            {imageListData.slice(0, 6).map((item) => (
+              <ImageListItem key={item.img}>
+                <img
+                  srcSet={`${item.img}?w=164&h=164&fit=crop&auto=format&dpr=2 2x`}
+                  src={`${item.img}?w=164&h=164&fit=crop&auto=format`}
+                  alt={item.title}
+                  loading="lazy"
+                />
+              </ImageListItem>
+            ))}
+          </ImageList>
         );
 
       default:
@@ -1681,42 +1840,6 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
                 Drawer content would typically contain navigation items, user info, or other sidebar content.
               </p>
-            </div>
-          </div>
-        );
-
-      case "Alert":
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Interactive Alert</h3>
-              <Alert 
-                severity={controls.severity || "info"}
-                variant={controls.variant || "standard"}
-                icon={controls.icon !== false}
-                onClose={controls.onClose ? () => {} : undefined}
-              >
-                {controls.message || "This is an alert message"}
-              </Alert>
-            </div>
-            
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Severity Types</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <Alert severity="error">This is an error alert</Alert>
-                <Alert severity="warning">This is a warning alert</Alert>
-                <Alert severity="info">This is an info alert</Alert>
-                <Alert severity="success">This is a success alert</Alert>
-              </div>
-            </div>
-
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <Alert severity="info" variant="standard">Standard variant</Alert>
-                <Alert severity="info" variant="filled">Filled variant</Alert>
-                <Alert severity="info" variant="outlined">Outlined variant</Alert>
-              </div>
             </div>
           </div>
         );
