@@ -229,13 +229,23 @@ export function StorybookLayout() {
         {/* Main Content */}
         {viewMode === "canvas" ? (
           <div className="flex-1 flex">
-            <ComponentPreview
-              component={selectedComponent}
-              story={selectedStory}
-              controls={controls}
-              viewport={viewport}
-              zoom={zoom}
-            />
+            <div className="flex-1 flex flex-col">
+              <div className="p-4">
+                <ThemeUploader
+                  onThemeChange={setDynamicTheme}
+                  currentTheme={currentTheme}
+                />
+              </div>
+              <div className="flex-1">
+                <ComponentPreview
+                  component={selectedComponent}
+                  story={selectedStory}
+                  controls={controls}
+                  viewport={viewport}
+                  zoom={zoom}
+                />
+              </div>
+            </div>
             <ControlsPanel
               controls={controls}
               onUpdateControl={updateControl}
@@ -243,7 +253,15 @@ export function StorybookLayout() {
             />
           </div>
         ) : (
-          <DocumentationPanel component={selectedComponent} />
+          <div className="flex-1 flex flex-col">
+            <div className="p-4">
+              <ThemeUploader
+                onThemeChange={setDynamicTheme}
+                currentTheme={currentTheme}
+              />
+            </div>
+            <DocumentationPanel component={selectedComponent} />
+          </div>
         )}
       </div>
     </div>

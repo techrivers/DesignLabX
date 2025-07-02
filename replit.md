@@ -2,7 +2,7 @@
 
 ## Overview
 
-This is a full-stack application built with React, Express, and Material-UI that serves as a component library and storybook for Material-UI components. The project demonstrates a comprehensive set of Material-UI components with interactive documentation, controls, and live preview capabilities.
+This is a full-stack application built with React, Express, and Material-UI that serves as an enterprise-ready component library and storybook for Material-UI components. The project demonstrates a comprehensive set of Material-UI components with interactive documentation, controls, live preview capabilities, and dynamic theme management for company design systems. Companies can upload their JSON design system configurations to instantly see all components styled with their brand colors, typography, and theme settings.
 
 ## System Architecture
 
@@ -105,6 +105,13 @@ This is a full-stack application built with React, Express, and Material-UI that
   - Layout: Grid, Container, Box, Stack, Divider, Paper, ImageList
   - Surfaces: AppBar, Paper, Card, Accordion
   - Utils: ClickAwayListener, Portal, TextareaAutosize, Popper, Grow, Fade, Slide, Zoom
+- July 2, 2025. Added enterprise theme management system:
+  - JSON theme upload capability for company design systems
+  - Dynamic theme application that updates all Material-UI components instantly
+  - Theme gallery with 6 pre-designed professional themes (Corporate Blue, Modern Purple, Minimalist Green, Dark Orange, Financial Navy, Healthcare Teal)
+  - Persistent theme storage in localStorage
+  - Theme validation and error handling
+  - Download functionality for example themes and custom configurations
 
 ## User Preferences
 

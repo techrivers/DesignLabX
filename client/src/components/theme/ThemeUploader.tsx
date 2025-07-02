@@ -15,7 +15,8 @@ import {
   Chip,
   Stack
 } from '@mui/material';
-import { Upload, Download, Palette, Code, Eye } from 'lucide-react';
+import { Upload, Download, Palette, Code, Eye, Zap } from 'lucide-react';
+import { exampleThemes, downloadTheme } from './ExampleThemes';
 
 export interface ThemeConfig {
   name: string;
@@ -64,6 +65,7 @@ export function ThemeUploader({ onThemeChange, currentTheme }: ThemeUploaderProp
   const [success, setSuccess] = useState<string | null>(null);
   const [previewOpen, setPreviewOpen] = useState(false);
   const [exampleOpen, setExampleOpen] = useState(false);
+  const [galleryOpen, setGalleryOpen] = useState(false);
 
   const validateThemeConfig = (config: any): ThemeConfig => {
     if (!config.name || typeof config.name !== 'string') {
@@ -218,6 +220,13 @@ export function ThemeUploader({ onThemeChange, currentTheme }: ThemeUploaderProp
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', gap: 1 }}>
+              <IconButton 
+                size="small" 
+                onClick={() => setGalleryOpen(true)}
+                title="Browse theme gallery"
+              >
+                <Zap size={16} />
+              </IconButton>
               <IconButton 
                 size="small" 
                 onClick={() => setExampleOpen(true)}
@@ -423,6 +432,109 @@ export function ThemeUploader({ onThemeChange, currentTheme }: ThemeUploaderProp
             Download Example
           </Button>
           <Button onClick={() => setExampleOpen(false)}>Close</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Theme Gallery Dialog */}
+      <Dialog open={galleryOpen} onClose={() => setGalleryOpen(false)} maxWidth="lg" fullWidth>
+        <DialogTitle>Theme Gallery</DialogTitle>
+        <DialogContent>
+          <Typography variant="body2" color="text.secondary" sx={{ mb: 3 }}>
+            Choose from our pre-designed themes or download them as starting points for customization.
+          </Typography>
+          
+          <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))', gap: 2 }}>
+            {Object.entries(exampleThemes).map(([key, theme]) => (
+              <Card key={key} variant="outlined" sx={{ position: 'relative' }}>
+                <CardContent>
+                  <Box sx={{ display: 'flex', alignItems: 'center', mb: 1 }}>
+                    <Typography variant="h6" sx={{ flexGrow: 1 }}>
+                      {theme.name}
+                    </Typography>
+                    <Box sx={{ display: 'flex', gap: 0.5 }}>
+                      <IconButton 
+                        size="small" 
+                        onClick={() => downloadTheme(key)}
+                        title="Download theme"
+                      >
+                        <Download size={14} />
+                      </IconButton>
+                    </Box>
+                  </Box>
+                  
+                  {theme.description && (
+                    <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                      {theme.description}
+                    </Typography>
+                  )}
+                  
+                  <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 0.5, mb: 2 }}>
+                    <Box 
+                      sx={{ 
+                        width: 16, 
+                        height: 16, 
+                        backgroundColor: theme.colors.primary, 
+                        borderRadius: '50%',
+                        border: '1px solid #ccc'
+                      }} 
+                      title={`Primary: ${theme.colors.primary}`}
+                    />
+                    <Box 
+                      sx={{ 
+                        width: 16, 
+                        height: 16, 
+                        backgroundColor: theme.colors.secondary, 
+                        borderRadius: '50%',
+                        border: '1px solid #ccc'
+                      }} 
+                      title={`Secondary: ${theme.colors.secondary}`}
+                    />
+                    <Box 
+                      sx={{ 
+                        width: 16, 
+                        height: 16, 
+                        backgroundColor: theme.colors.success, 
+                        borderRadius: '50%',
+                        border: '1px solid #ccc'
+                      }} 
+                      title={`Success: ${theme.colors.success}`}
+                    />
+                    <Box 
+                      sx={{ 
+                        width: 16, 
+                        height: 16, 
+                        backgroundColor: theme.colors.warning, 
+                        borderRadius: '50%',
+                        border: '1px solid #ccc'
+                      }} 
+                      title={`Warning: ${theme.colors.warning}`}
+                    />
+                  </Box>
+                  
+                  <Typography variant="caption" color="text.secondary" sx={{ display: 'block', mb: 2 }}>
+                    Font: {theme.typography.fontFamily.split(',')[0].replace(/"/g, '')}
+                  </Typography>
+                  
+                  <Button 
+                    variant="contained" 
+                    fullWidth 
+                    size="small"
+                    onClick={() => {
+                      onThemeChange(theme);
+                      setSuccess(`Applied "${theme.name}" theme successfully!`);
+                      setGalleryOpen(false);
+                      setError(null);
+                    }}
+                  >
+                    Apply Theme
+                  </Button>
+                </CardContent>
+              </Card>
+            ))}
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setGalleryOpen(false)}>Close</Button>
         </DialogActions>
       </Dialog>
     </Box>
