@@ -3,8 +3,11 @@ import { Sidebar } from "./Sidebar";
 import { ComponentPreview } from "./ComponentPreviewSimple";
 import { ControlsPanel } from "./ControlsPanel";
 import { DocumentationPanel } from "./DocumentationPanel";
+import { ThemeUploader } from "../theme/ThemeUploader";
+import { useDynamicTheme } from "../theme/DynamicThemeProvider";
 
 export function StorybookLayout() {
+  const { currentTheme, setTheme: setDynamicTheme } = useDynamicTheme();
   const [selectedComponent, setSelectedComponent] = useState("Button");
   const [selectedStory, setSelectedStory] = useState("Primary");
   const [viewMode, setViewMode] = useState<"canvas" | "docs">("canvas");
