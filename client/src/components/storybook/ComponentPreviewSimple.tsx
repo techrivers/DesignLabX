@@ -130,17 +130,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
 
   const popperOpen = Boolean(popperAnchor);
 
-  // Helper function to apply custom styles
-  const getCustomStyles = () => {
-    if (!controls.customStyles) return {};
-    
-    // Filter out empty values
-    const filteredStyles = Object.entries(controls.customStyles)
-      .filter(([_, value]) => value !== "" && value !== undefined)
-      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
-    
-    return filteredStyles;
-  };
+
 
   const renderControlledComponent = () => {
     switch (component) {
@@ -153,7 +143,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             disabled={controls.disabled || false}
             fullWidth={controls.fullWidth || false}
             disableElevation={controls.disableElevation || false}
-            sx={getCustomStyles()}
+
           >
             {controls.children || "Button"}
           </MuiButton>
@@ -2006,12 +1996,20 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             <div>
               <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Menu</h3>
               <div style={{ position: 'relative' }}>
-                <MuiButton variant="contained">Open Menu</MuiButton>
-                <Menu open={true} anchorOrigin={{ vertical: 'bottom', horizontal: 'left' }}>
-                  <MenuItem>Profile</MenuItem>
-                  <MenuItem>My account</MenuItem>
-                  <MenuItem>Logout</MenuItem>
-                </Menu>
+                <MuiButton variant="contained">Open Menu (Example)</MuiButton>
+                <Paper elevation={2} sx={{ mt: 1, width: 200 }}>
+                  <List dense>
+                    <ListItem>
+                      <ListItemText primary="Profile" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemText primary="My account" />
+                    </ListItem>
+                    <ListItem>
+                      <ListItemText primary="Logout" />
+                    </ListItem>
+                  </List>
+                </Paper>
               </div>
             </div>
           </div>
