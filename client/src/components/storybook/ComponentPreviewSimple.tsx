@@ -48,6 +48,14 @@ import {
   Alert,
   CircularProgress,
   LinearProgress,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions,
+  Snackbar,
+  Skeleton,
+  Backdrop,
   Paper,
   Box,
   Pagination,
@@ -1556,6 +1564,300 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
                 Drawer content would typically contain navigation items, user info, or other sidebar content.
               </p>
+            </div>
+          </div>
+        );
+
+      case "Alert":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Interactive Alert</h3>
+              <Alert 
+                severity={controls.severity || "info"}
+                variant={controls.variant || "standard"}
+                icon={controls.icon !== false}
+                onClose={controls.onClose ? () => {} : undefined}
+              >
+                {controls.message || "This is an alert message"}
+              </Alert>
+            </div>
+            
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Severity Types</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Alert severity="error">This is an error alert</Alert>
+                <Alert severity="warning">This is a warning alert</Alert>
+                <Alert severity="info">This is an info alert</Alert>
+                <Alert severity="success">This is a success alert</Alert>
+              </div>
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Alert severity="info" variant="standard">Standard variant</Alert>
+                <Alert severity="info" variant="filled">Filled variant</Alert>
+                <Alert severity="info" variant="outlined">Outlined variant</Alert>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "Dialog":
+        const [anchorOrigin, setAnchorOrigin] = useState({ vertical: 'bottom', horizontal: 'left' });
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Interactive Dialog</h3>
+              <MuiButton variant="contained" onClick={() => {}}>
+                Open Dialog
+              </MuiButton>
+              <Dialog
+                open={controls.open || false}
+                onClose={() => {}}
+                maxWidth={controls.maxWidth || "sm"}
+                fullWidth={controls.fullWidth || false}
+                fullScreen={controls.fullScreen || false}
+              >
+                <DialogTitle>{controls.title || "Dialog Title"}</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    {controls.content || "This is the dialog content. You can put any text here."}
+                  </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <MuiButton onClick={() => {}}>Cancel</MuiButton>
+                  <MuiButton variant="contained" onClick={() => {}}>Confirm</MuiButton>
+                </DialogActions>
+              </Dialog>
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Dialog Sizes</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <MuiButton variant="outlined" size="small">XS Dialog</MuiButton>
+                <MuiButton variant="outlined" size="small">SM Dialog</MuiButton>
+                <MuiButton variant="outlined" size="small">MD Dialog</MuiButton>
+                <MuiButton variant="outlined" size="small">LG Dialog</MuiButton>
+                <MuiButton variant="outlined" size="small">XL Dialog</MuiButton>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "Snackbar":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Interactive Snackbar</h3>
+              <MuiButton variant="contained" onClick={() => {}}>
+                Show Snackbar
+              </MuiButton>
+              <Snackbar
+                open={controls.open || false}
+                autoHideDuration={controls.autoHideDuration || 6000}
+                onClose={() => {}}
+                message={controls.message || "This is a snackbar message"}
+                anchorOrigin={{
+                  vertical: controls.anchorOrigin?.includes('top') ? 'top' : 'bottom',
+                  horizontal: controls.anchorOrigin?.includes('center') ? 'center' : 
+                            controls.anchorOrigin?.includes('right') ? 'right' : 'left'
+                }}
+                action={controls.action ? (
+                  <MuiButton color="secondary" size="small" onClick={() => {}}>
+                    UNDO
+                  </MuiButton>
+                ) : undefined}
+              />
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Position Examples</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <MuiButton variant="outlined" size="small">Top Left</MuiButton>
+                <MuiButton variant="outlined" size="small">Top Center</MuiButton>
+                <MuiButton variant="outlined" size="small">Top Right</MuiButton>
+                <MuiButton variant="outlined" size="small">Bottom Left</MuiButton>
+                <MuiButton variant="outlined" size="small">Bottom Center</MuiButton>
+                <MuiButton variant="outlined" size="small">Bottom Right</MuiButton>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "CircularProgress":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Interactive Circular Progress</h3>
+              <CircularProgress
+                variant={controls.variant || "indeterminate"}
+                value={controls.variant === "determinate" ? (controls.value || 25) : undefined}
+                size={controls.size || 40}
+                thickness={controls.thickness || 3.6}
+                color={controls.color || "primary"}
+              />
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+                <CircularProgress color="primary" />
+                <CircularProgress color="secondary" />
+                <CircularProgress color="error" />
+                <CircularProgress color="warning" />
+                <CircularProgress color="info" />
+                <CircularProgress color="success" />
+              </div>
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
+                <CircularProgress size={20} />
+                <CircularProgress size={40} />
+                <CircularProgress size={60} />
+                <CircularProgress size={80} />
+              </div>
+            </div>
+          </div>
+        );
+
+      case "LinearProgress":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Interactive Linear Progress</h3>
+              <div style={{ width: '100%' }}>
+                <LinearProgress
+                  variant={controls.variant || "indeterminate"}
+                  value={controls.variant === "determinate" ? (controls.value || 50) : undefined}
+                  valueBuffer={controls.variant === "buffer" ? (controls.valueBuffer || 75) : undefined}
+                  color={controls.color || "primary"}
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div>
+                  <Typography variant="body2" gutterBottom>Indeterminate</Typography>
+                  <LinearProgress />
+                </div>
+                <div>
+                  <Typography variant="body2" gutterBottom>Determinate (50%)</Typography>
+                  <LinearProgress variant="determinate" value={50} />
+                </div>
+                <div>
+                  <Typography variant="body2" gutterBottom>Buffer (50% / 75%)</Typography>
+                  <LinearProgress variant="buffer" value={50} valueBuffer={75} />
+                </div>
+                <div>
+                  <Typography variant="body2" gutterBottom>Query</Typography>
+                  <LinearProgress variant="query" />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <LinearProgress color="primary" />
+                <LinearProgress color="secondary" />
+                <LinearProgress color="error" />
+                <LinearProgress color="warning" />
+                <LinearProgress color="info" />
+                <LinearProgress color="success" />
+              </div>
+            </div>
+          </div>
+        );
+
+      case "Skeleton":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Interactive Skeleton</h3>
+              <Skeleton
+                variant={controls.variant || "text"}
+                width={controls.width || 210}
+                height={controls.height || 60}
+                animation={controls.animation === "false" ? false : controls.animation || "pulse"}
+              />
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div>
+                  <Typography variant="body2" gutterBottom>Text</Typography>
+                  <Skeleton variant="text" sx={{ fontSize: '1rem' }} />
+                </div>
+                <div>
+                  <Typography variant="body2" gutterBottom>Circular</Typography>
+                  <Skeleton variant="circular" width={40} height={40} />
+                </div>
+                <div>
+                  <Typography variant="body2" gutterBottom>Rectangular</Typography>
+                  <Skeleton variant="rectangular" width={210} height={60} />
+                </div>
+                <div>
+                  <Typography variant="body2" gutterBottom>Rounded</Typography>
+                  <Skeleton variant="rounded" width={210} height={60} />
+                </div>
+              </div>
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Animations</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div>
+                  <Typography variant="body2" gutterBottom>Pulse (default)</Typography>
+                  <Skeleton animation="pulse" />
+                </div>
+                <div>
+                  <Typography variant="body2" gutterBottom>Wave</Typography>
+                  <Skeleton animation="wave" />
+                </div>
+                <div>
+                  <Typography variant="body2" gutterBottom>No animation</Typography>
+                  <Skeleton animation={false} />
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "Backdrop":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Interactive Backdrop</h3>
+              <MuiButton variant="contained" onClick={() => {}}>
+                Show Backdrop
+              </MuiButton>
+              <Backdrop
+                sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={controls.open || false}
+                onClick={() => {}}
+                invisible={controls.invisible || false}
+              >
+                <CircularProgress color="inherit" />
+              </Backdrop>
+            </div>
+
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Usage Examples</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <MuiButton variant="outlined" size="small">Loading Backdrop</MuiButton>
+                <MuiButton variant="outlined" size="small">Invisible Backdrop</MuiButton>
+                <MuiButton variant="outlined" size="small">Custom Content</MuiButton>
+              </div>
+              <Typography variant="body2" color="textSecondary" style={{ marginTop: '8px' }}>
+                Backdrop is used to display loading states or block user interaction
+              </Typography>
             </div>
           </div>
         );
