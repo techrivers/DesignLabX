@@ -1677,6 +1677,369 @@ export function ControlsPanel({ controls, onUpdateControl, component }: Controls
           </>
         );
 
+      case "Alert":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">message</label>
+              <input
+                type="text"
+                value={controls.message || "This is an alert message"}
+                onChange={(e) => onUpdateControl("message", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">severity</label>
+              <select
+                value={controls.severity || "info"}
+                onChange={(e) => onUpdateControl("severity", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="error">error</option>
+                <option value="warning">warning</option>
+                <option value="info">info</option>
+                <option value="success">success</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">variant</label>
+              <select
+                value={controls.variant || "standard"}
+                onChange={(e) => onUpdateControl("variant", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="standard">standard</option>
+                <option value="filled">filled</option>
+                <option value="outlined">outlined</option>
+              </select>
+            </div>
+            <div className="space-y-3">
+              {["icon", "onClose"].map((prop) => (
+                <div key={prop} className="flex items-center justify-between">
+                  <label className="text-xs font-medium text-muted-foreground">{prop}</label>
+                  <input
+                    type="checkbox"
+                    checked={controls[prop] !== false}
+                    onChange={(e) => onUpdateControl(prop, e.target.checked)}
+                    className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        );
+
+      case "Dialog":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">title</label>
+              <input
+                type="text"
+                value={controls.title || "Dialog Title"}
+                onChange={(e) => onUpdateControl("title", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">content</label>
+              <textarea
+                value={controls.content || "This is the dialog content. You can put any text here."}
+                onChange={(e) => onUpdateControl("content", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+                rows={3}
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">maxWidth</label>
+              <select
+                value={controls.maxWidth || "sm"}
+                onChange={(e) => onUpdateControl("maxWidth", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="xs">xs</option>
+                <option value="sm">sm</option>
+                <option value="md">md</option>
+                <option value="lg">lg</option>
+                <option value="xl">xl</option>
+              </select>
+            </div>
+            <div className="space-y-3">
+              {["open", "fullWidth", "fullScreen"].map((prop) => (
+                <div key={prop} className="flex items-center justify-between">
+                  <label className="text-xs font-medium text-muted-foreground">{prop}</label>
+                  <input
+                    type="checkbox"
+                    checked={controls[prop] || false}
+                    onChange={(e) => onUpdateControl(prop, e.target.checked)}
+                    className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        );
+
+      case "Snackbar":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">message</label>
+              <input
+                type="text"
+                value={controls.message || "This is a snackbar message"}
+                onChange={(e) => onUpdateControl("message", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">autoHideDuration</label>
+              <input
+                type="range"
+                min="1000"
+                max="10000"
+                step="1000"
+                value={controls.autoHideDuration || 6000}
+                onChange={(e) => onUpdateControl("autoHideDuration", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.autoHideDuration || 6000}ms</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">anchorOrigin</label>
+              <select
+                value={controls.anchorOrigin || "bottom-left"}
+                onChange={(e) => onUpdateControl("anchorOrigin", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="top-left">top-left</option>
+                <option value="top-center">top-center</option>
+                <option value="top-right">top-right</option>
+                <option value="bottom-left">bottom-left</option>
+                <option value="bottom-center">bottom-center</option>
+                <option value="bottom-right">bottom-right</option>
+              </select>
+            </div>
+            <div className="space-y-3">
+              {["open", "action"].map((prop) => (
+                <div key={prop} className="flex items-center justify-between">
+                  <label className="text-xs font-medium text-muted-foreground">{prop}</label>
+                  <input
+                    type="checkbox"
+                    checked={controls[prop] || false}
+                    onChange={(e) => onUpdateControl(prop, e.target.checked)}
+                    className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        );
+
+      case "CircularProgress":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">variant</label>
+              <select
+                value={controls.variant || "indeterminate"}
+                onChange={(e) => onUpdateControl("variant", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="determinate">determinate</option>
+                <option value="indeterminate">indeterminate</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">value</label>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={controls.value || 25}
+                onChange={(e) => onUpdateControl("value", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.value || 25}%</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">size</label>
+              <input
+                type="range"
+                min="20"
+                max="120"
+                value={controls.size || 40}
+                onChange={(e) => onUpdateControl("size", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.size || 40}px</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">color</label>
+              <select
+                value={controls.color || "primary"}
+                onChange={(e) => onUpdateControl("color", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="primary">primary</option>
+                <option value="secondary">secondary</option>
+                <option value="error">error</option>
+                <option value="info">info</option>
+                <option value="success">success</option>
+                <option value="warning">warning</option>
+                <option value="inherit">inherit</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">thickness</label>
+              <input
+                type="range"
+                min="1"
+                max="10"
+                step="0.5"
+                value={controls.thickness || 3.6}
+                onChange={(e) => onUpdateControl("thickness", parseFloat(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.thickness || 3.6}</div>
+            </div>
+          </>
+        );
+
+      case "LinearProgress":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">variant</label>
+              <select
+                value={controls.variant || "indeterminate"}
+                onChange={(e) => onUpdateControl("variant", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="determinate">determinate</option>
+                <option value="indeterminate">indeterminate</option>
+                <option value="buffer">buffer</option>
+                <option value="query">query</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">value</label>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={controls.value || 50}
+                onChange={(e) => onUpdateControl("value", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.value || 50}%</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">valueBuffer</label>
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value={controls.valueBuffer || 75}
+                onChange={(e) => onUpdateControl("valueBuffer", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.valueBuffer || 75}%</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">color</label>
+              <select
+                value={controls.color || "primary"}
+                onChange={(e) => onUpdateControl("color", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="primary">primary</option>
+                <option value="secondary">secondary</option>
+                <option value="error">error</option>
+                <option value="info">info</option>
+                <option value="success">success</option>
+                <option value="warning">warning</option>
+                <option value="inherit">inherit</option>
+              </select>
+            </div>
+          </>
+        );
+
+      case "Skeleton":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">variant</label>
+              <select
+                value={controls.variant || "text"}
+                onChange={(e) => onUpdateControl("variant", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="text">text</option>
+                <option value="rectangular">rectangular</option>
+                <option value="rounded">rounded</option>
+                <option value="circular">circular</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">width</label>
+              <input
+                type="range"
+                min="50"
+                max="500"
+                value={controls.width || 210}
+                onChange={(e) => onUpdateControl("width", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.width || 210}px</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">height</label>
+              <input
+                type="range"
+                min="20"
+                max="200"
+                value={controls.height || 60}
+                onChange={(e) => onUpdateControl("height", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.height || 60}px</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">animation</label>
+              <select
+                value={controls.animation || "pulse"}
+                onChange={(e) => onUpdateControl("animation", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="pulse">pulse</option>
+                <option value="wave">wave</option>
+                <option value="false">none</option>
+              </select>
+            </div>
+          </>
+        );
+
+      case "Backdrop":
+        return (
+          <>
+            <div className="space-y-3">
+              {["open", "invisible"].map((prop) => (
+                <div key={prop} className="flex items-center justify-between">
+                  <label className="text-xs font-medium text-muted-foreground">{prop}</label>
+                  <input
+                    type="checkbox"
+                    checked={controls[prop] || false}
+                    onChange={(e) => onUpdateControl(prop, e.target.checked)}
+                    className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        );
+
       default:
         return (
           <div className="text-center text-muted-foreground">
