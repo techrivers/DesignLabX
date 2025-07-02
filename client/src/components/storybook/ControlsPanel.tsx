@@ -2502,6 +2502,320 @@ export function ControlsPanel({ controls, onUpdateControl, component }: Controls
           </>
         );
 
+      case "ClickAwayListener":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">elevation</label>
+              <input
+                type="range"
+                min="0"
+                max="24"
+                value={controls.elevation || 2}
+                onChange={(e) => onUpdateControl("elevation", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.elevation || 2}</div>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">active</label>
+                <input
+                  type="checkbox"
+                  checked={controls.active || false}
+                  onChange={(e) => onUpdateControl("active", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case "Portal":
+        return (
+          <>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">enabled</label>
+                <input
+                  type="checkbox"
+                  checked={controls.enabled || false}
+                  onChange={(e) => onUpdateControl("enabled", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case "TextareaAutosize":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">minRows</label>
+              <input
+                type="range"
+                min="1"
+                max="10"
+                value={controls.minRows || 3}
+                onChange={(e) => onUpdateControl("minRows", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.minRows || 3}</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">maxRows</label>
+              <input
+                type="range"
+                min="3"
+                max="20"
+                value={controls.maxRows || 8}
+                onChange={(e) => onUpdateControl("maxRows", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.maxRows || 8}</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">placeholder</label>
+              <input
+                type="text"
+                value={controls.placeholder || "Type your message here..."}
+                onChange={(e) => onUpdateControl("placeholder", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">disabled</label>
+                <input
+                  type="checkbox"
+                  checked={controls.disabled || false}
+                  onChange={(e) => onUpdateControl("disabled", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case "Popper":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">placement</label>
+              <select
+                value={controls.placement || "bottom"}
+                onChange={(e) => onUpdateControl("placement", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="top">top</option>
+                <option value="bottom">bottom</option>
+                <option value="left">left</option>
+                <option value="right">right</option>
+                <option value="top-start">top-start</option>
+                <option value="top-end">top-end</option>
+                <option value="bottom-start">bottom-start</option>
+                <option value="bottom-end">bottom-end</option>
+                <option value="left-start">left-start</option>
+                <option value="left-end">left-end</option>
+                <option value="right-start">right-start</option>
+                <option value="right-end">right-end</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">timeout</label>
+              <input
+                type="range"
+                min="100"
+                max="1000"
+                step="50"
+                value={controls.timeout || 350}
+                onChange={(e) => onUpdateControl("timeout", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.timeout || 350}ms</div>
+            </div>
+            <div className="space-y-3">
+              {["transition", "disablePortal"].map((prop) => (
+                <div key={prop} className="flex items-center justify-between">
+                  <label className="text-xs font-medium text-muted-foreground">{prop}</label>
+                  <input
+                    type="checkbox"
+                    checked={controls[prop] !== false}
+                    onChange={(e) => onUpdateControl(prop, e.target.checked)}
+                    className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                  />
+                </div>
+              ))}
+            </div>
+          </>
+        );
+
+      case "Grow":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">timeout</label>
+              <input
+                type="range"
+                min="100"
+                max="2000"
+                step="100"
+                value={controls.timeout || 500}
+                onChange={(e) => onUpdateControl("timeout", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.timeout || 500}ms</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">transformOrigin</label>
+              <select
+                value={controls.transformOrigin || "0 0 0"}
+                onChange={(e) => onUpdateControl("transformOrigin", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="0 0 0">0 0 0</option>
+                <option value="center">center</option>
+                <option value="top left">top left</option>
+                <option value="top center">top center</option>
+                <option value="top right">top right</option>
+                <option value="center left">center left</option>
+                <option value="center right">center right</option>
+                <option value="bottom left">bottom left</option>
+                <option value="bottom center">bottom center</option>
+                <option value="bottom right">bottom right</option>
+              </select>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">show</label>
+                <input
+                  type="checkbox"
+                  checked={controls.show !== false}
+                  onChange={(e) => onUpdateControl("show", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case "Fade":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">timeout</label>
+              <input
+                type="range"
+                min="100"
+                max="2000"
+                step="100"
+                value={controls.timeout || 500}
+                onChange={(e) => onUpdateControl("timeout", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.timeout || 500}ms</div>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">show</label>
+                <input
+                  type="checkbox"
+                  checked={controls.show !== false}
+                  onChange={(e) => onUpdateControl("show", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case "Slide":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">direction</label>
+              <select
+                value={controls.direction || "left"}
+                onChange={(e) => onUpdateControl("direction", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              >
+                <option value="left">left</option>
+                <option value="right">right</option>
+                <option value="up">up</option>
+                <option value="down">down</option>
+              </select>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">timeout</label>
+              <input
+                type="range"
+                min="100"
+                max="2000"
+                step="100"
+                value={controls.timeout || 500}
+                onChange={(e) => onUpdateControl("timeout", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.timeout || 500}ms</div>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">show</label>
+                <input
+                  type="checkbox"
+                  checked={controls.show !== false}
+                  onChange={(e) => onUpdateControl("show", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
+      case "Zoom":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">timeout</label>
+              <input
+                type="range"
+                min="100"
+                max="2000"
+                step="100"
+                value={controls.timeout || 500}
+                onChange={(e) => onUpdateControl("timeout", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.timeout || 500}ms</div>
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">delay</label>
+              <input
+                type="range"
+                min="0"
+                max="1000"
+                step="50"
+                value={controls.delay || 0}
+                onChange={(e) => onUpdateControl("delay", parseInt(e.target.value))}
+                className="w-full"
+              />
+              <div className="text-xs text-muted-foreground mt-1">Current: {controls.delay || 0}ms</div>
+            </div>
+            <div className="space-y-3">
+              <div className="flex items-center justify-between">
+                <label className="text-xs font-medium text-muted-foreground">show</label>
+                <input
+                  type="checkbox"
+                  checked={controls.show !== false}
+                  onChange={(e) => onUpdateControl("show", e.target.checked)}
+                  className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
+                />
+              </div>
+            </div>
+          </>
+        );
+
       default:
         return (
           <div className="text-center text-muted-foreground">

@@ -45,6 +45,14 @@ import {
   Divider,
   ImageList,
   ImageListItem,
+  ClickAwayListener,
+  Portal,
+  TextareaAutosize,
+  Popper,
+  Grow,
+  Fade,
+  Slide,
+  Zoom,
   List,
   ListItem,
   ListItemText,
@@ -935,6 +943,255 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               </ImageListItem>
             ))}
           </ImageList>
+        );
+
+      case "ClickAwayListener":
+        return (
+          <ClickAwayListener onClickAway={() => {}}>
+            <Paper 
+              elevation={controls.elevation || 2}
+              sx={{ 
+                p: 3, 
+                textAlign: 'center', 
+                backgroundColor: controls.active ? '#e3f2fd' : '#f5f5f5',
+                cursor: 'pointer',
+                transition: 'background-color 0.3s'
+              }}
+              onClick={() => {}}
+            >
+              <Typography variant="h6" gutterBottom>
+                ClickAwayListener Demo
+              </Typography>
+              <Typography variant="body2">
+                Click outside this area to trigger the ClickAwayListener event.
+                The background changes when {controls.active ? 'active' : 'inactive'}.
+              </Typography>
+            </Paper>
+          </ClickAwayListener>
+        );
+
+      case "Portal":
+        return (
+          <Box>
+            <Typography variant="h6" gutterBottom>
+              Portal Component
+            </Typography>
+            <Typography variant="body2" sx={{ mb: 2 }}>
+              Portal renders children into a different part of the DOM tree.
+            </Typography>
+            <MuiButton 
+              variant="contained" 
+              disabled={!controls.enabled}
+              sx={{ mb: 2 }}
+            >
+              {controls.enabled ? 'Portal Enabled' : 'Portal Disabled'}
+            </MuiButton>
+            <Portal container={controls.container || undefined}>
+              <Paper 
+                sx={{ 
+                  position: 'fixed', 
+                  top: 20, 
+                  right: 20, 
+                  p: 2, 
+                  zIndex: 9999,
+                  display: controls.enabled ? 'block' : 'none'
+                }}
+              >
+                <Typography variant="body2">
+                  This content is rendered via Portal!
+                </Typography>
+              </Paper>
+            </Portal>
+          </Box>
+        );
+
+      case "TextareaAutosize":
+        return (
+          <TextareaAutosize
+            minRows={controls.minRows || 3}
+            maxRows={controls.maxRows || 8}
+            placeholder={controls.placeholder || "Type your message here..."}
+            style={{
+              width: '100%',
+              padding: '12px',
+              fontSize: '14px',
+              fontFamily: 'inherit',
+              border: '1px solid #ccc',
+              borderRadius: '4px',
+              resize: 'none',
+              outline: 'none'
+            }}
+            disabled={controls.disabled || false}
+          />
+        );
+
+      case "Popper":
+        const [popperAnchor, setPopperAnchor] = useState<null | HTMLElement>(null);
+        const popperOpen = Boolean(popperAnchor);
+        
+        return (
+          <Box>
+            <MuiButton
+              variant="contained"
+              onClick={(event) => setPopperAnchor(popperAnchor ? null : event.currentTarget)}
+            >
+              Toggle Popper
+            </MuiButton>
+            <Popper 
+              open={popperOpen} 
+              anchorEl={popperAnchor}
+              placement={controls.placement || "bottom"}
+              transition={controls.transition !== false}
+              disablePortal={controls.disablePortal || false}
+            >
+              {({ TransitionProps }) => (
+                <Fade {...TransitionProps} timeout={controls.timeout || 350}>
+                  <Paper sx={{ p: 2, mt: 1, maxWidth: 300 }}>
+                    <Typography variant="h6" gutterBottom>
+                      Popper Content
+                    </Typography>
+                    <Typography variant="body2">
+                      This content is positioned using Popper.
+                      Placement: {controls.placement || "bottom"}
+                    </Typography>
+                  </Paper>
+                </Fade>
+              )}
+            </Popper>
+          </Box>
+        );
+
+      case "Grow":
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <MuiButton
+              variant="contained"
+              onClick={() => {}}
+            >
+              Toggle: {controls.show ? 'Hide' : 'Show'}
+            </MuiButton>
+            <Grow 
+              in={controls.show !== false} 
+              timeout={controls.timeout || 500}
+              style={{ transformOrigin: controls.transformOrigin || '0 0 0' }}
+            >
+              <Paper 
+                elevation={3}
+                sx={{ 
+                  p: 2, 
+                  backgroundColor: '#e8f5e8',
+                  minWidth: 200
+                }}
+              >
+                <Typography variant="body1">
+                  Grow Transition Component
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Timeout: {controls.timeout || 500}ms
+                </Typography>
+              </Paper>
+            </Grow>
+          </Box>
+        );
+
+      case "Fade":
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <MuiButton
+              variant="contained"
+              onClick={() => {}}
+            >
+              Toggle: {controls.show ? 'Fade Out' : 'Fade In'}
+            </MuiButton>
+            <Fade 
+              in={controls.show !== false} 
+              timeout={controls.timeout || 500}
+            >
+              <Paper 
+                elevation={3}
+                sx={{ 
+                  p: 2, 
+                  backgroundColor: '#f3e5f5',
+                  minWidth: 200
+                }}
+              >
+                <Typography variant="body1">
+                  Fade Transition Component
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Timeout: {controls.timeout || 500}ms
+                </Typography>
+              </Paper>
+            </Fade>
+          </Box>
+        );
+
+      case "Slide":
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, overflow: 'hidden' }}>
+            <MuiButton
+              variant="contained"
+              onClick={() => {}}
+            >
+              Toggle: {controls.show ? 'Slide Out' : 'Slide In'}
+            </MuiButton>
+            <Slide 
+              direction={controls.direction || "left"}
+              in={controls.show !== false} 
+              timeout={controls.timeout || 500}
+              mountOnEnter 
+              unmountOnExit
+            >
+              <Paper 
+                elevation={3}
+                sx={{ 
+                  p: 2, 
+                  backgroundColor: '#e3f2fd',
+                  minWidth: 200
+                }}
+              >
+                <Typography variant="body1">
+                  Slide Transition Component
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Direction: {controls.direction || "left"}
+                </Typography>
+              </Paper>
+            </Slide>
+          </Box>
+        );
+
+      case "Zoom":
+        return (
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
+            <MuiButton
+              variant="contained"
+              onClick={() => {}}
+            >
+              Toggle: {controls.show ? 'Zoom Out' : 'Zoom In'}
+            </MuiButton>
+            <Zoom 
+              in={controls.show !== false} 
+              timeout={controls.timeout || 500}
+              style={{ transitionDelay: controls.show ? `${controls.delay || 0}ms` : '0ms' }}
+            >
+              <Paper 
+                elevation={3}
+                sx={{ 
+                  p: 2, 
+                  backgroundColor: '#fff3e0',
+                  minWidth: 200
+                }}
+              >
+                <Typography variant="body1">
+                  Zoom Transition Component
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  Timeout: {controls.timeout || 500}ms
+                </Typography>
+              </Paper>
+            </Zoom>
+          </Box>
         );
 
       default:
