@@ -130,6 +130,18 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
 
   const popperOpen = Boolean(popperAnchor);
 
+  // Helper function to apply custom styles
+  const getCustomStyles = () => {
+    if (!controls.customStyles) return {};
+    
+    // Filter out empty values
+    const filteredStyles = Object.entries(controls.customStyles)
+      .filter(([_, value]) => value !== "" && value !== undefined)
+      .reduce((acc, [key, value]) => ({ ...acc, [key]: value }), {});
+    
+    return filteredStyles;
+  };
+
   const renderControlledComponent = () => {
     switch (component) {
       case "Button":
@@ -141,6 +153,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             disabled={controls.disabled || false}
             fullWidth={controls.fullWidth || false}
             disableElevation={controls.disableElevation || false}
+            sx={getCustomStyles()}
           >
             {controls.children || "Button"}
           </MuiButton>
