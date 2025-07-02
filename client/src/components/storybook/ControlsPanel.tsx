@@ -2151,7 +2151,7 @@ export function ControlsPanel({ controls, onUpdateControl, component }: Controls
                 <option value="md">md</option>
                 <option value="lg">lg</option>
                 <option value="xl">xl</option>
-                <option value={false}>false (no max width)</option>
+                <option value="false">false (no max width)</option>
               </select>
             </div>
             <div className="space-y-3">

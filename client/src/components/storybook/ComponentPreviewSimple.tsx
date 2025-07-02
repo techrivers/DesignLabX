@@ -38,7 +38,7 @@ import {
   ToggleButtonGroup,
   ButtonGroup,
   Fab,
-  Grid2 as Grid,
+  Grid,
   Container,
   Box,
   Stack,
@@ -793,30 +793,23 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
 
       case "Grid":
         return (
-          <Grid 
-            container 
-            spacing={controls.spacing || 2}
-            direction={controls.direction || "row"}
-            justifyContent={controls.justifyContent || "flex-start"}
-            alignItems={controls.alignItems || "stretch"}
-            wrap={controls.wrap || "wrap"}
-          >
-            <Grid item xs={controls.itemXs || 12} sm={controls.itemSm || 6} md={controls.itemMd || 4}>
+          <Box sx={{ display: 'flex', flexDirection: controls.direction === 'column' ? 'column' : 'row', gap: controls.spacing || 2, justifyContent: controls.justifyContent || 'flex-start', alignItems: controls.alignItems || 'stretch', flexWrap: 'wrap' }}>
+            <Box sx={{ flex: `0 0 ${100 / (12 / (controls.itemXs || 12))}%`, minWidth: 0 }}>
               <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: '#e3f2fd' }}>
                 Grid Item 1
               </Paper>
-            </Grid>
-            <Grid item xs={controls.itemXs || 12} sm={controls.itemSm || 6} md={controls.itemMd || 4}>
+            </Box>
+            <Box sx={{ flex: `0 0 ${100 / (12 / (controls.itemSm || 6))}%`, minWidth: 0 }}>
               <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: '#f3e5f5' }}>
                 Grid Item 2
               </Paper>
-            </Grid>
-            <Grid item xs={controls.itemXs || 12} sm={controls.itemSm || 6} md={controls.itemMd || 4}>
+            </Box>
+            <Box sx={{ flex: `0 0 ${100 / (12 / (controls.itemMd || 4))}%`, minWidth: 0 }}>
               <Paper sx={{ p: 2, textAlign: 'center', backgroundColor: '#e8f5e8' }}>
                 Grid Item 3
               </Paper>
-            </Grid>
-          </Grid>
+            </Box>
+          </Box>
         );
 
       case "Container":
