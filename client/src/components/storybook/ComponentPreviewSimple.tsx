@@ -1605,13 +1605,15 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "Dialog":
-        const [anchorOrigin, setAnchorOrigin] = useState({ vertical: 'bottom', horizontal: 'left' });
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
             <div>
               <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Interactive Dialog</h3>
-              <MuiButton variant="contained" onClick={() => {}}>
-                Open Dialog
+              <MuiButton 
+                variant="contained" 
+                onClick={() => {}}
+              >
+                {controls.open ? "Close Dialog" : "Open Dialog"} (Use controls panel)
               </MuiButton>
               <Dialog
                 open={controls.open || false}
