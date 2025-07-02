@@ -668,6 +668,123 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           </Box>
         );
 
+      case "Alert":
+        return (
+          <Alert 
+            severity={controls.severity || "info"}
+            variant={controls.variant || "standard"}
+            icon={controls.icon !== false}
+            onClose={controls.onClose ? () => {} : undefined}
+          >
+            {controls.message || "This is an alert message"}
+          </Alert>
+        );
+
+      case "Dialog":
+        return (
+          <div>
+            <MuiButton 
+              variant="contained" 
+              onClick={() => {}}
+            >
+              {controls.open ? "Dialog Open" : "Dialog Closed"} (Use controls)
+            </MuiButton>
+            <Dialog
+              open={controls.open || false}
+              onClose={() => {}}
+              maxWidth={controls.maxWidth || "sm"}
+              fullWidth={controls.fullWidth || false}
+              fullScreen={controls.fullScreen || false}
+            >
+              <DialogTitle>{controls.title || "Dialog Title"}</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  {controls.content || "This is the dialog content. You can put any text here."}
+                </DialogContentText>
+              </DialogContent>
+              <DialogActions>
+                <MuiButton onClick={() => {}}>Cancel</MuiButton>
+                <MuiButton variant="contained" onClick={() => {}}>Confirm</MuiButton>
+              </DialogActions>
+            </Dialog>
+          </div>
+        );
+
+      case "Snackbar":
+        return (
+          <div>
+            <MuiButton variant="contained" onClick={() => {}}>
+              {controls.open ? "Snackbar Open" : "Snackbar Closed"} (Use controls)
+            </MuiButton>
+            <Snackbar
+              open={controls.open || false}
+              autoHideDuration={controls.autoHideDuration || 6000}
+              onClose={() => {}}
+              message={controls.message || "This is a snackbar message"}
+              anchorOrigin={{
+                vertical: controls.anchorOrigin?.includes('top') ? 'top' : 'bottom',
+                horizontal: controls.anchorOrigin?.includes('center') ? 'center' : 
+                          controls.anchorOrigin?.includes('right') ? 'right' : 'left'
+              }}
+              action={controls.action ? (
+                <MuiButton color="secondary" size="small" onClick={() => {}}>
+                  UNDO
+                </MuiButton>
+              ) : undefined}
+            />
+          </div>
+        );
+
+      case "CircularProgress":
+        return (
+          <CircularProgress
+            variant={controls.variant || "indeterminate"}
+            value={controls.variant === "determinate" ? (controls.value || 25) : undefined}
+            size={controls.size || 40}
+            thickness={controls.thickness || 3.6}
+            color={controls.color || "primary"}
+          />
+        );
+
+      case "LinearProgress":
+        return (
+          <div style={{ width: '300px' }}>
+            <LinearProgress
+              variant={controls.variant || "indeterminate"}
+              value={controls.variant === "determinate" ? (controls.value || 50) : undefined}
+              valueBuffer={controls.variant === "buffer" ? (controls.valueBuffer || 75) : undefined}
+              color={controls.color || "primary"}
+            />
+          </div>
+        );
+
+      case "Skeleton":
+        return (
+          <Skeleton
+            variant={controls.variant || "text"}
+            width={controls.width || 210}
+            height={controls.height || 60}
+            animation={controls.animation === "false" ? false : controls.animation || "pulse"}
+          />
+        );
+
+      case "Backdrop":
+        return (
+          <div>
+            <MuiButton variant="contained" onClick={() => {}}>
+              {controls.open ? "Backdrop Open" : "Backdrop Closed"} (Use controls)
+            </MuiButton>
+            <Backdrop
+              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+              open={controls.open || false}
+              onClick={() => {}}
+              invisible={controls.invisible || false}
+            >
+              <CircularProgress color="inherit" />
+            </Backdrop>
+          </div>
+        );
+
       default:
         return (
           <div style={{ 
