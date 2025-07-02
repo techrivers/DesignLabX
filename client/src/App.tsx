@@ -7,12 +7,14 @@ import { ThemeProvider } from "@/components/mui/ThemeProvider";
 import { DynamicThemeProvider } from "@/components/theme/DynamicThemeProvider";
 import NotFound from "@/pages/not-found";
 import StorybookPage from "@/pages/storybook";
+import ShowcasePage from "@/pages/showcase";
 
 function Router() {
   return (
     <Switch>
-      <Route path="/" component={StorybookPage} />
+      <Route path="/" component={ShowcasePage} />
       <Route path="/storybook" component={StorybookPage} />
+      <Route path="/showcase" component={ShowcasePage} />
       <Route component={NotFound} />
     </Switch>
   );
