@@ -122,6 +122,9 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const [isDark, setIsDark] = useState(false);
   const [currentView, setCurrentView] = useState<'canvas' | 'design'>('canvas');
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [popperAnchor, setPopperAnchor] = useState<null | HTMLElement>(null);
+
+  const popperOpen = Boolean(popperAnchor);
 
   const renderControlledComponent = () => {
     switch (component) {
@@ -1026,9 +1029,6 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "Popper":
-        const [popperAnchor, setPopperAnchor] = useState<null | HTMLElement>(null);
-        const popperOpen = Boolean(popperAnchor);
-        
         return (
           <Box>
             <MuiButton
