@@ -99,6 +99,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const [tabValue, setTabValue] = useState(controls.value || 0);
   const [isDark, setIsDark] = useState(false);
   const [currentView, setCurrentView] = useState<'canvas' | 'design'>('canvas');
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const renderControlledComponent = () => {
     switch (component) {
@@ -432,21 +433,36 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "Menu":
+        const open = Boolean(anchorEl);
+        
+        const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+          setAnchorEl(event.currentTarget);
+        };
+        
+        const handleClose = () => {
+          setAnchorEl(null);
+        };
+        
         return (
           <div>
-            <MuiButton variant="contained">
+            <MuiButton 
+              variant="contained"
+              onClick={handleClick}
+            >
               {controls.buttonText || "Open Menu"}
             </MuiButton>
             <Menu
-              open={true}
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
               anchorOrigin={{
                 vertical: 'bottom',
                 horizontal: 'left',
               }}
             >
-              <MenuItem>Profile</MenuItem>
-              <MenuItem>My account</MenuItem>
-              <MenuItem>Logout</MenuItem>
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
             </Menu>
           </div>
         );
