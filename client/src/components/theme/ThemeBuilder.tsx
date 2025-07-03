@@ -251,6 +251,7 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
                 label="Theme Name"
                 value={theme.name}
                 onChange={(e) => updateTheme({ name: e.target.value })}
+                sx={{ mt: 2 }}
               />
             </Grid>
             <Grid item xs={12} md={6}>
@@ -259,6 +260,7 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
                 label="Description"
                 value={theme.description}
                 onChange={(e) => updateTheme({ description: e.target.value })}
+                sx={{ mt: 2 }}
               />
             </Grid>
           </Grid>
