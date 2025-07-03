@@ -361,13 +361,16 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
             <AccordionDetails>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={6}>
+                  <Typography variant="body2" gutterBottom sx={{ mb: 1, fontWeight: 500 }}>
+                    Font Family
+                  </Typography>
                   <FormControl fullWidth>
-                    <InputLabel>Font Family</InputLabel>
                     <Select
                       value={theme.typography.fontFamily}
                       onChange={(e) => updateTheme({ 
                         typography: { ...theme.typography, fontFamily: e.target.value } 
                       })}
+                      displayEmpty
                     >
                       {fontFamilies.map((font) => (
                         <MenuItem key={font} value={font} sx={{ fontFamily: font }}>
