@@ -15,8 +15,9 @@ import {
   Chip,
   Stack
 } from '@mui/material';
-import { Upload, Download, Palette, Code, Eye, Zap } from 'lucide-react';
+import { Upload, Download, Palette, Code, Eye, Zap, Settings } from 'lucide-react';
 import { exampleThemes, downloadTheme } from './ExampleThemes';
+import { ThemeBuilder } from './ThemeBuilder';
 
 export interface ThemeConfig {
   name: string;
@@ -66,6 +67,7 @@ export function ThemeUploader({ onThemeChange, currentTheme }: ThemeUploaderProp
   const [previewOpen, setPreviewOpen] = useState(false);
   const [exampleOpen, setExampleOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
+  const [builderOpen, setBuilderOpen] = useState(false);
 
   const validateThemeConfig = (config: any): ThemeConfig => {
     if (!config.name || typeof config.name !== 'string') {
@@ -220,6 +222,14 @@ export function ThemeUploader({ onThemeChange, currentTheme }: ThemeUploaderProp
               </Typography>
             </Box>
             <Box sx={{ display: 'flex', gap: 1 }}>
+              <IconButton 
+                size="small" 
+                onClick={() => setBuilderOpen(true)}
+                title="Create custom theme"
+                sx={{ backgroundColor: 'primary.main', color: 'white', '&:hover': { backgroundColor: 'primary.dark' } }}
+              >
+                <Settings size={16} />
+              </IconButton>
               <IconButton 
                 size="small" 
                 onClick={() => setGalleryOpen(true)}
@@ -537,6 +547,18 @@ export function ThemeUploader({ onThemeChange, currentTheme }: ThemeUploaderProp
           <Button onClick={() => setGalleryOpen(false)}>Close</Button>
         </DialogActions>
       </Dialog>
+
+      {/* Theme Builder Dialog */}
+      <ThemeBuilder
+        open={builderOpen}
+        onClose={() => setBuilderOpen(false)}
+        onApplyTheme={(theme) => {
+          onThemeChange(theme);
+          setSuccess(`Applied custom theme "${theme.name}" successfully!`);
+          setError(null);
+        }}
+        initialTheme={currentTheme}
+      />
     </Box>
   );
 }
