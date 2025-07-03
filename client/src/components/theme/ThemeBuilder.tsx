@@ -25,6 +25,7 @@ import {
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import DownloadIcon from '@mui/icons-material/Download';
 import ColorLensIcon from '@mui/icons-material/ColorLens';
+import { RotateCcw } from 'lucide-react';
 import { ThemeConfig } from './ThemeUploader';
 
 interface ThemeBuilderProps {
@@ -184,12 +185,60 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
     onClose();
   }, [theme, onApplyTheme, onClose]);
 
+  const resetToDefaults = useCallback(() => {
+    setTheme({
+      name: 'Custom Theme',
+      description: 'A custom theme created with the theme builder',
+      colors: {
+        primary: '#1976d2',
+        secondary: '#dc004e',
+        error: '#d32f2f',
+        warning: '#ed6c02',
+        info: '#0288d1',
+        success: '#2e7d32',
+        background: {
+          default: '#ffffff',
+          paper: '#f5f5f5'
+        },
+        text: {
+          primary: '#212121',
+          secondary: '#757575'
+        }
+      },
+      typography: {
+        fontFamily: 'Roboto, sans-serif',
+        fontSize: 14,
+        h1: { fontSize: '2.5rem', fontWeight: 300 },
+        h2: { fontSize: '2rem', fontWeight: 300 },
+        h3: { fontSize: '1.75rem', fontWeight: 400 },
+        h4: { fontSize: '1.5rem', fontWeight: 400 },
+        h5: { fontSize: '1.25rem', fontWeight: 400 },
+        h6: { fontSize: '1rem', fontWeight: 500 },
+        body1: { fontSize: '1rem', lineHeight: 1.5 },
+        body2: { fontSize: '0.875rem', lineHeight: 1.43 }
+      },
+      spacing: 8,
+      borderRadius: 4
+    });
+  }, []);
+
   return (
     <Dialog open={open} onClose={onClose} maxWidth="md" fullWidth>
       <DialogTitle>
-        <Box display="flex" alignItems="center" gap={1}>
-          <ColorLensIcon />
-          <Typography variant="h6">Theme Builder</Typography>
+        <Box display="flex" alignItems="center" justifyContent="space-between">
+          <Box display="flex" alignItems="center" gap={1}>
+            <ColorLensIcon />
+            <Typography variant="h6">Theme Builder</Typography>
+          </Box>
+          <Button
+            variant="outlined"
+            color="error"
+            size="small"
+            onClick={resetToDefaults}
+            startIcon={<RotateCcw size={16} />}
+          >
+            Reset to Defaults
+          </Button>
         </Box>
       </DialogTitle>
       <DialogContent>
