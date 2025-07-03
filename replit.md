@@ -118,6 +118,12 @@ This is a full-stack application built with React, Express, and Material-UI that
   - Integrated theme uploader as the main entry point for theme management
   - Removed theme configuration from storybook interface for cleaner UX
   - Made showcase page the default homepage with direct component navigation
+- July 3, 2025. Enhanced reset functionality with safety features:
+  - Added prominent reset button with icon in header controls (only visible when theme is active)
+  - Enhanced main reset button styling with error color and icon for better visibility
+  - Implemented confirmation dialog to prevent accidental theme resets
+  - Added current theme preview in confirmation dialog for user context
+  - Both header and section reset buttons now use the same safe confirmation flow
 
 ## User Preferences
 

@@ -15,7 +15,7 @@ import {
   Chip,
   Stack
 } from '@mui/material';
-import { Upload, Download, Palette, Code, Eye, Zap, Settings } from 'lucide-react';
+import { Upload, Download, Palette, Code, Eye, Zap, Settings, RotateCcw } from 'lucide-react';
 import { exampleThemes, downloadTheme } from './ExampleThemes';
 import { ThemeBuilder } from './ThemeBuilder';
 
@@ -68,6 +68,7 @@ export function ThemeUploader({ onThemeChange, currentTheme }: ThemeUploaderProp
   const [exampleOpen, setExampleOpen] = useState(false);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const [builderOpen, setBuilderOpen] = useState(false);
+  const [resetDialogOpen, setResetDialogOpen] = useState(false);
 
   const validateThemeConfig = (config: any): ThemeConfig => {
     if (!config.name || typeof config.name !== 'string') {
@@ -252,13 +253,23 @@ export function ThemeUploader({ onThemeChange, currentTheme }: ThemeUploaderProp
                 <Download size={16} />
               </IconButton>
               {currentTheme && (
-                <IconButton 
-                  size="small" 
-                  onClick={() => setPreviewOpen(true)}
-                  title="Preview current theme"
-                >
-                  <Eye size={16} />
-                </IconButton>
+                <>
+                  <IconButton 
+                    size="small" 
+                    onClick={() => setPreviewOpen(true)}
+                    title="Preview current theme"
+                  >
+                    <Eye size={16} />
+                  </IconButton>
+                  <IconButton 
+                    size="small" 
+                    onClick={() => setResetDialogOpen(true)}
+                    title="Reset to default theme"
+                    sx={{ color: 'error.main', '&:hover': { backgroundColor: 'error.light', color: 'white' } }}
+                  >
+                    <RotateCcw size={16} />
+                  </IconButton>
+                </>
               )}
             </Box>
           </Box>
@@ -278,12 +289,14 @@ export function ThemeUploader({ onThemeChange, currentTheme }: ThemeUploaderProp
                 )}
               </Stack>
               <Button 
-                variant="outlined" 
+                variant="contained" 
+                color="error" 
                 size="small" 
-                onClick={resetTheme}
+                onClick={() => setResetDialogOpen(true)}
+                startIcon={<RotateCcw size={16} />}
                 sx={{ mr: 1 }}
               >
-                Reset to Default
+                Reset Theme
               </Button>
             </Box>
           )}
@@ -559,6 +572,49 @@ export function ThemeUploader({ onThemeChange, currentTheme }: ThemeUploaderProp
         }}
         initialTheme={currentTheme}
       />
+
+      {/* Reset Confirmation Dialog */}
+      <Dialog
+        open={resetDialogOpen}
+        onClose={() => setResetDialogOpen(false)}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle>Reset Theme</DialogTitle>
+        <DialogContent>
+          <Typography>
+            Are you sure you want to reset to the default Material-UI theme? 
+            This will remove your current custom theme configuration.
+          </Typography>
+          {currentTheme && (
+            <Box sx={{ mt: 2, p: 2, backgroundColor: 'grey.100', borderRadius: 1 }}>
+              <Typography variant="body2" color="text.secondary">
+                Current theme: <strong>{currentTheme.name}</strong>
+              </Typography>
+              {currentTheme.description && (
+                <Typography variant="body2" color="text.secondary">
+                  {currentTheme.description}
+                </Typography>
+              )}
+            </Box>
+          )}
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={() => setResetDialogOpen(false)}>
+            Cancel
+          </Button>
+          <Button 
+            onClick={() => {
+              resetTheme();
+              setResetDialogOpen(false);
+            }}
+            color="error"
+            variant="contained"
+          >
+            Reset Theme
+          </Button>
+        </DialogActions>
+      </Dialog>
     </Box>
   );
 }
