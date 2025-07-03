@@ -3250,7 +3250,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
       </div>
 
       {/* Preview Content */}
-      <div style={{ flex: 1, overflow: 'auto', backgroundColor: '#f5f5f5' }}>
+      <div style={{ flex: 1, overflow: 'hidden', backgroundColor: '#f5f5f5', position: 'relative' }}>
         <div 
           style={{ 
             transform: `scale(${currentZoom})`, 
@@ -3258,19 +3258,20 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             width: selectedViewport === 'mobile' ? '375px' : 
                    selectedViewport === 'tablet' ? '768px' : '100%',
             minWidth: selectedViewport === 'desktop' ? '1200px' : undefined,
-            margin: '0 auto'
+            margin: '0 auto',
+            height: '100%',
+            overflow: 'auto'
           }}
         >
           <div style={{ 
             padding: '24px', 
             background: currentView === 'canvas' ? canvasBackground : designBackground,
-            minHeight: '500px', 
+            minHeight: 'calc(100vh - 120px)', 
             display: 'flex', 
-            alignItems: 'center', 
+            alignItems: 'flex-start', 
             justifyContent: 'center',
             position: 'relative',
-            width: '100%',
-            height: '100%'
+            width: '100%'
           }}>
             {currentView === 'design' && (
               <div style={{
@@ -3288,10 +3289,10 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               position: 'relative', 
               zIndex: 10,
               display: 'flex',
-              alignItems: 'center',
+              alignItems: 'flex-start',
               justifyContent: 'center',
-              minWidth: '200px',
-              minHeight: '100px'
+              width: '100%',
+              padding: '20px 0'
             }}>
               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', width: '100%', maxWidth: '800px' }}>
                 {/* Main controlled component */}
@@ -3305,13 +3306,15 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
                   alignItems: 'center',
                   justifyContent: 'center',
                   minHeight: '120px',
-                  width: '100%'
+                  width: '100%',
+                  maxWidth: '100%',
+                  overflow: 'hidden'
                 }}>
                   {renderControlledComponent()}
                 </div>
                 
                 {/* Variant showcase */}
-                <div style={{ width: '100%' }}>
+                <div style={{ width: '100%', maxWidth: '100%', overflow: 'hidden' }}>
                   {renderVariantShowcase()}
                 </div>
               </div>

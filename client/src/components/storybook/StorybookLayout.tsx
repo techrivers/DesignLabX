@@ -225,22 +225,28 @@ export function StorybookLayout() {
 
         {/* Main Content */}
         {viewMode === "canvas" ? (
-          <div className="flex-1 flex">
-            <ComponentPreview
-              component={selectedComponent}
-              story={selectedStory}
-              controls={controls}
-              viewport={viewport}
-              zoom={zoom}
-            />
-            <ControlsPanel
-              controls={controls}
-              onUpdateControl={updateControl}
-              component={selectedComponent}
-            />
+          <div className="flex-1 flex overflow-hidden">
+            <div className="flex-1 overflow-hidden">
+              <ComponentPreview
+                component={selectedComponent}
+                story={selectedStory}
+                controls={controls}
+                viewport={viewport}
+                zoom={zoom}
+              />
+            </div>
+            <div className="w-80 overflow-auto border-l">
+              <ControlsPanel
+                controls={controls}
+                onUpdateControl={updateControl}
+                component={selectedComponent}
+              />
+            </div>
           </div>
         ) : (
-          <DocumentationPanel component={selectedComponent} />
+          <div className="flex-1 overflow-auto">
+            <DocumentationPanel component={selectedComponent} />
+          </div>
         )}
       </div>
     </div>
