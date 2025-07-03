@@ -393,22 +393,52 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
           </Accordion>
 
           {/* Preview */}
-          <Paper sx={{ p: 2, backgroundColor: theme.colors.background?.default }}>
+          <Paper sx={{ 
+            p: theme.spacing || 2, 
+            backgroundColor: theme.colors.background?.default,
+            fontFamily: theme.typography.fontFamily
+          }}>
             <Typography variant="h6" gutterBottom>Preview</Typography>
-            <Box sx={{ fontFamily: theme.typography.fontFamily }}>
-              <Typography variant="h4" color={theme.colors.primary} gutterBottom>
+            <Box sx={{ 
+              fontFamily: theme.typography.fontFamily,
+              '& *': { 
+                fontFamily: `${theme.typography.fontFamily} !important`
+              }
+            }}>
+              <Typography 
+                variant="h4" 
+                color={theme.colors.primary} 
+                gutterBottom
+                sx={{ 
+                  fontSize: theme.typography.h4?.fontSize || `${theme.typography.fontSize * 2}px`,
+                  fontWeight: theme.typography.h4?.fontWeight || 600,
+                  marginBottom: `${theme.spacing || 2}px`
+                }}
+              >
                 {theme.name}
               </Typography>
-              <Typography variant="body1" color={theme.colors.text?.primary} gutterBottom>
-                This is how your theme will look. The primary color is used for buttons and links.
+              <Typography 
+                variant="body1" 
+                color={theme.colors.text?.primary} 
+                gutterBottom
+                sx={{ 
+                  fontSize: theme.typography.body1?.fontSize || `${theme.typography.fontSize}px`,
+                  lineHeight: theme.typography.body1?.lineHeight || 1.5,
+                  marginBottom: `${theme.spacing || 2}px`
+                }}
+              >
+                This is how your theme will look with font size {theme.typography.fontSize}px and spacing unit {theme.spacing || 2}px.
               </Typography>
-              <Stack direction="row" spacing={1} mt={2}>
+              <Stack direction="row" spacing={theme.spacing ? theme.spacing / 8 : 1} mt={theme.spacing ? theme.spacing / 8 : 2}>
                 <Button 
                   variant="contained" 
                   size="small"
                   sx={{ 
                     backgroundColor: theme.colors.primary,
-                    borderRadius: `${theme.borderRadius}px`
+                    borderRadius: `${theme.borderRadius}px`,
+                    fontSize: `${theme.typography.fontSize * 0.875}px`,
+                    padding: `${(theme.spacing || 2) * 0.5}px ${(theme.spacing || 2) * 1}px`,
+                    margin: `${(theme.spacing || 2) * 0.25}px`
                   }}
                 >
                   Primary
@@ -418,7 +448,10 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
                   size="small"
                   sx={{ 
                     backgroundColor: theme.colors.secondary,
-                    borderRadius: `${theme.borderRadius}px`
+                    borderRadius: `${theme.borderRadius}px`,
+                    fontSize: `${theme.typography.fontSize * 0.875}px`,
+                    padding: `${(theme.spacing || 2) * 0.5}px ${(theme.spacing || 2) * 1}px`,
+                    margin: `${(theme.spacing || 2) * 0.25}px`
                   }}
                 >
                   Secondary
@@ -428,7 +461,10 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
                   size="small"
                   sx={{ 
                     backgroundColor: theme.colors.success,
-                    borderRadius: `${theme.borderRadius}px`
+                    borderRadius: `${theme.borderRadius}px`,
+                    fontSize: `${theme.typography.fontSize * 0.875}px`,
+                    padding: `${(theme.spacing || 2) * 0.5}px ${(theme.spacing || 2) * 1}px`,
+                    margin: `${(theme.spacing || 2) * 0.25}px`
                   }}
                 >
                   Success
