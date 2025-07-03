@@ -385,12 +385,6 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
                     min={10}
                     max={24}
                     step={1}
-                    marks={[
-                      { value: 12, label: '12px' },
-                      { value: 14, label: '14px' },
-                      { value: 16, label: '16px' },
-                      { value: 18, label: '18px' }
-                    ]}
                   />
                 </Grid>
               </Grid>
@@ -447,7 +441,16 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
             backgroundColor: theme.colors.background?.default,
             fontFamily: theme.typography.fontFamily
           }}>
-            <Typography variant="h6" gutterBottom>Preview</Typography>
+            <Typography 
+              variant="h6" 
+              gutterBottom
+              sx={{ 
+                fontSize: `${theme.typography.fontSize * 1.25}px`,
+                fontFamily: theme.typography.fontFamily
+              }}
+            >
+              Preview
+            </Typography>
             <Box sx={{ 
               fontFamily: theme.typography.fontFamily,
               '& *': { 
@@ -471,9 +474,10 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
                 color={theme.colors.text?.primary} 
                 gutterBottom
                 sx={{ 
-                  fontSize: theme.typography.body1?.fontSize || `${theme.typography.fontSize}px`,
+                  fontSize: `${theme.typography.fontSize}px`,
                   lineHeight: theme.typography.body1?.lineHeight || 1.5,
-                  marginBottom: `${theme.spacing || 2}px`
+                  marginBottom: `${theme.spacing || 2}px`,
+                  fontFamily: theme.typography.fontFamily
                 }}
               >
                 This is how your theme will look with font size {theme.typography.fontSize}px and spacing unit {theme.spacing || 2}px.
