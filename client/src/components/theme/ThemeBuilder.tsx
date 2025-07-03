@@ -371,6 +371,7 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
                         typography: { ...theme.typography, fontFamily: e.target.value } 
                       })}
                       displayEmpty
+                      size="small"
                     >
                       {fontFamilies.map((font) => (
                         <MenuItem key={font} value={font} sx={{ fontFamily: font }}>
