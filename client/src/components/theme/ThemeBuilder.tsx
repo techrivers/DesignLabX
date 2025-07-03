@@ -244,7 +244,7 @@ export function ThemeBuilder({ open, onClose, onApplyTheme, initialTheme }: Them
       <DialogContent>
         <Stack spacing={3}>
           {/* Basic Info */}
-          <Grid container spacing={2}>
+          <Grid container spacing={2} sx={{ mt: 2 }}>
             <Grid item xs={12} md={6}>
               <TextField
                 fullWidth
