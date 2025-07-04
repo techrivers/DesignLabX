@@ -88,6 +88,8 @@ import {
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import InboxIcon from '@mui/icons-material/Inbox';
 import DraftsIcon from '@mui/icons-material/Drafts';
@@ -95,10 +97,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import MenuIcon from '@mui/icons-material/Menu';
 import SendIcon from '@mui/icons-material/Send';
 import RestoreIcon from '@mui/icons-material/Restore';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import ExpandMoreIcon2 from '@mui/icons-material/ExpandMore';
 import EditIcon from '@mui/icons-material/Edit';
 import ShareIcon from '@mui/icons-material/Share';
 import PrintIcon from '@mui/icons-material/Print';
@@ -453,33 +453,56 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             size={controls.size || "medium"}
             readOnly={controls.readOnly || false}
             disabled={controls.disabled || false}
+            icon={controls.icon ? <FavoriteIcon fontSize="inherit" /> : undefined}
+            emptyIcon={controls.emptyIcon ? <FavoriteBorderIcon fontSize="inherit" /> : undefined}
+            onChange={() => {}}
           />
         );
       case "Autocomplete":
+        const autocompleteOptions = controls.grouped ? [
+          { title: 'Group 1', options: ['Option 1', 'Option 2'] },
+          { title: 'Group 2', options: ['Option 3', 'Option 4'] }
+        ] : ['Option 1', 'Option 2', 'Option 3', 'Option 4'];
+        
         return (
           <Autocomplete
-            options={['Option 1', 'Option 2', 'Option 3']}
+            options={autocompleteOptions}
             sx={{ width: 300 }}
             multiple={controls.multiple || false}
             freeSolo={controls.freeSolo || false}
             disabled={controls.disabled || false}
             size={controls.size || "medium"}
+            groupBy={controls.grouped ? (option: any) => option.title : undefined}
+            getOptionLabel={controls.grouped ? (option: any) => option.options?.[0] || option : (option: any) => option}
             renderInput={(params) => <TextField {...params} label={controls.label || "Autocomplete"} />}
+            onChange={() => {}}
           />
         );
 
       case "ToggleButton":
         return (
-          <ToggleButton
-            value={controls.value || "value"}
-            selected={controls.selected || false}
-            color={controls.color || "primary"}
-            size={controls.size || "medium"}
-            disabled={controls.disabled || false}
-            onChange={() => {}}
-          >
-            {controls.label || "Toggle"}
-          </ToggleButton>
+          <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+            <ToggleButton
+              value={controls.value || "format_bold"}
+              selected={controls.selected || false}
+              color={controls.color || "primary"}
+              size={controls.size || "medium"}
+              disabled={controls.disabled || false}
+              onChange={() => {}}
+            >
+              {controls.icon ? <EditIcon /> : (controls.label || "Bold")}
+            </ToggleButton>
+            {!controls.exclusive && (
+              <>
+                <ToggleButton value="format_italic" onChange={() => {}}>
+                  <ShareIcon />
+                </ToggleButton>
+                <ToggleButton value="format_underlined" onChange={() => {}}>
+                  <PrintIcon />
+                </ToggleButton>
+              </>
+            )}
+          </div>
         );
 
       case "ButtonGroup":
@@ -490,10 +513,13 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             size={controls.size || "medium"}
             orientation={controls.orientation || "horizontal"}
             disabled={controls.disabled || false}
+            exclusive={controls.exclusive || false}
+            fullWidth={controls.fullWidth || false}
           >
-            <MuiButton>One</MuiButton>
-            <MuiButton>Two</MuiButton>
-            <MuiButton>Three</MuiButton>
+            <MuiButton>{controls.label1 || "One"}</MuiButton>
+            <MuiButton>{controls.label2 || "Two"}</MuiButton>
+            <MuiButton>{controls.label3 || "Three"}</MuiButton>
+            {controls.fourButtons && <MuiButton>Four</MuiButton>}
           </ButtonGroup>
         );
 
