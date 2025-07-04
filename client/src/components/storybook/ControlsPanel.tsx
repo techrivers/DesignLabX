@@ -14,20 +14,117 @@ export function ControlsPanel({ controls, onUpdateControl, component }: Controls
   };
 
   const generateComponentCode = () => {
-    const props = Object.entries(controls)
-      .filter(([_, value]) => value !== false && value !== "")
-      .map(([key, value]) => {
-        if (typeof value === "boolean") {
-          return value ? key : "";
-        }
-        return `${key}="${value}"`;
-      })
-      .filter(Boolean)
-      .join(" ");
+    const getControlsString = () => {
+      return Object.entries(controls)
+        .filter(([key, value]) => value !== undefined && value !== null && value !== '')
+        .map(([key, value]) => {
+          if (typeof value === 'string') {
+            return `${key}="${value}"`;
+          } else if (typeof value === 'boolean' && value) {
+            return key;
+          } else {
+            return `${key}={${JSON.stringify(value)}}`;
+          }
+        })
+        .join('\n      ');
+    };
 
-    return `<${component} ${props}>
-  ${controls.children || `${component} Content`}
-</${component}>`;
+    const getImportStatement = () => {
+      const componentMap: Record<string, string> = {
+        'Button': 'Button',
+        'TextField': 'TextField',
+        'Card': 'Card, CardContent',
+        'Checkbox': 'Checkbox, FormControlLabel',
+        'Select': 'Select, FormControl, InputLabel, MenuItem',
+        'Radio': 'Radio, RadioGroup, FormControlLabel',
+        'Switch': 'Switch, FormControlLabel',
+        'Slider': 'Slider',
+        'Rating': 'Rating',
+        'Autocomplete': 'Autocomplete, TextField',
+        'ToggleButton': 'ToggleButton, ToggleButtonGroup',
+        'ButtonGroup': 'ButtonGroup, Button',
+        'Fab': 'Fab',
+        'Table': 'Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper',
+        'List': 'List, ListItem, ListItemText, ListItemIcon',
+        'Chip': 'Chip',
+        'Avatar': 'Avatar',
+        'Badge': 'Badge',
+        'Typography': 'Typography',
+        'Accordion': 'Accordion, AccordionSummary, AccordionDetails',
+        'AppBar': 'AppBar, Toolbar, Typography',
+        'Drawer': 'Drawer, List, ListItem, ListItemText',
+        'Tabs': 'Tabs, Tab',
+        'Alert': 'Alert',
+        'Dialog': 'Dialog, DialogTitle, DialogContent, DialogActions, Button',
+        'Progress': 'CircularProgress, LinearProgress',
+        'Grid': 'Grid',
+        'Paper': 'Paper',
+        'Box': 'Box',
+        'Stack': 'Stack',
+        'Divider': 'Divider'
+      };
+      
+      return `import { ${componentMap[component] || component} } from '@mui/material';`;
+    };
+
+    const getComponentJSX = () => {
+      const controlsString = getControlsString();
+      
+      switch (component) {
+        case 'Button':
+          return `<Button${controlsString ? `\n      ${controlsString}` : ''}>
+      Button Text
+    </Button>`;
+        case 'TextField':
+          return `<TextField${controlsString ? `\n      ${controlsString}` : ''}
+      label="Text Field"
+      variant="outlined"
+    />`;
+        case 'Card':
+          return `<Card${controlsString ? `\n      ${controlsString}` : ''}>
+      <CardContent>
+        <Typography variant="h5" component="div">
+          Card Title
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Card content goes here
+        </Typography>
+      </CardContent>
+    </Card>`;
+        case 'Checkbox':
+          return `<FormControlLabel
+      control={<Checkbox${controlsString ? `\n        ${controlsString}` : ''} />}
+      label="Checkbox Label"
+    />`;
+        default:
+          return `<${component}${controlsString ? `\n      ${controlsString}` : ''}>
+      {/* Component content */}
+    </${component}>`;
+      }
+    };
+
+    return `${getImportStatement()}
+
+function ${component}Example() {
+  return (
+    ${getComponentJSX()}
+  );
+}
+
+export default ${component}Example;`;
+  };
+
+  const exportComponent = () => {
+    const code = generateComponentCode();
+    const blob = new Blob([code], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${component}-component.tsx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
 
   const getControlsForComponent = () => {
@@ -2858,6 +2955,7 @@ export function ControlsPanel({ controls, onUpdateControl, component }: Controls
               Copy Code
             </button>
             <button
+              onClick={exportComponent}
               className="w-full px-3 py-2 text-xs bg-muted hover:bg-muted/80 rounded flex items-center justify-center"
             >
               <span className="material-icons text-xs mr-1">download</span>
