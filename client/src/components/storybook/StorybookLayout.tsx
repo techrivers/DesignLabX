@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Sidebar } from "./Sidebar";
 import { ComponentPreview } from "./ComponentPreviewSimple";
 import { ControlsPanel } from "./ControlsPanel";
@@ -55,14 +55,14 @@ export function StorybookLayout() {
 
   const stories = {
     Button: ["Primary", "Secondary", "Outlined", "Text", "Disabled", "Loading"],
-    TextField: ["Basic", "Outlined", "Filled", "Error", "Disabled", "Multiline"],
-    Card: ["Basic", "With Media", "With Actions", "Outlined"],
+    TextField: ["Basic", "Outlined", "Filled", "Standard", "Error", "Disabled", "Multiline"],
+    Card: ["Basic", "WithMedia", "WithActions", "Outlined"],
     Table: ["Basic", "Dense", "With Pagination", "Sortable"],
     AppBar: ["Default", "Dense", "With Menu", "Elevated"],
-    Checkbox: ["Basic", "With Label", "Disabled", "Indeterminate", "Color Variants"],
-    Select: ["Basic", "With Helper Text", "Error", "Multiple", "Small"],
-    Radio: ["Basic", "With Label", "Disabled", "Color Variants"],
-    Switch: ["Basic", "With Label", "Disabled", "Color Variants"],
+    Checkbox: ["Basic", "WithLabel", "Disabled", "Indeterminate", "ColorVariants", "SizeVariants", "Controlled"],
+    Select: ["Basic", "WithHelperText", "Error", "Multiple", "Small", "Filled"],
+    Radio: ["Basic", "WithLabel", "Disabled", "ColorVariants", "Controlled"],
+    Switch: ["Basic", "WithLabel", "Disabled", "ColorVariants", "Controlled"],
     Slider: ["Basic", "Range", "Disabled", "Marks", "Vertical"],
     Rating: ["Basic", "Read Only", "Half Rating", "Custom Icon"],
     Autocomplete: ["Basic", "Multiple", "Grouped", "Free Solo"],
@@ -70,9 +70,9 @@ export function StorybookLayout() {
     ButtonGroup: ["Basic", "Vertical", "Split Button"],
     Fab: ["Basic", "Extended", "Size Variants"],
     List: ["Basic", "With Icons", "With Avatars", "Interactive"],
-    Chip: ["Basic", "Deletable", "Clickable", "Avatar"],
-    Avatar: ["Basic", "With Image", "Group", "Size Variants"],
-    Badge: ["Basic", "Dot", "Custom", "Color Variants"],
+    Chip: ["Basic", "Deletable", "Clickable", "Avatar", "ColorVariants", "SizeVariants", "VariantStyles"],
+    Avatar: ["Basic", "WithImage", "Group", "SizeVariants", "VariantStyles"],
+    Badge: ["Basic", "Dot", "Custom", "ColorVariants", "WithAvatar"],
     Tooltip: ["Basic", "Positioned", "Custom"],
     Typography: ["Headers", "Body", "Colors"],
     Accordion: ["Basic", "Controlled", "Detailed"],
@@ -85,7 +85,7 @@ export function StorybookLayout() {
     Menu: ["Basic", "Positioned", "Dense"],
     Pagination: ["Basic", "Outlined", "Size Variants"],
     SpeedDial: ["Basic", "Direction", "Persistent"],
-    Alert: ["Basic", "Severity", "Action", "Filled"],
+    Alert: ["Basic", "Severity", "Action", "Filled", "WithTitle"],
     Dialog: ["Basic", "Form", "Full Screen"],
     Snackbar: ["Basic", "Action", "Positioned"],
     Progress: ["Circular", "Linear", "With Label"],
@@ -1130,6 +1130,12 @@ export function StorybookLayout() {
         };
     }
   };
+
+  // Initialize controls when component mounts
+  useEffect(() => {
+    const newControls = getDefaultControls(selectedComponent, selectedStory);
+    setControls(newControls);
+  }, [selectedComponent, selectedStory]);
 
   // Update controls when component or story changes
   const handleComponentChange = (component: string) => {
