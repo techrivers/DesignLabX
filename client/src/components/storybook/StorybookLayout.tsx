@@ -19,6 +19,7 @@ export function StorybookLayout() {
     disabled: false,
     fullWidth: false,
     disableElevation: false,
+    startIcon: undefined as string | undefined,
   });
 
   const componentCategories = [
@@ -110,6 +111,116 @@ export function StorybookLayout() {
     setControls(prev => ({ ...prev, [key]: value }));
   };
 
+  // Function to get default controls based on component and story
+  const getDefaultControls = (component: string, story: string) => {
+    switch (component) {
+      case "Button":
+        switch (story) {
+          case "Primary":
+            return {
+              variant: "contained",
+              color: "primary",
+              size: "medium",
+              children: "Primary Button",
+              disabled: false,
+              fullWidth: false,
+              disableElevation: false,
+              startIcon: undefined,
+            };
+          case "Secondary":
+            return {
+              variant: "contained",
+              color: "secondary",
+              size: "medium",
+              children: "Secondary Button",
+              disabled: false,
+              fullWidth: false,
+              disableElevation: false,
+              startIcon: undefined,
+            };
+          case "Outlined":
+            return {
+              variant: "outlined",
+              color: "primary",
+              size: "medium",
+              children: "Outlined Button",
+              disabled: false,
+              fullWidth: false,
+              disableElevation: false,
+              startIcon: undefined,
+            };
+          case "Text":
+            return {
+              variant: "text",
+              color: "primary",
+              size: "medium",
+              children: "Text Button",
+              disabled: false,
+              fullWidth: false,
+              disableElevation: false,
+              startIcon: undefined,
+            };
+          case "Disabled":
+            return {
+              variant: "contained",
+              color: "primary",
+              size: "medium",
+              children: "Disabled Button",
+              disabled: true,
+              fullWidth: false,
+              disableElevation: false,
+              startIcon: undefined,
+            };
+          case "Loading":
+            return {
+              variant: "contained",
+              color: "primary",
+              size: "medium",
+              children: "Loading...",
+              disabled: true,
+              fullWidth: false,
+              disableElevation: false,
+              startIcon: "loading",
+            };
+          default:
+            return {
+              variant: "contained",
+              color: "primary",
+              size: "medium",
+              children: "Button",
+              disabled: false,
+              fullWidth: false,
+              disableElevation: false,
+              startIcon: undefined,
+            };
+        }
+      default:
+        return {
+          variant: "contained",
+          color: "primary",
+          size: "medium",
+          children: `${component} Content`,
+          disabled: false,
+          fullWidth: false,
+          disableElevation: false,
+          startIcon: undefined,
+        };
+    }
+  };
+
+  // Update controls when component or story changes
+  const handleComponentChange = (component: string) => {
+    setSelectedComponent(component);
+    const firstStory = stories[component as keyof typeof stories]?.[0] || "Default";
+    setSelectedStory(firstStory);
+    setControls(getDefaultControls(component, firstStory));
+  };
+
+  const handleStoryChange = (story: string) => {
+    setSelectedStory(story);
+    setControls(getDefaultControls(selectedComponent, story));
+  };
+
 
 
   return (
@@ -117,7 +228,7 @@ export function StorybookLayout() {
       <Sidebar
         categories={componentCategories}
         selectedComponent={selectedComponent}
-        onSelectComponent={setSelectedComponent}
+        onSelectComponent={handleComponentChange}
       />
       
       <div className="flex-1 flex flex-col">
@@ -212,7 +323,7 @@ export function StorybookLayout() {
             {(stories[selectedComponent as keyof typeof stories] || ["Default"]).map((story) => (
               <button
                 key={story}
-                onClick={() => setSelectedStory(story)}
+                onClick={() => handleStoryChange(story)}
                 className={`px-4 py-3 text-sm font-medium ${
                   selectedStory === story
                     ? "text-primary border-b-2 border-primary"
