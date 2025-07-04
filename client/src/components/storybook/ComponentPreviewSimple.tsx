@@ -445,16 +445,33 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           </Box>
         );
       case "Rating":
+        const getRatingProps = () => {
+          switch (story) {
+            case "ReadOnly":
+              return { value: 3, readOnly: true, precision: 1 };
+            case "HalfRating":
+              return { value: 2.5, precision: 0.5, readOnly: false };
+            case "CustomIcon":
+              return { 
+                value: 4, 
+                icon: <FavoriteIcon fontSize="inherit" />, 
+                emptyIcon: <FavoriteBorderIcon fontSize="inherit" /> 
+              };
+            case "Controlled":
+              return { value: controls.value || 3, precision: 1 };
+            default:
+              return { value: 4, precision: 1 };
+          }
+        };
+        
+        const ratingProps = getRatingProps();
+        
         return (
           <Rating 
-            value={controls.value || 4} 
+            {...ratingProps}
             max={controls.max || 5}
-            precision={controls.precision || 1}
             size={controls.size || "medium"}
-            readOnly={controls.readOnly || false}
             disabled={controls.disabled || false}
-            icon={controls.icon ? <FavoriteIcon fontSize="inherit" /> : undefined}
-            emptyIcon={controls.emptyIcon ? <FavoriteBorderIcon fontSize="inherit" /> : undefined}
             onChange={() => {}}
           />
         );
@@ -513,7 +530,6 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             size={controls.size || "medium"}
             orientation={controls.orientation || "horizontal"}
             disabled={controls.disabled || false}
-            exclusive={controls.exclusive || false}
             fullWidth={controls.fullWidth || false}
           >
             <MuiButton>{controls.label1 || "One"}</MuiButton>
@@ -524,16 +540,59 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "Fab":
-        return (
-          <Fab
-            color={controls.color || "primary"}
-            size={controls.size || "medium"}
-            variant={controls.variant || "circular"}
-            disabled={controls.disabled || false}
-          >
-            <SendIcon />
-          </Fab>
-        );
+        const getFabContent = () => {
+          switch (story) {
+            case "Extended":
+              return (
+                <Fab variant="extended" color={controls.color || "primary"} size={controls.size || "medium"}>
+                  <SendIcon sx={{ mr: 1 }} />
+                  {controls.label || "Extended"}
+                </Fab>
+              );
+            case "WithIcon":
+              return (
+                <Fab color={controls.color || "primary"} size={controls.size || "medium"}>
+                  <FavoriteIcon />
+                </Fab>
+              );
+            case "Sizes":
+              return (
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                  <Fab color="primary" size="small">
+                    <EditIcon />
+                  </Fab>
+                  <Fab color="primary" size="medium">
+                    <FavoriteIcon />
+                  </Fab>
+                  <Fab color="primary" size="large">
+                    <SendIcon />
+                  </Fab>
+                </div>
+              );
+            case "Colors":
+              return (
+                <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
+                  <Fab color="primary"><EditIcon /></Fab>
+                  <Fab color="secondary"><FavoriteIcon /></Fab>
+                  <Fab color="success"><SendIcon /></Fab>
+                  <Fab color="error"><CloseIcon /></Fab>
+                </div>
+              );
+            default:
+              return (
+                <Fab 
+                  color={controls.color || "primary"}
+                  size={controls.size || "medium"}
+                  disabled={controls.disabled || false}
+                  onClick={() => {}}
+                >
+                  {controls.icon ? <SendIcon /> : <EditIcon />}
+                </Fab>
+              );
+          }
+        };
+        
+        return getFabContent();
 
       case "Tooltip":
         return (
@@ -1620,36 +1679,6 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
                   { value: 37, label: '37°C' },
                   { value: 100, label: '100°C' }
                 ]} />
-              </div>
-            </div>
-          </div>
-        );
-      case "Rating":
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Rating</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <Rating value={4} />
-                <Rating value={2.5} precision={0.5} />
-                <Rating value={3} readOnly />
-                <Rating value={4} disabled />
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <Rating value={4} size="small" />
-                <Rating value={4} size="medium" />
-                <Rating value={4} size="large" />
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Customization</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <Rating value={4} max={10} />
-                <Rating value={4} precision={0.5} />
-                <Rating value={null} />
               </div>
             </div>
           </div>
