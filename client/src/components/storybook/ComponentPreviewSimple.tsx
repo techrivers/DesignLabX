@@ -1683,6 +1683,179 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             </div>
           </div>
         );
+      case "Rating":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Rating</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Rating value={4} />
+                <Rating value={2.5} precision={0.5} />
+                <Rating value={3} readOnly />
+                <Rating value={4} disabled />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Rating value={4} size="small" />
+                <Rating value={4} size="medium" />
+                <Rating value={4} size="large" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Customization</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Rating value={4} max={10} />
+                <Rating value={4} precision={0.5} />
+                <Rating 
+                  value={4} 
+                  icon={<FavoriteIcon fontSize="inherit" />} 
+                  emptyIcon={<FavoriteBorderIcon fontSize="inherit" />} 
+                />
+              </div>
+            </div>
+          </div>
+        );
+      case "ToggleButton":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Toggle Buttons</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <ToggleButtonGroup value="left" exclusive>
+                  <ToggleButton value="left">Left</ToggleButton>
+                  <ToggleButton value="center">Center</ToggleButton>
+                  <ToggleButton value="right">Right</ToggleButton>
+                </ToggleButtonGroup>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Multiple Selection</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <ToggleButtonGroup value={['bold', 'italic']}>
+                  <ToggleButton value="bold">Bold</ToggleButton>
+                  <ToggleButton value="italic">Italic</ToggleButton>
+                  <ToggleButton value="underline">Underline</ToggleButton>
+                </ToggleButtonGroup>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <ToggleButtonGroup value="small" exclusive size="small">
+                  <ToggleButton value="small">Small</ToggleButton>
+                  <ToggleButton value="medium">Medium</ToggleButton>
+                </ToggleButtonGroup>
+                <ToggleButtonGroup value="large" exclusive size="large">
+                  <ToggleButton value="large">Large</ToggleButton>
+                  <ToggleButton value="xl">Extra Large</ToggleButton>
+                </ToggleButtonGroup>
+              </div>
+            </div>
+          </div>
+        );
+      case "ButtonGroup":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <ButtonGroup variant="contained">
+                  <MuiButton>One</MuiButton>
+                  <MuiButton>Two</MuiButton>
+                  <MuiButton>Three</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="outlined">
+                  <MuiButton>One</MuiButton>
+                  <MuiButton>Two</MuiButton>
+                  <MuiButton>Three</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="text">
+                  <MuiButton>One</MuiButton>
+                  <MuiButton>Two</MuiButton>
+                  <MuiButton>Three</MuiButton>
+                </ButtonGroup>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <ButtonGroup variant="contained" color="primary">
+                  <MuiButton>Primary</MuiButton>
+                  <MuiButton>Group</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="contained" color="secondary">
+                  <MuiButton>Secondary</MuiButton>
+                  <MuiButton>Group</MuiButton>
+                </ButtonGroup>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes & Orientation</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <ButtonGroup variant="contained" size="small">
+                  <MuiButton>Small</MuiButton>
+                  <MuiButton>Size</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="contained" size="large">
+                  <MuiButton>Large</MuiButton>
+                  <MuiButton>Size</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="contained" orientation="vertical">
+                  <MuiButton>Vertical</MuiButton>
+                  <MuiButton>Layout</MuiButton>
+                </ButtonGroup>
+              </div>
+            </div>
+          </div>
+        );
+      case "Fab":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic FABs</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Fab color="primary">
+                  <span style={{ fontSize: '18px' }}>+</span>
+                </Fab>
+                <Fab color="secondary">
+                  <span style={{ fontSize: '18px' }}>✏️</span>
+                </Fab>
+                <Fab disabled>
+                  <span style={{ fontSize: '18px' }}>⚠️</span>
+                </Fab>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Extended FAB</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Fab variant="extended" color="primary">
+                  <span style={{ marginRight: '8px' }}>+</span>
+                  Add Item
+                </Fab>
+                <Fab variant="extended" color="secondary">
+                  <span style={{ marginRight: '8px' }}>✏️</span>
+                  Edit
+                </Fab>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Fab size="small" color="primary">
+                  <span style={{ fontSize: '14px' }}>S</span>
+                </Fab>
+                <Fab size="medium" color="primary">
+                  <span style={{ fontSize: '16px' }}>M</span>
+                </Fab>
+                <Fab size="large" color="primary">
+                  <span style={{ fontSize: '20px' }}>L</span>
+                </Fab>
+              </div>
+            </div>
+          </div>
+        );
       case "Autocomplete":
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
@@ -1694,60 +1867,32 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
                   renderInput={(params) => <TextField {...params} label="Basic" />}
                 />
                 <Autocomplete
-                  multiple
-                  options={['Option 1', 'Option 2', 'Option 3']}
-                  renderInput={(params) => <TextField {...params} label="Multiple" />}
-                />
-                <Autocomplete
-                  freeSolo
-                  options={['Option 1', 'Option 2', 'Option 3']}
-                  renderInput={(params) => <TextField {...params} label="Free Solo" />}
+                  options={['Apple', 'Banana', 'Cherry', 'Date', 'Elderberry']}
+                  renderInput={(params) => <TextField {...params} label="Fruits" />}
                 />
               </div>
             </div>
             <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes & States</h3>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Multiple Selection</h3>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
                 <Autocomplete
-                  size="small"
-                  options={['Small Option 1', 'Small Option 2']}
-                  renderInput={(params) => <TextField {...params} label="Small" />}
+                  multiple
+                  options={['React', 'Vue', 'Angular', 'Svelte']}
+                  renderInput={(params) => <TextField {...params} label="Frameworks" />}
                 />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Free Solo</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', minWidth: '300px' }}>
                 <Autocomplete
-                  disabled
-                  options={['Disabled Option 1', 'Disabled Option 2']}
-                  renderInput={(params) => <TextField {...params} label="Disabled" />}
-                />
-                <Autocomplete
-                  loading
-                  options={['Loading Option 1', 'Loading Option 2']}
-                  renderInput={(params) => <TextField {...params} label="Loading" />}
+                  freeSolo
+                  options={['JavaScript', 'Python', 'Java', 'C++']}
+                  renderInput={(params) => <TextField {...params} label="Programming Languages" />}
                 />
               </div>
             </div>
           </div>
-        );
-      case "ToggleButton":
-        return (
-          <ToggleButtonGroup value="left" exclusive>
-            <ToggleButton value="left">Left</ToggleButton>
-            <ToggleButton value="center">Center</ToggleButton>
-            <ToggleButton value="right">Right</ToggleButton>
-          </ToggleButtonGroup>
-        );
-      case "ButtonGroup":
-        return (
-          <ButtonGroup variant="contained">
-            <MuiButton>One</MuiButton>
-            <MuiButton>Two</MuiButton>
-            <MuiButton>Three</MuiButton>
-          </ButtonGroup>
-        );
-      case "Fab":
-        return (
-          <Fab color="primary">
-            <span style={{ fontSize: '18px' }}>+</span>
-          </Fab>
         );
       case "List":
         return (
@@ -1772,42 +1917,6 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             <span style={{ fontSize: '24px' }}>📧</span>
           </Badge>
         );
-      case "Typography":
-        return <Typography variant="h4">Typography</Typography>;
-      case "Alert":
-        return <Alert severity="info">This is an info alert</Alert>;
-      case "Progress":
-        return (
-          <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, width: '100%' }}>
-            <CircularProgress />
-            <LinearProgress />
-          </Box>
-        );
-      case "Table":
-        return (
-          <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-            <table style={{ width: '100%', borderCollapse: 'collapse' }}>
-              <thead>
-                <tr>
-                  <th style={{ padding: '16px', textAlign: 'left', borderBottom: '1px solid #ddd' }}>Name</th>
-                  <th style={{ padding: '16px', textAlign: 'left', borderBottom: '1px solid #ddd' }}>Calories</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td style={{ padding: '16px', borderBottom: '1px solid #eee' }}>Frozen yoghurt</td>
-                  <td style={{ padding: '16px', borderBottom: '1px solid #eee' }}>159</td>
-                </tr>
-                <tr>
-                  <td style={{ padding: '16px', borderBottom: '1px solid #eee' }}>Ice cream</td>
-                  <td style={{ padding: '16px', borderBottom: '1px solid #eee' }}>237</td>
-                </tr>
-              </tbody>
-            </table>
-          </Paper>
-        );
-      case "Pagination":
-        return <Pagination count={10} />;
       case "AppBar":
         return (
           <AppBar position="static">
