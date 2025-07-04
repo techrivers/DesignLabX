@@ -11,7 +11,7 @@ export function StorybookLayout() {
   const [viewport, setViewport] = useState("desktop");
   const [theme, setTheme] = useState("light");
   const [zoom, setZoom] = useState(100);
-  const [controls, setControls] = useState({
+  const [controls, setControls] = useState<any>({
     variant: "contained",
     color: "primary",
     size: "medium",
@@ -19,7 +19,7 @@ export function StorybookLayout() {
     disabled: false,
     fullWidth: false,
     disableElevation: false,
-    startIcon: undefined as string | undefined,
+    startIcon: undefined,
   });
 
   const componentCategories = [
@@ -108,7 +108,7 @@ export function StorybookLayout() {
   };
 
   const updateControl = (key: string, value: any) => {
-    setControls(prev => ({ ...prev, [key]: value }));
+    setControls((prev: any) => ({ ...prev, [key]: value }));
   };
 
   // Function to get default controls based on component and story
@@ -194,6 +194,929 @@ export function StorybookLayout() {
               startIcon: undefined,
             };
         }
+      
+      case "TextField":
+        switch (story) {
+          case "Basic":
+            return {
+              variant: "outlined",
+              label: "Basic TextField",
+              placeholder: "Enter text...",
+              disabled: false,
+              error: false,
+              helperText: "",
+              fullWidth: false,
+              multiline: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+          case "Outlined":
+            return {
+              variant: "outlined",
+              label: "Outlined TextField",
+              placeholder: "Outlined style",
+              disabled: false,
+              error: false,
+              helperText: "This is an outlined text field",
+              fullWidth: false,
+              multiline: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+          case "Filled":
+            return {
+              variant: "filled",
+              label: "Filled TextField",
+              placeholder: "Filled style",
+              disabled: false,
+              error: false,
+              helperText: "This is a filled text field",
+              fullWidth: false,
+              multiline: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+          case "Standard":
+            return {
+              variant: "standard",
+              label: "Standard TextField",
+              placeholder: "Standard style",
+              disabled: false,
+              error: false,
+              helperText: "This is a standard text field",
+              fullWidth: false,
+              multiline: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+          case "Error":
+            return {
+              variant: "outlined",
+              label: "Error TextField",
+              placeholder: "Error state",
+              disabled: false,
+              error: true,
+              helperText: "This field has an error",
+              fullWidth: false,
+              multiline: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+          case "Disabled":
+            return {
+              variant: "outlined",
+              label: "Disabled TextField",
+              placeholder: "Disabled",
+              disabled: true,
+              error: false,
+              helperText: "This field is disabled",
+              fullWidth: false,
+              multiline: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+          case "Multiline":
+            return {
+              variant: "outlined",
+              label: "Multiline TextField",
+              placeholder: "Enter multiple lines...",
+              disabled: false,
+              error: false,
+              helperText: "This field supports multiple lines",
+              fullWidth: false,
+              multiline: true,
+              size: "medium",
+              startIcon: undefined,
+            };
+          default:
+            return {
+              variant: "outlined",
+              label: "TextField",
+              placeholder: "Enter text...",
+              disabled: false,
+              error: false,
+              helperText: "",
+              fullWidth: false,
+              multiline: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+        }
+
+      case "Checkbox":
+        switch (story) {
+          case "Basic":
+            return {
+              checked: false,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              indeterminate: false,
+              label: "Basic Checkbox",
+              startIcon: undefined,
+            };
+          case "WithLabel":
+            return {
+              checked: false,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              indeterminate: false,
+              label: "Checkbox with Label",
+              startIcon: undefined,
+            };
+          case "Disabled":
+            return {
+              checked: false,
+              disabled: true,
+              color: "primary",
+              size: "medium",
+              indeterminate: false,
+              label: "Disabled Checkbox",
+              startIcon: undefined,
+            };
+          case "Indeterminate":
+            return {
+              checked: false,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              indeterminate: true,
+              label: "Indeterminate Checkbox",
+              startIcon: undefined,
+            };
+          case "ColorVariants":
+            return {
+              checked: true,
+              disabled: false,
+              color: "secondary",
+              size: "medium",
+              indeterminate: false,
+              label: "Secondary Color",
+              startIcon: undefined,
+            };
+          case "SizeVariants":
+            return {
+              checked: true,
+              disabled: false,
+              color: "primary",
+              size: "small",
+              indeterminate: false,
+              label: "Small Checkbox",
+              startIcon: undefined,
+            };
+          case "Controlled":
+            return {
+              checked: true,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              indeterminate: false,
+              label: "Controlled Checkbox",
+              startIcon: undefined,
+            };
+          default:
+            return {
+              checked: false,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              indeterminate: false,
+              label: "Checkbox",
+              startIcon: undefined,
+            };
+        }
+
+      case "Select":
+        switch (story) {
+          case "Basic":
+            return {
+              variant: "outlined",
+              label: "Basic Select",
+              value: "",
+              disabled: false,
+              error: false,
+              helperText: "",
+              fullWidth: false,
+              multiple: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+          case "WithHelperText":
+            return {
+              variant: "outlined",
+              label: "Select with Helper",
+              value: "option1",
+              disabled: false,
+              error: false,
+              helperText: "Choose an option from the list",
+              fullWidth: false,
+              multiple: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+          case "Error":
+            return {
+              variant: "outlined",
+              label: "Error Select",
+              value: "",
+              disabled: false,
+              error: true,
+              helperText: "Please select an option",
+              fullWidth: false,
+              multiple: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+          case "Multiple":
+            return {
+              variant: "outlined",
+              label: "Multiple Select",
+              value: ["option1"],
+              disabled: false,
+              error: false,
+              helperText: "Select multiple options",
+              fullWidth: false,
+              multiple: true,
+              size: "medium",
+              startIcon: undefined,
+            };
+          case "Small":
+            return {
+              variant: "outlined",
+              label: "Small Select",
+              value: "option1",
+              disabled: false,
+              error: false,
+              helperText: "",
+              fullWidth: false,
+              multiple: false,
+              size: "small",
+              startIcon: undefined,
+            };
+          case "Filled":
+            return {
+              variant: "filled",
+              label: "Filled Select",
+              value: "option1",
+              disabled: false,
+              error: false,
+              helperText: "Filled variant style",
+              fullWidth: false,
+              multiple: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+          default:
+            return {
+              variant: "outlined",
+              label: "Select",
+              value: "",
+              disabled: false,
+              error: false,
+              helperText: "",
+              fullWidth: false,
+              multiple: false,
+              size: "medium",
+              startIcon: undefined,
+            };
+        }
+
+      case "Switch":
+        switch (story) {
+          case "Basic":
+            return {
+              checked: false,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              label: "Basic Switch",
+              startIcon: undefined,
+            };
+          case "WithLabel":
+            return {
+              checked: true,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              label: "Switch with Label",
+              startIcon: undefined,
+            };
+          case "Disabled":
+            return {
+              checked: false,
+              disabled: true,
+              color: "primary",
+              size: "medium",
+              label: "Disabled Switch",
+              startIcon: undefined,
+            };
+          case "ColorVariants":
+            return {
+              checked: true,
+              disabled: false,
+              color: "secondary",
+              size: "medium",
+              label: "Secondary Color",
+              startIcon: undefined,
+            };
+          case "Controlled":
+            return {
+              checked: true,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              label: "Controlled Switch",
+              startIcon: undefined,
+            };
+          default:
+            return {
+              checked: false,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              label: "Switch",
+              startIcon: undefined,
+            };
+        }
+
+      case "Radio":
+        switch (story) {
+          case "Basic":
+            return {
+              checked: false,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              value: "basic",
+              label: "Basic Radio",
+              startIcon: undefined,
+            };
+          case "WithLabel":
+            return {
+              checked: true,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              value: "labeled",
+              label: "Radio with Label",
+              startIcon: undefined,
+            };
+          case "Disabled":
+            return {
+              checked: false,
+              disabled: true,
+              color: "primary",
+              size: "medium",
+              value: "disabled",
+              label: "Disabled Radio",
+              startIcon: undefined,
+            };
+          case "ColorVariants":
+            return {
+              checked: true,
+              disabled: false,
+              color: "secondary",
+              size: "medium",
+              value: "secondary",
+              label: "Secondary Color",
+              startIcon: undefined,
+            };
+          case "Controlled":
+            return {
+              checked: true,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              value: "controlled",
+              label: "Controlled Radio",
+              startIcon: undefined,
+            };
+          default:
+            return {
+              checked: false,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              value: "default",
+              label: "Radio",
+              startIcon: undefined,
+            };
+        }
+
+      case "Slider":
+        switch (story) {
+          case "Basic":
+            return {
+              value: 30,
+              min: 0,
+              max: 100,
+              step: 1,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              orientation: "horizontal",
+              marks: false,
+              valueLabelDisplay: "off",
+              startIcon: undefined,
+            };
+          case "Range":
+            return {
+              value: [20, 60],
+              min: 0,
+              max: 100,
+              step: 1,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              orientation: "horizontal",
+              marks: false,
+              valueLabelDisplay: "on",
+              startIcon: undefined,
+            };
+          case "Disabled":
+            return {
+              value: 50,
+              min: 0,
+              max: 100,
+              step: 1,
+              disabled: true,
+              color: "primary",
+              size: "medium",
+              orientation: "horizontal",
+              marks: false,
+              valueLabelDisplay: "off",
+              startIcon: undefined,
+            };
+          case "Marks":
+            return {
+              value: 40,
+              min: 0,
+              max: 100,
+              step: 10,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              orientation: "horizontal",
+              marks: true,
+              valueLabelDisplay: "auto",
+              startIcon: undefined,
+            };
+          case "Vertical":
+            return {
+              value: 30,
+              min: 0,
+              max: 100,
+              step: 1,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              orientation: "vertical",
+              marks: false,
+              valueLabelDisplay: "auto",
+              startIcon: undefined,
+            };
+          default:
+            return {
+              value: 30,
+              min: 0,
+              max: 100,
+              step: 1,
+              disabled: false,
+              color: "primary",
+              size: "medium",
+              orientation: "horizontal",
+              marks: false,
+              valueLabelDisplay: "off",
+              startIcon: undefined,
+            };
+        }
+
+      case "Alert":
+        switch (story) {
+          case "Basic":
+            return {
+              severity: "info",
+              variant: "standard",
+              children: "This is a basic alert message",
+              onClose: undefined,
+              action: undefined,
+              icon: undefined,
+              title: "",
+              startIcon: undefined,
+            };
+          case "Severity":
+            return {
+              severity: "success",
+              variant: "standard",
+              children: "This is a success alert message",
+              onClose: undefined,
+              action: undefined,
+              icon: undefined,
+              title: "",
+              startIcon: undefined,
+            };
+          case "Action":
+            return {
+              severity: "warning",
+              variant: "standard",
+              children: "This alert has an action button",
+              onClose: "close",
+              action: "UNDO",
+              icon: undefined,
+              title: "",
+              startIcon: undefined,
+            };
+          case "Filled":
+            return {
+              severity: "error",
+              variant: "filled",
+              children: "This is a filled alert message",
+              onClose: undefined,
+              action: undefined,
+              icon: undefined,
+              title: "",
+              startIcon: undefined,
+            };
+          case "WithTitle":
+            return {
+              severity: "info",
+              variant: "standard",
+              children: "This alert includes a title for better context",
+              onClose: undefined,
+              action: undefined,
+              icon: undefined,
+              title: "Information",
+              startIcon: undefined,
+            };
+          default:
+            return {
+              severity: "info",
+              variant: "standard",
+              children: "Alert message",
+              onClose: undefined,
+              action: undefined,
+              icon: undefined,
+              title: "",
+              startIcon: undefined,
+            };
+        }
+
+      case "Card":
+        switch (story) {
+          case "Basic":
+            return {
+              variant: "elevation",
+              elevation: 1,
+              title: "Basic Card",
+              subtitle: "This is a basic card",
+              content: "Card content goes here. This is a simple Material-UI card component.",
+              actions: false,
+              media: false,
+              startIcon: undefined,
+            };
+          case "WithMedia":
+            return {
+              variant: "elevation",
+              elevation: 2,
+              title: "Card with Media",
+              subtitle: "Includes header image",
+              content: "This card demonstrates media integration with image headers.",
+              actions: true,
+              media: true,
+              startIcon: undefined,
+            };
+          case "WithActions":
+            return {
+              variant: "elevation",
+              elevation: 1,
+              title: "Interactive Card",
+              subtitle: "With action buttons",
+              content: "This card includes action buttons for user interaction.",
+              actions: true,
+              media: false,
+              startIcon: undefined,
+            };
+          case "Outlined":
+            return {
+              variant: "outlined",
+              elevation: 0,
+              title: "Outlined Card",
+              subtitle: "Clean border style",
+              content: "This card uses outlined variant with border styling.",
+              actions: false,
+              media: false,
+              startIcon: undefined,
+            };
+          default:
+            return {
+              variant: "elevation",
+              elevation: 1,
+              title: "Card Title",
+              subtitle: "Card subtitle",
+              content: "Card content",
+              actions: false,
+              media: false,
+              startIcon: undefined,
+            };
+        }
+
+      case "Typography":
+        switch (story) {
+          case "Headers":
+            return {
+              variant: "h1",
+              color: "inherit",
+              align: "left",
+              children: "Header Typography",
+              gutterBottom: true,
+              noWrap: false,
+              component: "h1",
+              startIcon: undefined,
+            };
+          case "Body":
+            return {
+              variant: "body1",
+              color: "inherit",
+              align: "left",
+              children: "This is body text with standard formatting and proper line spacing.",
+              gutterBottom: false,
+              noWrap: false,
+              component: "p",
+              startIcon: undefined,
+            };
+          case "Colors":
+            return {
+              variant: "h4",
+              color: "primary",
+              align: "center",
+              children: "Colored Typography",
+              gutterBottom: true,
+              noWrap: false,
+              component: "h4",
+              startIcon: undefined,
+            };
+          default:
+            return {
+              variant: "body1",
+              color: "inherit",
+              align: "left",
+              children: "Typography example",
+              gutterBottom: false,
+              noWrap: false,
+              component: "p",
+              startIcon: undefined,
+            };
+        }
+
+      case "Avatar":
+        switch (story) {
+          case "Basic":
+            return {
+              variant: "circular",
+              size: 40,
+              children: "U",
+              src: "",
+              alt: "User Avatar",
+              backgroundColor: "primary",
+              startIcon: undefined,
+            };
+          case "WithImage":
+            return {
+              variant: "circular",
+              size: 56,
+              children: "",
+              src: "/api/placeholder/56/56",
+              alt: "Profile Picture",
+              backgroundColor: "primary",
+              startIcon: undefined,
+            };
+          case "Group":
+            return {
+              variant: "circular",
+              size: 40,
+              children: "G",
+              src: "",
+              alt: "Group Avatar",
+              backgroundColor: "secondary",
+              startIcon: undefined,
+            };
+          case "SizeVariants":
+            return {
+              variant: "circular",
+              size: 24,
+              children: "S",
+              src: "",
+              alt: "Small Avatar",
+              backgroundColor: "primary",
+              startIcon: undefined,
+            };
+          case "VariantStyles":
+            return {
+              variant: "rounded",
+              size: 40,
+              children: "R",
+              src: "",
+              alt: "Rounded Avatar",
+              backgroundColor: "primary",
+              startIcon: undefined,
+            };
+          default:
+            return {
+              variant: "circular",
+              size: 40,
+              children: "A",
+              src: "",
+              alt: "Avatar",
+              backgroundColor: "primary",
+              startIcon: undefined,
+            };
+        }
+
+      case "Badge":
+        switch (story) {
+          case "Basic":
+            return {
+              badgeContent: "4",
+              color: "primary",
+              variant: "standard",
+              overlap: "rectangular",
+              anchorOrigin: { vertical: "top", horizontal: "right" },
+              showZero: false,
+              invisible: false,
+              max: 99,
+              startIcon: undefined,
+            };
+          case "Dot":
+            return {
+              badgeContent: "",
+              color: "secondary",
+              variant: "dot",
+              overlap: "circular",
+              anchorOrigin: { vertical: "top", horizontal: "right" },
+              showZero: false,
+              invisible: false,
+              max: 99,
+              startIcon: undefined,
+            };
+          case "Custom":
+            return {
+              badgeContent: "NEW",
+              color: "error",
+              variant: "standard",
+              overlap: "rectangular",
+              anchorOrigin: { vertical: "top", horizontal: "right" },
+              showZero: false,
+              invisible: false,
+              max: 99,
+              startIcon: undefined,
+            };
+          case "ColorVariants":
+            return {
+              badgeContent: "99+",
+              color: "success",
+              variant: "standard",
+              overlap: "circular",
+              anchorOrigin: { vertical: "top", horizontal: "right" },
+              showZero: true,
+              invisible: false,
+              max: 99,
+              startIcon: undefined,
+            };
+          case "WithAvatar":
+            return {
+              badgeContent: "3",
+              color: "warning",
+              variant: "standard",
+              overlap: "circular",
+              anchorOrigin: { vertical: "bottom", horizontal: "right" },
+              showZero: false,
+              invisible: false,
+              max: 99,
+              startIcon: undefined,
+            };
+          default:
+            return {
+              badgeContent: "1",
+              color: "primary",
+              variant: "standard",
+              overlap: "rectangular",
+              anchorOrigin: { vertical: "top", horizontal: "right" },
+              showZero: false,
+              invisible: false,
+              max: 99,
+              startIcon: undefined,
+            };
+        }
+
+      case "Chip":
+        switch (story) {
+          case "Basic":
+            return {
+              label: "Basic Chip",
+              variant: "filled",
+              color: "default",
+              size: "medium",
+              disabled: false,
+              clickable: false,
+              deletable: false,
+              avatar: false,
+              icon: false,
+              startIcon: undefined,
+            };
+          case "Deletable":
+            return {
+              label: "Deletable Chip",
+              variant: "filled",
+              color: "primary",
+              size: "medium",
+              disabled: false,
+              clickable: false,
+              deletable: true,
+              avatar: false,
+              icon: false,
+              startIcon: undefined,
+            };
+          case "Clickable":
+            return {
+              label: "Clickable Chip",
+              variant: "filled",
+              color: "secondary",
+              size: "medium",
+              disabled: false,
+              clickable: true,
+              deletable: false,
+              avatar: false,
+              icon: false,
+              startIcon: undefined,
+            };
+          case "Avatar":
+            return {
+              label: "Avatar Chip",
+              variant: "filled",
+              color: "primary",
+              size: "medium",
+              disabled: false,
+              clickable: true,
+              deletable: true,
+              avatar: true,
+              icon: false,
+              startIcon: undefined,
+            };
+          case "ColorVariants":
+            return {
+              label: "Success Chip",
+              variant: "filled",
+              color: "success",
+              size: "medium",
+              disabled: false,
+              clickable: false,
+              deletable: false,
+              avatar: false,
+              icon: false,
+              startIcon: undefined,
+            };
+          case "SizeVariants":
+            return {
+              label: "Small Chip",
+              variant: "filled",
+              color: "primary",
+              size: "small",
+              disabled: false,
+              clickable: false,
+              deletable: false,
+              avatar: false,
+              icon: false,
+              startIcon: undefined,
+            };
+          case "VariantStyles":
+            return {
+              label: "Outlined Chip",
+              variant: "outlined",
+              color: "primary",
+              size: "medium",
+              disabled: false,
+              clickable: false,
+              deletable: false,
+              avatar: false,
+              icon: false,
+              startIcon: undefined,
+            };
+          default:
+            return {
+              label: "Chip",
+              variant: "filled",
+              color: "default",
+              size: "medium",
+              disabled: false,
+              clickable: false,
+              deletable: false,
+              avatar: false,
+              icon: false,
+              startIcon: undefined,
+            };
+        }
+
       default:
         return {
           variant: "contained",
@@ -213,12 +1136,14 @@ export function StorybookLayout() {
     setSelectedComponent(component);
     const firstStory = stories[component as keyof typeof stories]?.[0] || "Default";
     setSelectedStory(firstStory);
-    setControls(getDefaultControls(component, firstStory));
+    const newControls = getDefaultControls(component, firstStory);
+    setControls(newControls);
   };
 
   const handleStoryChange = (story: string) => {
     setSelectedStory(story);
-    setControls(getDefaultControls(selectedComponent, story));
+    const newControls = getDefaultControls(selectedComponent, story);
+    setControls(newControls);
   };
 
 
