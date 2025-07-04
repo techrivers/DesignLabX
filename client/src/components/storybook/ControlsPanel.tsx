@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 interface ControlsPanelProps {
   controls: any;
   onUpdateControl: (key: string, value: any) => void;
@@ -5,11 +7,34 @@ interface ControlsPanelProps {
 }
 
 export function ControlsPanel({ controls, onUpdateControl, component }: ControlsPanelProps) {
+  const [copyMessage, setCopyMessage] = useState<string>('');
+  const [exportMessage, setExportMessage] = useState<string>('');
+
+  const generateExampleCode = () => {
+    const props = Object.entries(controls)
+      .filter(([_, value]) => value !== false && value !== "" && value !== undefined && value !== null)
+      .map(([key, value]) => {
+        if (typeof value === "boolean") {
+          return value ? key : "";
+        }
+        return `${key}="${value}"`;
+      })
+      .filter(Boolean)
+      .join(" ");
+
+    return `<${component} ${props}>
+  ${controls.children || `${component} Content`}
+</${component}>`;
+  };
+
   const copyCode = () => {
-    const code = generateComponentCode();
+    const code = generateExampleCode();
     navigator.clipboard.writeText(code).then(() => {
-      // Show success feedback - you could add a toast here
-      console.log('Code copied to clipboard');
+      setCopyMessage('Code copied to clipboard!');
+      setTimeout(() => setCopyMessage(''), 3000);
+    }).catch(() => {
+      setCopyMessage('Failed to copy code');
+      setTimeout(() => setCopyMessage(''), 3000);
     });
   };
 
@@ -125,6 +150,9 @@ export default ${component}Example;`;
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+    
+    setExportMessage(`${component} component downloaded successfully!`);
+    setTimeout(() => setExportMessage(''), 3000);
   };
 
   const getControlsForComponent = () => {
@@ -2954,6 +2982,11 @@ export default ${component}Example;`;
               <span className="material-icons text-xs mr-1">content_copy</span>
               Copy Code
             </button>
+            {copyMessage && (
+              <div className="text-xs text-green-600 text-center py-1">
+                {copyMessage}
+              </div>
+            )}
             <button
               onClick={exportComponent}
               className="w-full px-3 py-2 text-xs bg-muted hover:bg-muted/80 rounded flex items-center justify-center"
@@ -2961,6 +2994,11 @@ export default ${component}Example;`;
               <span className="material-icons text-xs mr-1">download</span>
               Export Component
             </button>
+            {exportMessage && (
+              <div className="text-xs text-green-600 text-center py-1">
+                {exportMessage}
+              </div>
+            )}
           </div>
         </div>
       </div>
