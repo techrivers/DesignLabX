@@ -110,6 +110,120 @@ export function StorybookLayout() {
     setControls(prev => ({ ...prev, [key]: value }));
   };
 
+  const generateComponentCode = () => {
+    const getControlsString = () => {
+      return Object.entries(controls)
+        .filter(([key, value]) => value !== undefined && value !== null && value !== '')
+        .map(([key, value]) => {
+          if (typeof value === 'string') {
+            return `${key}="${value}"`;
+          } else if (typeof value === 'boolean' && value) {
+            return key;
+          } else {
+            return `${key}={${JSON.stringify(value)}}`;
+          }
+        })
+        .join('\n      ');
+    };
+
+    const getImportStatement = () => {
+      const componentMap: Record<string, string> = {
+        'Button': 'Button',
+        'TextField': 'TextField',
+        'Card': 'Card, CardContent',
+        'Checkbox': 'Checkbox, FormControlLabel',
+        'Select': 'Select, FormControl, InputLabel, MenuItem',
+        'Radio': 'Radio, RadioGroup, FormControlLabel',
+        'Switch': 'Switch, FormControlLabel',
+        'Slider': 'Slider',
+        'Rating': 'Rating',
+        'Autocomplete': 'Autocomplete, TextField',
+        'ToggleButton': 'ToggleButton, ToggleButtonGroup',
+        'ButtonGroup': 'ButtonGroup, Button',
+        'Fab': 'Fab',
+        'Table': 'Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper',
+        'List': 'List, ListItem, ListItemText, ListItemIcon',
+        'Chip': 'Chip',
+        'Avatar': 'Avatar',
+        'Badge': 'Badge',
+        'Typography': 'Typography',
+        'Accordion': 'Accordion, AccordionSummary, AccordionDetails',
+        'AppBar': 'AppBar, Toolbar, Typography',
+        'Drawer': 'Drawer, List, ListItem, ListItemText',
+        'Tabs': 'Tabs, Tab',
+        'Alert': 'Alert',
+        'Dialog': 'Dialog, DialogTitle, DialogContent, DialogActions, Button',
+        'Progress': 'CircularProgress, LinearProgress',
+        'Grid': 'Grid',
+        'Paper': 'Paper',
+        'Box': 'Box',
+        'Stack': 'Stack',
+        'Divider': 'Divider'
+      };
+      
+      return `import { ${componentMap[selectedComponent] || selectedComponent} } from '@mui/material';`;
+    };
+
+    const getComponentJSX = () => {
+      const controlsString = getControlsString();
+      
+      switch (selectedComponent) {
+        case 'Button':
+          return `<Button${controlsString ? `\n      ${controlsString}` : ''}>
+      Button Text
+    </Button>`;
+        case 'TextField':
+          return `<TextField${controlsString ? `\n      ${controlsString}` : ''}
+      label="Text Field"
+      variant="outlined"
+    />`;
+        case 'Card':
+          return `<Card${controlsString ? `\n      ${controlsString}` : ''}>
+      <CardContent>
+        <Typography variant="h5" component="div">
+          Card Title
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Card content goes here
+        </Typography>
+      </CardContent>
+    </Card>`;
+        case 'Checkbox':
+          return `<FormControlLabel
+      control={<Checkbox${controlsString ? `\n        ${controlsString}` : ''} />}
+      label="Checkbox Label"
+    />`;
+        default:
+          return `<${selectedComponent}${controlsString ? `\n      ${controlsString}` : ''}>
+      {/* Component content */}
+    </${selectedComponent}>`;
+      }
+    };
+
+    return `${getImportStatement()}
+
+function ${selectedComponent}Example() {
+  return (
+    ${getComponentJSX()}
+  );
+}
+
+export default ${selectedComponent}Example;`;
+  };
+
+  const exportComponent = () => {
+    const code = generateComponentCode();
+    const blob = new Blob([code], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `${selectedComponent}-${selectedStory}.tsx`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className={`flex h-screen bg-background text-foreground ${theme === "dark" ? "dark" : ""}`}>
       <Sidebar
@@ -179,6 +293,16 @@ export function StorybookLayout() {
                 +
               </button>
             </div>
+
+            {/* Export Component Button */}
+            <button
+              onClick={exportComponent}
+              className="px-3 py-2 text-sm flex items-center bg-green-600 hover:bg-green-700 text-white rounded-lg"
+              title="Export Component Code"
+            >
+              <span className="material-icons text-sm mr-1">download</span>
+              Export
+            </button>
 
             {/* View Mode Toggle */}
             <div className="flex border border-border rounded-lg overflow-hidden">
