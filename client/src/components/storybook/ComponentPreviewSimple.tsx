@@ -336,20 +336,72 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
       case "Select":
         return (
-          <FormControl sx={{ minWidth: 120 }}>
-            <InputLabel>Select</InputLabel>
-            <Select value={controls.value || "option1"} label="Select">
+          <FormControl 
+            variant={controls.variant || "outlined"} 
+            sx={{ minWidth: 200 }}
+            error={controls.error || false}
+            disabled={controls.disabled || false}
+            size={controls.size || "medium"}
+            fullWidth={controls.fullWidth || false}
+          >
+            <InputLabel>{controls.label || "Select"}</InputLabel>
+            <Select 
+              value={controls.value || ""} 
+              label={controls.label || "Select"}
+              multiple={controls.multiple || false}
+              onChange={() => {}}
+            >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
               <MenuItem value="option1">Option 1</MenuItem>
               <MenuItem value="option2">Option 2</MenuItem>
               <MenuItem value="option3">Option 3</MenuItem>
+              <MenuItem value="option4">Option 4</MenuItem>
             </Select>
+            {controls.helperText && (
+              <FormHelperText>{controls.helperText}</FormHelperText>
+            )}
           </FormControl>
         );
       case "Radio":
         return (
-          <RadioGroup value={controls.value || "option1"}>
-            <FormControlLabel value="option1" control={<Radio />} label="Option 1" />
-            <FormControlLabel value="option2" control={<Radio />} label="Option 2" />
+          <RadioGroup 
+            value={controls.value || "basic"} 
+            onChange={() => {}}
+          >
+            <FormControlLabel 
+              value="basic" 
+              control={
+                <Radio 
+                  color={controls.color || "primary"}
+                  size={controls.size || "medium"}
+                  disabled={controls.disabled || false}
+                />
+              } 
+              label={controls.label || "Radio"} 
+              disabled={controls.disabled || false}
+            />
+            <FormControlLabel 
+              value="option2" 
+              control={
+                <Radio 
+                  color={controls.color || "primary"}
+                  size={controls.size || "medium"}
+                />
+              } 
+              label="Option 2" 
+            />
+            <FormControlLabel 
+              value="option3" 
+              control={
+                <Radio 
+                  color={controls.color || "primary"}
+                  size={controls.size || "medium"}
+                />
+              } 
+              label="Option 3" 
+            />
           </RadioGroup>
         );
       case "Switch":
@@ -366,16 +418,31 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           />
         );
       case "Slider":
+        const sliderValue = Array.isArray(controls.value) ? controls.value : (controls.value || 30);
+        const sliderMarks = controls.marks ? [
+          { value: 0, label: '0' },
+          { value: 25, label: '25' },
+          { value: 50, label: '50' },
+          { value: 75, label: '75' },
+          { value: 100, label: '100' }
+        ] : false;
+        
         return (
-          <Slider 
-            defaultValue={controls.value || 30} 
-            min={controls.min || 0}
-            max={controls.max || 100}
-            step={controls.step || 1}
-            disabled={controls.disabled || false}
-            color={controls.color || "primary"}
-            sx={{ width: 200 }} 
-          />
+          <Box sx={{ width: controls.orientation === 'vertical' ? 40 : 300, height: controls.orientation === 'vertical' ? 300 : 'auto' }}>
+            <Slider 
+              value={sliderValue}
+              min={controls.min || 0}
+              max={controls.max || 100}
+              step={controls.step || 1}
+              disabled={controls.disabled || false}
+              color={controls.color || "primary"}
+              size={controls.size || "medium"}
+              orientation={controls.orientation || "horizontal"}
+              marks={sliderMarks}
+              valueLabelDisplay={controls.valueLabelDisplay || "off"}
+              onChange={() => {}}
+            />
+          </Box>
         );
       case "Rating":
         return (
