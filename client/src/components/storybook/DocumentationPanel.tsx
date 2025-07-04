@@ -146,6 +146,116 @@ export function DocumentationPanel({ component }: DocumentationPanelProps) {
           </>
         )}
 
+        <h2 className="text-xl font-semibold text-foreground mb-3">Code Roadmap</h2>
+        <div className="bg-muted rounded-lg p-4 mb-6">
+          <p className="text-muted-foreground mb-4">Find the source code and related files for this component:</p>
+          
+          <div className="space-y-4">
+            <div>
+              <h3 className="text-sm font-semibold text-foreground mb-2">📁 Story Configuration</h3>
+              <div className="bg-gray-900 rounded p-3 font-mono text-xs">
+                <code className="text-green-400">client/src/stories/{component}.stories.tsx</code>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">Contains interactive story definitions and component examples</p>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-foreground mb-2">🎛️ Controls Configuration</h3>
+              <div className="bg-gray-900 rounded p-3 font-mono text-xs">
+                <code className="text-blue-400">client/src/components/storybook/ControlsPanel.tsx</code>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">Interactive controls and prop configurations for this component</p>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-foreground mb-2">👁️ Preview Implementation</h3>
+              <div className="bg-gray-900 rounded p-3 font-mono text-xs">
+                <code className="text-purple-400">client/src/components/storybook/ComponentPreview.tsx</code>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">Live preview rendering and component mounting logic</p>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-foreground mb-2">🎨 Theme Integration</h3>
+              <div className="bg-gray-900 rounded p-3 font-mono text-xs">
+                <code className="text-yellow-400">client/src/components/theme/DynamicThemeProvider.tsx</code>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">Dynamic theme application and Material-UI theme configuration</p>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-foreground mb-2">📚 Material-UI Source</h3>
+              <div className="bg-gray-900 rounded p-3 font-mono text-xs">
+                <code className="text-orange-400">@mui/material/{component}</code>
+              </div>
+              <p className="text-xs text-muted-foreground mt-2">Official Material-UI component source and documentation</p>
+            </div>
+
+            <div>
+              <h3 className="text-sm font-semibold text-foreground mb-2">🏗️ Project Structure</h3>
+              <div className="bg-gray-900 rounded p-3 font-mono text-xs text-gray-300">
+                <div>client/</div>
+                <div>&nbsp;&nbsp;├── src/</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;├── components/</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── storybook/        # Storybook interface components</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├── theme/            # Theme management system</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└── ui/               # Custom UI components</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;├── stories/              # Component story definitions</div>
+                <div>&nbsp;&nbsp;&nbsp;&nbsp;└── pages/                # Application pages</div>
+                <div>server/                       # Express backend</div>
+                <div>shared/                       # Shared types and schemas</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 p-3 bg-blue-50 dark:bg-blue-900/20 rounded border border-blue-200 dark:border-blue-800">
+            <h4 className="text-sm font-semibold text-blue-800 dark:text-blue-200 mb-2">💡 Quick Navigation Tips</h4>
+            <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1">
+              <li>• Use <strong>Copy Code</strong> for simple JSX snippets</li>
+              <li>• Use <strong>Export Component</strong> for complete TypeScript files</li>
+              <li>• Check story files for comprehensive usage examples</li>
+              <li>• Explore ControlsPanel.tsx to understand prop configurations</li>
+              <li>• Modify themes in DynamicThemeProvider.tsx for custom styling</li>
+            </ul>
+          </div>
+
+          <div className="mt-4 p-3 bg-green-50 dark:bg-green-900/20 rounded border border-green-200 dark:border-green-800">
+            <h4 className="text-sm font-semibold text-green-800 dark:text-green-200 mb-2">🚀 Development Setup</h4>
+            <div className="space-y-2">
+              <div>
+                <p className="text-xs text-green-700 dark:text-green-300 font-medium">Start Development Server:</p>
+                <div className="bg-gray-900 rounded p-2 font-mono text-xs mt-1">
+                  <code className="text-gray-300">npm run dev</code>
+                </div>
+              </div>
+              <div>
+                <p className="text-xs text-green-700 dark:text-green-300 font-medium">Add New Component Story:</p>
+                <div className="bg-gray-900 rounded p-2 font-mono text-xs mt-1">
+                  <code className="text-gray-300">client/src/stories/NewComponent.stories.tsx</code>
+                </div>
+              </div>
+              <div>
+                <p className="text-xs text-green-700 dark:text-green-300 font-medium">Test Theme Changes:</p>
+                <div className="bg-gray-900 rounded p-2 font-mono text-xs mt-1">
+                  <code className="text-gray-300">Upload JSON theme via Showcase page</code>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="mt-4 p-3 bg-yellow-50 dark:bg-yellow-900/20 rounded border border-yellow-200 dark:border-yellow-800">
+            <h4 className="text-sm font-semibold text-yellow-800 dark:text-yellow-200 mb-2">📋 Component Integration Checklist</h4>
+            <ul className="text-xs text-yellow-700 dark:text-yellow-300 space-y-1">
+              <li>✅ Story file created in <code>/stories/</code></li>
+              <li>✅ Controls added to <code>ControlsPanel.tsx</code></li>
+              <li>✅ Preview rendering in <code>ComponentPreview.tsx</code></li>
+              <li>✅ Documentation updated in <code>DocumentationPanel.tsx</code></li>
+              <li>✅ Import mapping in export code generation</li>
+              <li>✅ Theme compatibility tested</li>
+            </ul>
+          </div>
+        </div>
+
         <h2 className="text-xl font-semibold text-foreground mb-3">Examples</h2>
         <div className="bg-gray-900 rounded-lg p-4 font-mono text-sm syntax-highlight mb-6">
           <div className="text-gray-300">
