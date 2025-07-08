@@ -61,6 +61,7 @@ import {
   Avatar,
   Badge,
   Alert,
+  AlertTitle,
   CircularProgress,
   LinearProgress,
   Dialog,
@@ -236,16 +237,62 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "Alert":
-        return (
-          <Alert 
-            severity={controls.severity || "info"}
-            variant={controls.variant || "standard"}
-            onClose={controls.onClose ? () => {} : undefined}
-            icon={controls.icon || undefined}
-          >
-            {controls.message || "This is an alert message"}
-          </Alert>
-        );
+        switch (story) {
+          case "Basic":
+            return (
+              <Alert>
+                {controls.message || "This is a basic alert message"}
+              </Alert>
+            );
+          
+          case "Severity":
+            return (
+              <Alert severity={controls.severity || "info"}>
+                {controls.message || "This is an alert with severity"}
+              </Alert>
+            );
+          
+          case "Action":
+            return (
+              <Alert 
+                severity={controls.severity || "warning"}
+                action={
+                  <MuiButton color="inherit" size="small">
+                    UNDO
+                  </MuiButton>
+                }
+              >
+                {controls.message || "This is an alert with action"}
+              </Alert>
+            );
+          
+          case "Filled":
+            return (
+              <Alert severity={controls.severity || "success"} variant="filled">
+                {controls.message || "This is a filled alert"}
+              </Alert>
+            );
+          
+          case "WithTitle":
+            return (
+              <Alert severity={controls.severity || "error"}>
+                <AlertTitle>{controls.title || "Error"}</AlertTitle>
+                {controls.message || "This is an alert with title"}
+              </Alert>
+            );
+          
+          default:
+            return (
+              <Alert 
+                severity={controls.severity || "info"}
+                variant={controls.variant || "standard"}
+                onClose={controls.onClose ? () => {} : undefined}
+                icon={controls.icon || undefined}
+              >
+                {controls.message || "This is an alert message"}
+              </Alert>
+            );
+        }
 
       case "Chip":
         return (
@@ -378,14 +425,52 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         }
 
       case "Progress":
-        return (
-          <LinearProgress 
-            variant={controls.variant || "determinate"}
-            value={controls.value || 50}
-            color={controls.color || "primary"}
-            sx={{ width: '100%', minWidth: 200 }}
-          />
-        );
+        switch (story) {
+          case "Circular":
+            return (
+              <CircularProgress 
+                variant={controls.variant || "determinate"}
+                value={controls.value || 50}
+                color={controls.color || "primary"}
+                size={controls.size || 40}
+              />
+            );
+          
+          case "Linear":
+            return (
+              <LinearProgress 
+                variant={controls.variant || "determinate"}
+                value={controls.value || 50}
+                color={controls.color || "primary"}
+                sx={{ width: '100%', minWidth: 200 }}
+              />
+            );
+          
+          case "With Label":
+            return (
+              <div style={{ display: 'flex', alignItems: 'center', gap: '10px', width: '100%' }}>
+                <LinearProgress 
+                  variant={controls.variant || "determinate"}
+                  value={controls.value || 50}
+                  color={controls.color || "primary"}
+                  sx={{ width: '100%', minWidth: 200 }}
+                />
+                <Typography variant="body2" color="text.secondary">
+                  {`${Math.round(controls.value || 50)}%`}
+                </Typography>
+              </div>
+            );
+          
+          default:
+            return (
+              <LinearProgress 
+                variant={controls.variant || "determinate"}
+                value={controls.value || 50}
+                color={controls.color || "primary"}
+                sx={{ width: '100%', minWidth: 200 }}
+              />
+            );
+        }
 
       case "Tabs":
         return (
@@ -2615,11 +2700,170 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           </div>
         );
 
+      case "Alert":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Severity Variants</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Alert severity="info">This is an info alert</Alert>
+                <Alert severity="success">This is a success alert</Alert>
+                <Alert severity="warning">This is a warning alert</Alert>
+                <Alert severity="error">This is an error alert</Alert>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Filled Variants</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Alert severity="info" variant="filled">This is a filled info alert</Alert>
+                <Alert severity="success" variant="filled">This is a filled success alert</Alert>
+                <Alert severity="warning" variant="filled">This is a filled warning alert</Alert>
+                <Alert severity="error" variant="filled">This is a filled error alert</Alert>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Outlined Variants</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Alert severity="info" variant="outlined">This is an outlined info alert</Alert>
+                <Alert severity="success" variant="outlined">This is an outlined success alert</Alert>
+                <Alert severity="warning" variant="outlined">This is an outlined warning alert</Alert>
+                <Alert severity="error" variant="outlined">This is an outlined error alert</Alert>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Actions</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Alert 
+                  severity="warning" 
+                  action={
+                    <MuiButton color="inherit" size="small">
+                      UNDO
+                    </MuiButton>
+                  }
+                >
+                  This is a warning alert with action
+                </Alert>
+                <Alert 
+                  severity="error" 
+                  action={
+                    <MuiButton color="inherit" size="small">
+                      RETRY
+                    </MuiButton>
+                  }
+                >
+                  This is an error alert with action
+                </Alert>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Titles</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <Alert severity="success">
+                  <AlertTitle>Success</AlertTitle>
+                  This is a success alert with title
+                </Alert>
+                <Alert severity="warning">
+                  <AlertTitle>Warning</AlertTitle>
+                  This is a warning alert with title
+                </Alert>
+                <Alert severity="error">
+                  <AlertTitle>Error</AlertTitle>
+                  This is an error alert with title
+                </Alert>
+              </div>
+            </div>
+          </div>
+        );
 
-
-
-
-
+      case "Progress":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Linear Progress</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Determinate</Typography>
+                  <LinearProgress variant="determinate" value={70} sx={{ width: '100%' }} />
+                </div>
+                <div>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Indeterminate</Typography>
+                  <LinearProgress variant="indeterminate" sx={{ width: '100%' }} />
+                </div>
+                <div>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Buffer</Typography>
+                  <LinearProgress variant="buffer" value={70} valueBuffer={90} sx={{ width: '100%' }} />
+                </div>
+                <div>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Query</Typography>
+                  <LinearProgress variant="query" sx={{ width: '100%' }} />
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Circular Progress</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <div style={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Determinate</Typography>
+                  <CircularProgress variant="determinate" value={70} />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Indeterminate</Typography>
+                  <CircularProgress variant="indeterminate" />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Small</Typography>
+                  <CircularProgress size={24} />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Large</Typography>
+                  <CircularProgress size={60} />
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Color Variants</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <div style={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Primary</Typography>
+                  <CircularProgress color="primary" />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Secondary</Typography>
+                  <CircularProgress color="secondary" />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Success</Typography>
+                  <CircularProgress color="success" />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Warning</Typography>
+                  <CircularProgress color="warning" />
+                </div>
+                <div style={{ textAlign: 'center' }}>
+                  <Typography variant="body2" color="text.secondary" gutterBottom>Error</Typography>
+                  <CircularProgress color="error" />
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Labels</h3>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <LinearProgress variant="determinate" value={45} sx={{ width: '100%' }} />
+                  <Typography variant="body2" color="text.secondary">45%</Typography>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <LinearProgress variant="determinate" value={80} color="success" sx={{ width: '100%' }} />
+                  <Typography variant="body2" color="text.secondary">80%</Typography>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                  <LinearProgress variant="determinate" value={25} color="warning" sx={{ width: '100%' }} />
+                  <Typography variant="body2" color="text.secondary">25%</Typography>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
 
       case "Dialog":
         return (
