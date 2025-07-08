@@ -109,6 +109,11 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import FolderIcon from '@mui/icons-material/Folder';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import FileCopyIcon from '@mui/icons-material/FileCopy';
+import SaveIcon from '@mui/icons-material/Save';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import DeleteIcon from '@mui/icons-material/Delete';
+import MessageIcon from '@mui/icons-material/Message';
 
 interface ComponentControls {
   [key: string]: any;
@@ -814,18 +819,161 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "SpeedDial":
-        return (
-          <SpeedDial
-            ariaLabel="SpeedDial"
-            icon={<SpeedDialIcon />}
-            open={controls.open || false}
-            direction={controls.direction || "up"}
-          >
-            <SpeedDialAction icon={<EditIcon />} tooltipTitle="Edit" />
-            <SpeedDialAction icon={<ShareIcon />} tooltipTitle="Share" />
-            <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
-          </SpeedDial>
-        );
+        const speedDialActions = [
+          { icon: <FileCopyIcon />, name: 'Copy' },
+          { icon: <SaveIcon />, name: 'Save' },
+          { icon: <PrintIcon />, name: 'Print' },
+          { icon: <ShareIcon />, name: 'Share' },
+        ];
+
+        switch (story) {
+          case "Basic":
+            return (
+              <div style={{ position: 'relative', height: '200px', width: '300px' }}>
+                <SpeedDial
+                  ariaLabel="SpeedDial basic example"
+                  sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  icon={<SpeedDialIcon />}
+                  open={controls.open || false}
+                  direction={controls.direction || "up"}
+                >
+                  {speedDialActions.map((action) => (
+                    <SpeedDialAction
+                      key={action.name}
+                      icon={action.icon}
+                      tooltipTitle={action.name}
+                    />
+                  ))}
+                </SpeedDial>
+              </div>
+            );
+          
+          case "WithEditIcon":
+            return (
+              <div style={{ position: 'relative', height: '200px', width: '300px' }}>
+                <SpeedDial
+                  ariaLabel="SpeedDial with edit icon"
+                  sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  icon={<SpeedDialIcon icon={<EditIcon />} />}
+                  open={controls.open || false}
+                  direction={controls.direction || "up"}
+                >
+                  {speedDialActions.map((action) => (
+                    <SpeedDialAction
+                      key={action.name}
+                      icon={action.icon}
+                      tooltipTitle={action.name}
+                    />
+                  ))}
+                </SpeedDial>
+              </div>
+            );
+          
+          case "DirectionUp":
+            return (
+              <div style={{ position: 'relative', height: '200px', width: '300px' }}>
+                <SpeedDial
+                  ariaLabel="SpeedDial direction up"
+                  sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  icon={<SpeedDialIcon />}
+                  direction="up"
+                  open={controls.open || false}
+                >
+                  {speedDialActions.map((action) => (
+                    <SpeedDialAction
+                      key={action.name}
+                      icon={action.icon}
+                      tooltipTitle={action.name}
+                    />
+                  ))}
+                </SpeedDial>
+              </div>
+            );
+          
+          case "DirectionLeft":
+            return (
+              <div style={{ position: 'relative', height: '200px', width: '300px' }}>
+                <SpeedDial
+                  ariaLabel="SpeedDial direction left"
+                  sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  icon={<SpeedDialIcon />}
+                  direction="left"
+                  open={controls.open || false}
+                >
+                  {speedDialActions.map((action) => (
+                    <SpeedDialAction
+                      key={action.name}
+                      icon={action.icon}
+                      tooltipTitle={action.name}
+                    />
+                  ))}
+                </SpeedDial>
+              </div>
+            );
+          
+          case "Persistent":
+            return (
+              <div style={{ position: 'relative', height: '200px', width: '300px' }}>
+                <SpeedDial
+                  ariaLabel="SpeedDial persistent"
+                  sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  icon={<SpeedDialIcon />}
+                  open={true}
+                  direction={controls.direction || "up"}
+                >
+                  {speedDialActions.map((action) => (
+                    <SpeedDialAction
+                      key={action.name}
+                      icon={action.icon}
+                      tooltipTitle={action.name}
+                    />
+                  ))}
+                </SpeedDial>
+              </div>
+            );
+          
+          case "CustomIcon":
+            return (
+              <div style={{ position: 'relative', height: '200px', width: '300px' }}>
+                <SpeedDial
+                  ariaLabel="SpeedDial custom icon"
+                  sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  icon={<ContentCopyIcon />}
+                  open={controls.open || false}
+                  direction={controls.direction || "up"}
+                >
+                  {speedDialActions.map((action) => (
+                    <SpeedDialAction
+                      key={action.name}
+                      icon={action.icon}
+                      tooltipTitle={action.name}
+                    />
+                  ))}
+                </SpeedDial>
+              </div>
+            );
+          
+          default:
+            return (
+              <div style={{ position: 'relative', height: '200px', width: '300px' }}>
+                <SpeedDial
+                  ariaLabel="SpeedDial"
+                  sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  icon={<SpeedDialIcon />}
+                  open={controls.open || false}
+                  direction={controls.direction || "up"}
+                >
+                  {speedDialActions.map((action) => (
+                    <SpeedDialAction
+                      key={action.name}
+                      icon={action.icon}
+                      tooltipTitle={action.name}
+                    />
+                  ))}
+                </SpeedDial>
+              </div>
+            );
+        }
 
       case "Typography":
         return (
@@ -2326,12 +2474,142 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
             <div>
               <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Speed Dial</h3>
-              <div style={{ position: 'relative', height: '200px' }}>
-                <SpeedDial ariaLabel="SpeedDial" open={true} icon={<SpeedDialIcon />}>
-                  <SpeedDialAction icon={<EditIcon />} tooltipTitle="Edit" />
-                  <SpeedDialAction icon={<ShareIcon />} tooltipTitle="Share" />
+              <div style={{ position: 'relative', height: '200px', width: '300px' }}>
+                <SpeedDial 
+                  ariaLabel="Basic SpeedDial" 
+                  open={true} 
+                  icon={<SpeedDialIcon />}
+                  sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                >
+                  <SpeedDialAction icon={<FileCopyIcon />} tooltipTitle="Copy" />
+                  <SpeedDialAction icon={<SaveIcon />} tooltipTitle="Save" />
                   <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
+                  <SpeedDialAction icon={<ShareIcon />} tooltipTitle="Share" />
                 </SpeedDial>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Directions</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+                <div style={{ position: 'relative', height: '200px', width: '200px' }}>
+                  <div style={{ position: 'absolute', top: '0', left: '0', fontSize: '12px', color: '#666' }}>Up</div>
+                  <SpeedDial 
+                    ariaLabel="Direction Up" 
+                    open={true} 
+                    direction="up"
+                    icon={<SpeedDialIcon />}
+                    sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  >
+                    <SpeedDialAction icon={<FileCopyIcon />} tooltipTitle="Copy" />
+                    <SpeedDialAction icon={<SaveIcon />} tooltipTitle="Save" />
+                    <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
+                  </SpeedDial>
+                </div>
+                <div style={{ position: 'relative', height: '200px', width: '200px' }}>
+                  <div style={{ position: 'absolute', top: '0', left: '0', fontSize: '12px', color: '#666' }}>Down</div>
+                  <SpeedDial 
+                    ariaLabel="Direction Down" 
+                    open={true} 
+                    direction="down"
+                    icon={<SpeedDialIcon />}
+                    sx={{ position: 'absolute', top: 16, right: 16 }}
+                  >
+                    <SpeedDialAction icon={<FileCopyIcon />} tooltipTitle="Copy" />
+                    <SpeedDialAction icon={<SaveIcon />} tooltipTitle="Save" />
+                    <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
+                  </SpeedDial>
+                </div>
+                <div style={{ position: 'relative', height: '200px', width: '200px' }}>
+                  <div style={{ position: 'absolute', top: '0', left: '0', fontSize: '12px', color: '#666' }}>Left</div>
+                  <SpeedDial 
+                    ariaLabel="Direction Left" 
+                    open={true} 
+                    direction="left"
+                    icon={<SpeedDialIcon />}
+                    sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  >
+                    <SpeedDialAction icon={<FileCopyIcon />} tooltipTitle="Copy" />
+                    <SpeedDialAction icon={<SaveIcon />} tooltipTitle="Save" />
+                    <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
+                  </SpeedDial>
+                </div>
+                <div style={{ position: 'relative', height: '200px', width: '200px' }}>
+                  <div style={{ position: 'absolute', top: '0', left: '0', fontSize: '12px', color: '#666' }}>Right</div>
+                  <SpeedDial 
+                    ariaLabel="Direction Right" 
+                    open={true} 
+                    direction="right"
+                    icon={<SpeedDialIcon />}
+                    sx={{ position: 'absolute', bottom: 16, left: 16 }}
+                  >
+                    <SpeedDialAction icon={<FileCopyIcon />} tooltipTitle="Copy" />
+                    <SpeedDialAction icon={<SaveIcon />} tooltipTitle="Save" />
+                    <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
+                  </SpeedDial>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Custom Icons</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+                <div style={{ position: 'relative', height: '200px', width: '200px' }}>
+                  <div style={{ position: 'absolute', top: '0', left: '0', fontSize: '12px', color: '#666' }}>Edit Icon</div>
+                  <SpeedDial 
+                    ariaLabel="Edit Icon" 
+                    open={true} 
+                    icon={<SpeedDialIcon icon={<EditIcon />} />}
+                    sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  >
+                    <SpeedDialAction icon={<FileCopyIcon />} tooltipTitle="Copy" />
+                    <SpeedDialAction icon={<SaveIcon />} tooltipTitle="Save" />
+                    <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
+                  </SpeedDial>
+                </div>
+                <div style={{ position: 'relative', height: '200px', width: '200px' }}>
+                  <div style={{ position: 'absolute', top: '0', left: '0', fontSize: '12px', color: '#666' }}>Content Copy</div>
+                  <SpeedDial 
+                    ariaLabel="Content Copy" 
+                    open={true} 
+                    icon={<ContentCopyIcon />}
+                    sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  >
+                    <SpeedDialAction icon={<FileCopyIcon />} tooltipTitle="Copy" />
+                    <SpeedDialAction icon={<SaveIcon />} tooltipTitle="Save" />
+                    <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
+                  </SpeedDial>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Action Variants</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap' }}>
+                <div style={{ position: 'relative', height: '200px', width: '200px' }}>
+                  <div style={{ position: 'absolute', top: '0', left: '0', fontSize: '12px', color: '#666' }}>File Actions</div>
+                  <SpeedDial 
+                    ariaLabel="File Actions" 
+                    open={true} 
+                    icon={<SpeedDialIcon />}
+                    sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  >
+                    <SpeedDialAction icon={<FileCopyIcon />} tooltipTitle="Copy" />
+                    <SpeedDialAction icon={<SaveIcon />} tooltipTitle="Save" />
+                    <SpeedDialAction icon={<PrintIcon />} tooltipTitle="Print" />
+                    <SpeedDialAction icon={<DeleteIcon />} tooltipTitle="Delete" />
+                  </SpeedDial>
+                </div>
+                <div style={{ position: 'relative', height: '200px', width: '200px' }}>
+                  <div style={{ position: 'absolute', top: '0', left: '0', fontSize: '12px', color: '#666' }}>Social Actions</div>
+                  <SpeedDial 
+                    ariaLabel="Social Actions" 
+                    open={true} 
+                    icon={<SpeedDialIcon />}
+                    sx={{ position: 'absolute', bottom: 16, right: 16 }}
+                  >
+                    <SpeedDialAction icon={<ShareIcon />} tooltipTitle="Share" />
+                    <SpeedDialAction icon={<FavoriteIcon />} tooltipTitle="Like" />
+                    <SpeedDialAction icon={<MessageIcon />} tooltipTitle="Comment" />
+                  </SpeedDial>
+                </div>
               </div>
             </div>
           </div>

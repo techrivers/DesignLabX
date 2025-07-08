@@ -84,7 +84,7 @@ export function StorybookLayout() {
     BottomNavigation: ["Basic", "With Badge"],
     Menu: ["Basic", "Positioned", "Dense"],
     Pagination: ["Basic", "Outlined", "Size Variants"],
-    SpeedDial: ["Basic", "Direction", "Persistent"],
+    SpeedDial: ["Basic", "WithEditIcon", "DirectionUp", "DirectionLeft", "Persistent", "CustomIcon"],
     Alert: ["Basic", "Severity", "Action", "Filled", "WithTitle"],
     Dialog: ["Basic", "Form", "Full Screen"],
     Snackbar: ["Basic", "Action", "Positioned"],
