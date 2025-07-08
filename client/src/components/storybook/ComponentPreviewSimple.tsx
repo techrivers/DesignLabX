@@ -311,61 +311,49 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
 
       case "Badge":
         return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <Badge 
-              badgeContent={controls.badgeContent || "4"}
-              color={controls.color || "default"}
-              variant={controls.variant || "standard"}
-              max={controls.max || 99}
-              invisible={controls.invisible || false}
-              showZero={controls.showZero || false}
-            >
-              <NotificationsIcon />
-            </Badge>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '16px' }}>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>Basic Badges</h3>
-                <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <Badge badgeContent={4} color="primary">
-                    <MailIcon />
-                  </Badge>
-                  <Badge badgeContent={10} color="secondary">
-                    <MailIcon />
-                  </Badge>
-                  <Badge badgeContent={100} color="error">
-                    <MailIcon />
-                  </Badge>
-                </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Badges</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} color="primary">
+                  <MailIcon />
+                </Badge>
+                <Badge badgeContent={10} color="secondary">
+                  <MailIcon />
+                </Badge>
+                <Badge badgeContent={100} color="error">
+                  <MailIcon />
+                </Badge>
               </div>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>Colors</h3>
-                <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <Badge badgeContent={4} color="primary"><MailIcon /></Badge>
-                  <Badge badgeContent={4} color="secondary"><MailIcon /></Badge>
-                  <Badge badgeContent={4} color="success"><MailIcon /></Badge>
-                  <Badge badgeContent={4} color="error"><MailIcon /></Badge>
-                  <Badge badgeContent={4} color="warning"><MailIcon /></Badge>
-                  <Badge badgeContent={4} color="info"><MailIcon /></Badge>
-                </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} color="primary"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="secondary"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="success"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="error"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="warning"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="info"><MailIcon /></Badge>
               </div>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>Variants</h3>
-                <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <Badge badgeContent={4} variant="standard"><MailIcon /></Badge>
-                  <Badge badgeContent={4} variant="dot"><MailIcon /></Badge>
-                  <Badge color="error" variant="dot"><MailIcon /></Badge>
-                </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} variant="standard"><MailIcon /></Badge>
+                <Badge badgeContent={4} variant="dot"><MailIcon /></Badge>
+                <Badge color="error" variant="dot"><MailIcon /></Badge>
               </div>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>With Avatar</h3>
-                <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <Badge badgeContent={4} color="primary">
-                    <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
-                  </Badge>
-                  <Badge color="error" variant="dot">
-                    <Avatar sx={{ bgcolor: 'secondary.main' }}>JS</Avatar>
-                  </Badge>
-                </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Avatar</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} color="primary">
+                  <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
+                </Badge>
+                <Badge color="error" variant="dot">
+                  <Avatar sx={{ bgcolor: 'secondary.main' }}>JS</Avatar>
+                </Badge>
               </div>
             </div>
           </div>
@@ -1451,6 +1439,106 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               </Paper>
             </Zoom>
           </Box>
+        );
+
+      case "Timeline":
+        return (
+          <div style={{ maxWidth: 400 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: controls.primaryColor || '#1976d2', marginTop: '4px', flexShrink: 0 }}></div>
+                <div style={{ flex: 1 }}>
+                  <Typography variant="body1" fontWeight="medium">{controls.firstTitle || "Project Started"}</Typography>
+                  <Typography variant="body2" color="text.secondary">{controls.firstTime || "9:30 AM"}</Typography>
+                  {controls.firstDescription && (
+                    <Typography variant="body2" sx={{ mt: 1 }}>{controls.firstDescription}</Typography>
+                  )}
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: controls.secondaryColor || '#388e3c', marginTop: '4px', flexShrink: 0 }}></div>
+                <div style={{ flex: 1 }}>
+                  <Typography variant="body1" fontWeight="medium">{controls.secondTitle || "Design Phase Completed"}</Typography>
+                  <Typography variant="body2" color="text.secondary">{controls.secondTime || "11:45 AM"}</Typography>
+                  {controls.secondDescription && (
+                    <Typography variant="body2" sx={{ mt: 1 }}>{controls.secondDescription}</Typography>
+                  )}
+                </div>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: controls.tertiaryColor || '#f57c00', marginTop: '4px', flexShrink: 0 }}></div>
+                <div style={{ flex: 1 }}>
+                  <Typography variant="body1" fontWeight="medium">{controls.thirdTitle || "Development Started"}</Typography>
+                  <Typography variant="body2" color="text.secondary">{controls.thirdTime || "2:15 PM"}</Typography>
+                  {controls.thirdDescription && (
+                    <Typography variant="body2" sx={{ mt: 1 }}>{controls.thirdDescription}</Typography>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "TreeView":
+        const [expandedItems, setExpandedItems] = useState<string[]>(['applications']);
+        
+        const toggleExpanded = (itemId: string) => {
+          setExpandedItems(prev => 
+            prev.includes(itemId) 
+              ? prev.filter(id => id !== itemId)
+              : [...prev, itemId]
+          );
+        };
+
+        return (
+          <div style={{ maxWidth: 300 }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+              <div 
+                style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}
+                onClick={() => toggleExpanded('applications')}
+              >
+                {expandedItems.includes('applications') ? <ExpandMoreIcon style={{ fontSize: '16px' }} /> : <ChevronRightIcon style={{ fontSize: '16px' }} />}
+                <FolderIcon style={{ fontSize: '16px', color: controls.folderColor || '#f57c00' }} />
+                <Typography variant="body2">{controls.rootName || "Applications"}</Typography>
+              </div>
+              {expandedItems.includes('applications') && (
+                <div style={{ marginLeft: '24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                    <div style={{ width: '16px' }}></div>
+                    <InsertDriveFileIcon style={{ fontSize: '16px', color: controls.fileColor || '#42a5f5' }} />
+                    <Typography variant="body2">{controls.fileName1 || "app.js"}</Typography>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                    <div style={{ width: '16px' }}></div>
+                    <InsertDriveFileIcon style={{ fontSize: '16px', color: controls.fileColor || '#42a5f5' }} />
+                    <Typography variant="body2">{controls.fileName2 || "config.json"}</Typography>
+                  </div>
+                  <div 
+                    style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}
+                    onClick={() => toggleExpanded('components')}
+                  >
+                    {expandedItems.includes('components') ? <ExpandMoreIcon style={{ fontSize: '16px' }} /> : <ChevronRightIcon style={{ fontSize: '16px' }} />}
+                    <FolderIcon style={{ fontSize: '16px', color: controls.subfolderColor || '#ff9800' }} />
+                    <Typography variant="body2">{controls.subfolderName || "components"}</Typography>
+                  </div>
+                  {expandedItems.includes('components') && (
+                    <div style={{ marginLeft: '24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                        <div style={{ width: '16px' }}></div>
+                        <InsertDriveFileIcon style={{ fontSize: '16px', color: controls.fileColor || '#42a5f5' }} />
+                        <Typography variant="body2">{controls.subFileName1 || "Header.tsx"}</Typography>
+                      </div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                        <div style={{ width: '16px' }}></div>
+                        <InsertDriveFileIcon style={{ fontSize: '16px', color: controls.fileColor || '#42a5f5' }} />
+                        <Typography variant="body2">{controls.subFileName2 || "Footer.tsx"}</Typography>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
+            </div>
+          </div>
         );
 
       default:

@@ -2941,6 +2941,190 @@ export default ${component}Example;`;
           </>
         );
 
+      case "Timeline":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">firstTitle</label>
+              <input
+                type="text"
+                value={controls.firstTitle || "Project Started"}
+                onChange={(e) => onUpdateControl("firstTitle", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">firstTime</label>
+              <input
+                type="text"
+                value={controls.firstTime || "9:30 AM"}
+                onChange={(e) => onUpdateControl("firstTime", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">firstDescription</label>
+              <input
+                type="text"
+                value={controls.firstDescription || ""}
+                onChange={(e) => onUpdateControl("firstDescription", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+                placeholder="Optional description"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">secondTitle</label>
+              <input
+                type="text"
+                value={controls.secondTitle || "Design Phase Completed"}
+                onChange={(e) => onUpdateControl("secondTitle", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">secondTime</label>
+              <input
+                type="text"
+                value={controls.secondTime || "11:45 AM"}
+                onChange={(e) => onUpdateControl("secondTime", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">thirdTitle</label>
+              <input
+                type="text"
+                value={controls.thirdTitle || "Development Started"}
+                onChange={(e) => onUpdateControl("thirdTitle", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">thirdTime</label>
+              <input
+                type="text"
+                value={controls.thirdTime || "2:15 PM"}
+                onChange={(e) => onUpdateControl("thirdTime", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">primaryColor</label>
+              <input
+                type="color"
+                value={controls.primaryColor || "#1976d2"}
+                onChange={(e) => onUpdateControl("primaryColor", e.target.value)}
+                className="w-full h-10 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">secondaryColor</label>
+              <input
+                type="color"
+                value={controls.secondaryColor || "#388e3c"}
+                onChange={(e) => onUpdateControl("secondaryColor", e.target.value)}
+                className="w-full h-10 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">tertiaryColor</label>
+              <input
+                type="color"
+                value={controls.tertiaryColor || "#f57c00"}
+                onChange={(e) => onUpdateControl("tertiaryColor", e.target.value)}
+                className="w-full h-10 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+          </>
+        );
+
+      case "TreeView":
+        return (
+          <>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">rootName</label>
+              <input
+                type="text"
+                value={controls.rootName || "Applications"}
+                onChange={(e) => onUpdateControl("rootName", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">fileName1</label>
+              <input
+                type="text"
+                value={controls.fileName1 || "app.js"}
+                onChange={(e) => onUpdateControl("fileName1", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">fileName2</label>
+              <input
+                type="text"
+                value={controls.fileName2 || "config.json"}
+                onChange={(e) => onUpdateControl("fileName2", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">subfolderName</label>
+              <input
+                type="text"
+                value={controls.subfolderName || "components"}
+                onChange={(e) => onUpdateControl("subfolderName", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">subFileName1</label>
+              <input
+                type="text"
+                value={controls.subFileName1 || "Header.tsx"}
+                onChange={(e) => onUpdateControl("subFileName1", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">subFileName2</label>
+              <input
+                type="text"
+                value={controls.subFileName2 || "Footer.tsx"}
+                onChange={(e) => onUpdateControl("subFileName2", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">folderColor</label>
+              <input
+                type="color"
+                value={controls.folderColor || "#f57c00"}
+                onChange={(e) => onUpdateControl("folderColor", e.target.value)}
+                className="w-full h-10 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">subfolderColor</label>
+              <input
+                type="color"
+                value={controls.subfolderColor || "#ff9800"}
+                onChange={(e) => onUpdateControl("subfolderColor", e.target.value)}
+                className="w-full h-10 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">fileColor</label>
+              <input
+                type="color"
+                value={controls.fileColor || "#42a5f5"}
+                onChange={(e) => onUpdateControl("fileColor", e.target.value)}
+                className="w-full h-10 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </div>
+          </>
+        );
+
       default:
         return (
           <div className="text-center text-muted-foreground">
