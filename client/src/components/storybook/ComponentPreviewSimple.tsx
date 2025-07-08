@@ -236,47 +236,16 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
 
       case "Chip":
         return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <Chip 
-              label={controls.label || "Chip"}
-              variant={controls.variant || "filled"}
-              color={controls.color || "default"}
-              size={controls.size || "medium"}
-              clickable={controls.clickable || false}
-              onDelete={controls.deletable ? () => {} : undefined}
-              disabled={controls.disabled || false}
-              icon={controls.icon ? <NotificationsIcon /> : undefined}
-            />
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '16px' }}>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>Basic Chips</h3>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                  <Chip label="Default" />
-                  <Chip label="Clickable" clickable />
-                  <Chip label="Deletable" onDelete={() => {}} />
-                  <Chip label="Disabled" disabled />
-                </div>
-              </div>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>Colors</h3>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                  <Chip label="Primary" color="primary" />
-                  <Chip label="Secondary" color="secondary" />
-                  <Chip label="Success" color="success" />
-                  <Chip label="Error" color="error" />
-                  <Chip label="Warning" color="warning" />
-                  <Chip label="Info" color="info" />
-                </div>
-              </div>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>With Icons</h3>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
-                  <Chip label="With Icon" icon={<FavoriteIcon />} />
-                  <Chip label="With Avatar" avatar={<Avatar>M</Avatar>} />
-                </div>
-              </div>
-            </div>
-          </div>
+          <Chip 
+            label={controls.label || "Chip"}
+            variant={controls.variant || "filled"}
+            color={controls.color || "default"}
+            size={controls.size || "medium"}
+            clickable={controls.clickable || false}
+            onDelete={controls.deletable ? () => {} : undefined}
+            disabled={controls.disabled || false}
+            icon={controls.icon ? <NotificationsIcon /> : undefined}
+          />
         );
 
       case "Avatar":
@@ -983,63 +952,9 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           </AppBar>
         );
 
-      case "Drawer":
-        return (
-          <Box sx={{ display: 'flex', width: '100%', height: 240 }}>
-            <MuiButton 
-              variant="contained" 
-              onClick={() => setDrawerOpen(true)}
-              sx={{ mb: 2 }}
-            >
-              Open Drawer
-            </MuiButton>
-            <Drawer
-              variant={controls.variant || "temporary"}
-              anchor={controls.anchor || "left"}
-              open={controls.open !== undefined ? controls.open : drawerOpen}
-              onClose={() => setDrawerOpen(false)}
-              sx={{
-                width: 240,
-                flexShrink: 0,
-                '& .MuiDrawer-paper': {
-                  width: 240,
-                  boxSizing: 'border-box',
-                },
-              }}
-            >
-              <Toolbar />
-              <Box sx={{ overflow: 'auto' }}>
-                <List>
-                  {['Home', 'About', 'Contact'].map((text, index) => (
-                    <ListItem key={text}>
-                      <ListItemIcon>
-                        {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                      </ListItemIcon>
-                      <ListItemText primary={text} />
-                    </ListItem>
-                  ))}
-                </List>
-              </Box>
-            </Drawer>
-            <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-              <Typography>
-                Main content area with drawer navigation.
-              </Typography>
-            </Box>
-          </Box>
-        );
 
-      case "Alert":
-        return (
-          <Alert 
-            severity={controls.severity || "info"}
-            variant={controls.variant || "standard"}
-            icon={controls.icon !== false}
-            onClose={controls.onClose ? () => {} : undefined}
-          >
-            {controls.message || "This is an alert message"}
-          </Alert>
-        );
+
+
 
       case "Dialog":
         return (
@@ -1894,99 +1809,8 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             </div>
           </div>
         );
-      case "ToggleButton":
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Toggle Buttons</h3>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <ToggleButtonGroup value="left" exclusive>
-                  <ToggleButton value="left">Left</ToggleButton>
-                  <ToggleButton value="center">Center</ToggleButton>
-                  <ToggleButton value="right">Right</ToggleButton>
-                </ToggleButtonGroup>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Multiple Selection</h3>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <ToggleButtonGroup value={['bold', 'italic']}>
-                  <ToggleButton value="bold">Bold</ToggleButton>
-                  <ToggleButton value="italic">Italic</ToggleButton>
-                  <ToggleButton value="underline">Underline</ToggleButton>
-                </ToggleButtonGroup>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <ToggleButtonGroup value="small" exclusive size="small">
-                  <ToggleButton value="small">Small</ToggleButton>
-                  <ToggleButton value="medium">Medium</ToggleButton>
-                </ToggleButtonGroup>
-                <ToggleButtonGroup value="large" exclusive size="large">
-                  <ToggleButton value="large">Large</ToggleButton>
-                  <ToggleButton value="xl">Extra Large</ToggleButton>
-                </ToggleButtonGroup>
-              </div>
-            </div>
-          </div>
-        );
-      case "ButtonGroup":
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <ButtonGroup variant="contained">
-                  <MuiButton>One</MuiButton>
-                  <MuiButton>Two</MuiButton>
-                  <MuiButton>Three</MuiButton>
-                </ButtonGroup>
-                <ButtonGroup variant="outlined">
-                  <MuiButton>One</MuiButton>
-                  <MuiButton>Two</MuiButton>
-                  <MuiButton>Three</MuiButton>
-                </ButtonGroup>
-                <ButtonGroup variant="text">
-                  <MuiButton>One</MuiButton>
-                  <MuiButton>Two</MuiButton>
-                  <MuiButton>Three</MuiButton>
-                </ButtonGroup>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <ButtonGroup variant="contained" color="primary">
-                  <MuiButton>Primary</MuiButton>
-                  <MuiButton>Group</MuiButton>
-                </ButtonGroup>
-                <ButtonGroup variant="contained" color="secondary">
-                  <MuiButton>Secondary</MuiButton>
-                  <MuiButton>Group</MuiButton>
-                </ButtonGroup>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes & Orientation</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <ButtonGroup variant="contained" size="small">
-                  <MuiButton>Small</MuiButton>
-                  <MuiButton>Size</MuiButton>
-                </ButtonGroup>
-                <ButtonGroup variant="contained" size="large">
-                  <MuiButton>Large</MuiButton>
-                  <MuiButton>Size</MuiButton>
-                </ButtonGroup>
-                <ButtonGroup variant="contained" orientation="vertical">
-                  <MuiButton>Vertical</MuiButton>
-                  <MuiButton>Layout</MuiButton>
-                </ButtonGroup>
-              </div>
-            </div>
-          </div>
-        );
+
+
       case "Fab":
         return (
           <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
@@ -2084,16 +1908,10 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             </ListItem>
           </List>
         );
-      case "Chip":
-        return <Chip label="Chip" />;
+
       case "Avatar":
         return <Avatar>A</Avatar>;
-      case "Badge":
-        return (
-          <Badge badgeContent={4} color="primary">
-            <span style={{ fontSize: '24px' }}>📧</span>
-          </Badge>
-        );
+
       case "AppBar":
         return (
           <AppBar position="static">
@@ -2136,132 +1954,11 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           </Stepper>
         );
 
-      case "ToggleButton":
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Toggle Buttons</h3>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <ToggleButton value="left" selected={false}>Left</ToggleButton>
-                <ToggleButton value="center" selected={true}>Center</ToggleButton>
-                <ToggleButton value="right" selected={false}>Right</ToggleButton>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                <ToggleButton value="standard" selected={true} color="standard">Standard</ToggleButton>
-                <ToggleButton value="primary" selected={true} color="primary">Primary</ToggleButton>
-                <ToggleButton value="secondary" selected={true} color="secondary">Secondary</ToggleButton>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes & States</h3>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-                <ToggleButton value="small" size="small" selected={true}>Small</ToggleButton>
-                <ToggleButton value="medium" size="medium" selected={true}>Medium</ToggleButton>
-                <ToggleButton value="large" size="large" selected={true}>Large</ToggleButton>
-                <ToggleButton value="disabled" disabled>Disabled</ToggleButton>
-              </div>
-            </div>
-          </div>
-        );
 
-      case "ButtonGroup":
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Button Groups</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <ButtonGroup variant="contained">
-                  <MuiButton>One</MuiButton>
-                  <MuiButton>Two</MuiButton>
-                  <MuiButton>Three</MuiButton>
-                </ButtonGroup>
-                <ButtonGroup variant="outlined">
-                  <MuiButton>One</MuiButton>
-                  <MuiButton>Two</MuiButton>
-                  <MuiButton>Three</MuiButton>
-                </ButtonGroup>
-                <ButtonGroup variant="text">
-                  <MuiButton>One</MuiButton>
-                  <MuiButton>Two</MuiButton>
-                  <MuiButton>Three</MuiButton>
-                </ButtonGroup>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
-                <ButtonGroup variant="contained" color="primary">
-                  <MuiButton>Primary</MuiButton>
-                  <MuiButton>Group</MuiButton>
-                </ButtonGroup>
-                <ButtonGroup variant="contained" color="secondary">
-                  <MuiButton>Secondary</MuiButton>
-                  <MuiButton>Group</MuiButton>
-                </ButtonGroup>
-                <ButtonGroup variant="contained" color="success">
-                  <MuiButton>Success</MuiButton>
-                  <MuiButton>Group</MuiButton>
-                </ButtonGroup>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Orientations & Sizes</h3>
-              <div style={{ display: 'flex', gap: '24px', alignItems: 'flex-start' }}>
-                <div>
-                  <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>Vertical</p>
-                  <ButtonGroup orientation="vertical" variant="outlined">
-                    <MuiButton>Top</MuiButton>
-                    <MuiButton>Middle</MuiButton>
-                    <MuiButton>Bottom</MuiButton>
-                  </ButtonGroup>
-                </div>
-                <div>
-                  <p style={{ marginBottom: '8px', fontSize: '14px', color: '#666' }}>Small Size</p>
-                  <ButtonGroup size="small" variant="contained">
-                    <MuiButton>Small</MuiButton>
-                    <MuiButton>Group</MuiButton>
-                  </ButtonGroup>
-                </div>
-              </div>
-            </div>
-          </div>
-        );
 
-      case "Fab":
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic FABs</h3>
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                <Fab color="primary"><SendIcon /></Fab>
-                <Fab color="secondary"><EditIcon /></Fab>
-                <Fab disabled><FavoriteIcon /></Fab>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center' }}>
-                <Fab color="default"><SendIcon /></Fab>
-                <Fab color="primary"><SendIcon /></Fab>
-                <Fab color="secondary"><SendIcon /></Fab>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes & Variants</h3>
-              <div style={{ display: 'flex', gap: '16px', alignItems: 'center', flexWrap: 'wrap' }}>
-                <Fab size="small" color="primary"><SendIcon /></Fab>
-                <Fab size="medium" color="primary"><SendIcon /></Fab>
-                <Fab size="large" color="primary"><SendIcon /></Fab>
-                <Fab variant="extended" color="primary">
-                  <SendIcon sx={{ mr: 1 }} />Extended
-                </Fab>
-              </div>
-            </div>
-          </div>
-        );
+
+
+
 
       case "Tooltip":
         return (
@@ -2465,65 +2162,11 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           </div>
         );
 
-      case "Breadcrumbs":
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Breadcrumbs</h3>
-              <Breadcrumbs>
-                <Link color="inherit" href="/">Home</Link>
-                <Link color="inherit" href="/category">Category</Link>
-                <Typography color="textPrimary">Current Page</Typography>
-              </Breadcrumbs>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Custom Separator</h3>
-              <Breadcrumbs separator="›">
-                <Link color="inherit" href="/">Home</Link>
-                <Link color="inherit" href="/category">Category</Link>
-                <Typography color="textPrimary">Current Page</Typography>
-              </Breadcrumbs>
-            </div>
-          </div>
-        );
 
-      case "Stepper":
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Horizontal Stepper</h3>
-              <Stepper activeStep={1}>
-                <Step><StepLabel>Select campaign settings</StepLabel></Step>
-                <Step><StepLabel>Create an ad group</StepLabel></Step>
-                <Step><StepLabel>Create an ad</StepLabel></Step>
-              </Stepper>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Vertical Stepper</h3>
-              <Stepper activeStep={0} orientation="vertical">
-                <Step><StepLabel>Step 1</StepLabel></Step>
-                <Step><StepLabel>Step 2</StepLabel></Step>
-                <Step><StepLabel>Step 3</StepLabel></Step>
-              </Stepper>
-            </div>
-          </div>
-        );
 
-      case "Drawer":
-        return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Drawer Example</h3>
-              <div style={{ display: 'flex', gap: '12px' }}>
-                <MuiButton variant="contained">Open Left Drawer</MuiButton>
-                <MuiButton variant="outlined">Open Right Drawer</MuiButton>
-              </div>
-              <p style={{ marginTop: '12px', fontSize: '14px', color: '#666' }}>
-                Drawer content would typically contain navigation items, user info, or other sidebar content.
-              </p>
-            </div>
-          </div>
-        );
+
+
+
 
       case "Dialog":
         return (
@@ -3787,6 +3430,50 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             </div>
           </div>
         );
+
+      case "Chip":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Chips</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Chip label="Default" />
+                <Chip label="Clickable" clickable />
+                <Chip label="Deletable" onDelete={() => {}} />
+                <Chip label="Disabled" disabled />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Chip label="Filled" variant="filled" />
+                <Chip label="Outlined" variant="outlined" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Chip label="Primary" color="primary" />
+                <Chip label="Secondary" color="secondary" />
+                <Chip label="Success" color="success" />
+                <Chip label="Error" color="error" />
+                <Chip label="Warning" color="warning" />
+                <Chip label="Info" color="info" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Icons</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Chip label="With Icon" icon={<FavoriteIcon />} />
+                <Chip label="With Avatar" avatar={<Avatar>M</Avatar>} />
+              </div>
+            </div>
+          </div>
+        );
+
+
+
+
 
       default:
         return (
