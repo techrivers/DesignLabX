@@ -84,7 +84,8 @@ import {
   StepLabel,
   Accordion,
   AccordionSummary,
-  AccordionDetails
+  AccordionDetails,
+  AvatarGroup
 } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CloseIcon from '@mui/icons-material/Close';
@@ -102,6 +103,12 @@ import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import EditIcon from '@mui/icons-material/Edit';
 import ShareIcon from '@mui/icons-material/Share';
 import PrintIcon from '@mui/icons-material/Print';
+import PersonIcon from '@mui/icons-material/Person';
+import CheckIcon from '@mui/icons-material/Check';
+import SettingsIcon from '@mui/icons-material/Settings';
+import FolderIcon from '@mui/icons-material/Folder';
+import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
+import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
 interface ComponentControls {
   [key: string]: any;
@@ -3395,6 +3402,8 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             </div>
           </div>
         );
+
+
 
       default:
         return (
