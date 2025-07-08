@@ -3632,17 +3632,66 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         </div>
 
         <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-            <label style={{ fontSize: '14px', color: '#666' }}>Viewport:</label>
-            <select 
-              value={selectedViewport}
-              onChange={(e) => setSelectedViewport(e.target.value)}
-              style={{ fontSize: '14px', border: '1px solid #ddd', borderRadius: '4px', padding: '4px 8px' }}
+          <div style={{ 
+            display: 'flex', 
+            backgroundColor: '#f5f5f5', 
+            borderRadius: '8px', 
+            padding: '4px' 
+          }}>
+            <button
+              onClick={() => setSelectedViewport('mobile')}
+              style={{
+                padding: '8px 12px',
+                fontSize: '14px',
+                borderRadius: '6px',
+                border: 'none',
+                cursor: 'pointer',
+                backgroundColor: selectedViewport === 'mobile' ? '#ffffff' : 'transparent',
+                color: selectedViewport === 'mobile' ? '#000000' : '#666666',
+                boxShadow: selectedViewport === 'mobile' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
             >
-              <option value="mobile">Mobile</option>
-              <option value="tablet">Tablet</option>
-              <option value="desktop">Desktop</option>
-            </select>
+              📱
+            </button>
+            <button
+              onClick={() => setSelectedViewport('tablet')}
+              style={{
+                padding: '8px 12px',
+                fontSize: '14px',
+                borderRadius: '6px',
+                border: 'none',
+                cursor: 'pointer',
+                backgroundColor: selectedViewport === 'tablet' ? '#ffffff' : 'transparent',
+                color: selectedViewport === 'tablet' ? '#000000' : '#666666',
+                boxShadow: selectedViewport === 'tablet' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              💻
+            </button>
+            <button
+              onClick={() => setSelectedViewport('desktop')}
+              style={{
+                padding: '8px 12px',
+                fontSize: '14px',
+                borderRadius: '6px',
+                border: 'none',
+                cursor: 'pointer',
+                backgroundColor: selectedViewport === 'desktop' ? '#ffffff' : 'transparent',
+                color: selectedViewport === 'desktop' ? '#000000' : '#666666',
+                boxShadow: selectedViewport === 'desktop' ? '0 1px 3px rgba(0,0,0,0.1)' : 'none',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '4px'
+              }}
+            >
+              🖥️
+            </button>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
             <button
