@@ -2000,8 +2000,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           </List>
         );
 
-      case "Avatar":
-        return <Avatar>A</Avatar>;
+
 
       case "AppBar":
         return (
