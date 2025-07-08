@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { 
   Button as MuiButton, 
   TextField, 
@@ -127,12 +127,37 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [selectValue, setSelectValue] = useState(() => {
-    if (controls.multiple) {
-      return controls.value || [];
+  const [selectValue, setSelectValue] = useState(controls.multiple ? [] : "");
+  
+  // Additional state variables for interactive components
+  const [checkboxChecked, setCheckboxChecked] = useState(false);
+  const [radioValue, setRadioValue] = useState('option1');
+  const [switchChecked, setSwitchChecked] = useState(false);
+  const [sliderValue, setSliderValue] = useState(30);
+  const [ratingValue, setRatingValue] = useState(4);
+  const [autocompleteValue, setAutocompleteValue] = useState(null);
+  const [toggleValue, setToggleValue] = useState('');
+  const [buttonGroupValue, setButtonGroupValue] = useState('left');
+  const [textFieldValue, setTextFieldValue] = useState('');
+  const [chipData, setChipData] = useState([
+    { key: 0, label: 'Angular' },
+    { key: 1, label: 'jQuery' },
+    { key: 2, label: 'Polymer' },
+    { key: 3, label: 'React' },
+    { key: 4, label: 'Vue.js' }
+  ]);
+  const [progressValue, setProgressValue] = useState(75);
+  const [accordionExpanded, setAccordionExpanded] = useState(false);
+  const [stepperActiveStep, setStepperActiveStep] = useState(0);
+
+  // Update select value when controls change
+  useEffect(() => {
+    if (controls.multiple && !Array.isArray(selectValue)) {
+      setSelectValue([]);
+    } else if (!controls.multiple && Array.isArray(selectValue)) {
+      setSelectValue("");
     }
-    return controls.value || "";
-  });
+  }, [controls.multiple]);
 
   const popperOpen = Boolean(popperAnchor);
 
@@ -157,6 +182,8 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
       case "TextField":
         return (
           <TextField 
+            value={textFieldValue}
+            onChange={(event) => setTextFieldValue(event.target.value)}
             label={controls.label || "Text Field"}
             variant={controls.variant === "contained" ? "outlined" : (controls.variant || "outlined")}
             size={controls.size || "medium"}
@@ -166,6 +193,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             helperText={controls.helperText || ""}
             multiline={controls.multiline || false}
             rows={controls.rows || 1}
+            placeholder={controls.placeholder || "Enter text..."}
           />
         );
       case "Card":
@@ -276,15 +304,15 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           <Box>
             <MuiButton 
               variant="contained" 
-              onClick={() => {}}
+              onClick={() => setDrawerOpen(!drawerOpen)}
             >
-              {controls.buttonText || "Open Drawer"}
+              {drawerOpen ? "Close Drawer" : (controls.buttonText || "Open Drawer")}
             </MuiButton>
             <Drawer
               anchor={controls.anchor || "left"}
-              open={controls.open || false}
+              open={drawerOpen}
               variant={controls.variant || "temporary"}
-              onClose={() => {}}
+              onClose={() => setDrawerOpen(false)}
             >
               <Box
                 sx={{ width: controls.width || 250 }}
@@ -331,10 +359,12 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           <FormControlLabel
             control={
               <Checkbox 
-                checked={controls.checked || false}
+                checked={checkboxChecked}
+                onChange={(event) => setCheckboxChecked(event.target.checked)}
                 disabled={controls.disabled || false}
                 color={controls.color || "primary"}
                 size={controls.size || "medium"}
+                indeterminate={controls.indeterminate || false}
               />
             }
             label={controls.label || "Checkbox"}
@@ -376,8 +406,8 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
       case "Radio":
         return (
           <RadioGroup 
-            value={controls.value || "basic"} 
-            onChange={() => {}}
+            value={radioValue} 
+            onChange={(event) => setRadioValue(event.target.value)}
           >
             <FormControlLabel 
               value="basic" 
@@ -418,9 +448,11 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           <FormControlLabel 
             control={
               <Switch 
-                checked={controls.checked || false}
+                checked={switchChecked}
+                onChange={(event) => setSwitchChecked(event.target.checked)}
                 color={controls.color || "primary"}
                 size={controls.size || "medium"}
+                disabled={controls.disabled || false}
               />
             } 
             label={controls.label || "Switch"} 
@@ -440,6 +472,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           <Box sx={{ width: controls.orientation === 'vertical' ? 40 : 300, height: controls.orientation === 'vertical' ? 300 : 'auto' }}>
             <Slider 
               value={sliderValue}
+              onChange={(event, newValue) => setSliderValue(newValue)}
               min={controls.min || 0}
               max={controls.max || 100}
               step={controls.step || 1}
@@ -449,7 +482,6 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
               orientation={controls.orientation || "horizontal"}
               marks={sliderMarks}
               valueLabelDisplay={controls.valueLabelDisplay || "off"}
-              onChange={() => {}}
             />
           </Box>
         );
@@ -478,10 +510,11 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         return (
           <Rating 
             {...ratingProps}
+            value={ratingValue}
+            onChange={(event, newValue) => setRatingValue(newValue)}
             max={controls.max || 5}
             size={controls.size || "medium"}
             disabled={controls.disabled || false}
-            onChange={() => {}}
           />
         );
       case "Autocomplete":
@@ -492,6 +525,8 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         
         return (
           <Autocomplete
+            value={autocompleteValue}
+            onChange={(event, newValue) => setAutocompleteValue(newValue)}
             options={autocompleteOptions}
             sx={{ width: 300 }}
             multiple={controls.multiple || false}
@@ -501,7 +536,6 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
             groupBy={controls.grouped ? (option: any) => option.title : undefined}
             getOptionLabel={controls.grouped ? (option: any) => option.options?.[0] || option : (option: any) => option}
             renderInput={(params) => <TextField {...params} label={controls.label || "Autocomplete"} />}
-            onChange={() => {}}
           />
         );
 
