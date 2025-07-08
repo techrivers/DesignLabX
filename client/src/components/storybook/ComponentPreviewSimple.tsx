@@ -115,6 +115,12 @@ import SaveIcon from '@mui/icons-material/Save';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DeleteIcon from '@mui/icons-material/Delete';
 import MessageIcon from '@mui/icons-material/Message';
+import FormatAlignLeftIcon from '@mui/icons-material/FormatAlignLeft';
+import FormatAlignCenterIcon from '@mui/icons-material/FormatAlignCenter';
+import FormatAlignRightIcon from '@mui/icons-material/FormatAlignRight';
+import FormatBoldIcon from '@mui/icons-material/FormatBold';
+import FormatItalicIcon from '@mui/icons-material/FormatItalic';
+import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
 
 interface ComponentControls {
   [key: string]: any;
@@ -4239,6 +4245,125 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
                 <Chip label="With Icon" icon={<FavoriteIcon />} />
                 <Chip label="With Avatar" avatar={<Avatar>M</Avatar>} />
               </div>
+            </div>
+          </div>
+        );
+
+      case "ToggleButton":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Toggle Buttons</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <ToggleButton value="bold" selected={false}>
+                  <FormatBoldIcon />
+                </ToggleButton>
+                <ToggleButton value="italic" selected={true}>
+                  <FormatItalicIcon />
+                </ToggleButton>
+                <ToggleButton value="underlined" selected={false}>
+                  <FormatUnderlinedIcon />
+                </ToggleButton>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Color Variants</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <ToggleButton value="primary" selected={true} color="primary">Primary</ToggleButton>
+                <ToggleButton value="secondary" selected={true} color="secondary">Secondary</ToggleButton>
+                <ToggleButton value="success" selected={true} color="success">Success</ToggleButton>
+                <ToggleButton value="error" selected={true} color="error">Error</ToggleButton>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <ToggleButton value="small" selected={true} size="small">Small</ToggleButton>
+                <ToggleButton value="medium" selected={true} size="medium">Medium</ToggleButton>
+                <ToggleButton value="large" selected={true} size="large">Large</ToggleButton>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Toggle Button Group</h3>
+              <ToggleButtonGroup value="center" exclusive>
+                <ToggleButton value="left">
+                  <FormatAlignLeftIcon />
+                </ToggleButton>
+                <ToggleButton value="center">
+                  <FormatAlignCenterIcon />
+                </ToggleButton>
+                <ToggleButton value="right">
+                  <FormatAlignRightIcon />
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </div>
+          </div>
+        );
+
+      case "ButtonGroup":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Button Groups</h3>
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <ButtonGroup variant="contained">
+                  <MuiButton>One</MuiButton>
+                  <MuiButton>Two</MuiButton>
+                  <MuiButton>Three</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="outlined">
+                  <MuiButton>One</MuiButton>
+                  <MuiButton>Two</MuiButton>
+                  <MuiButton>Three</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="text">
+                  <MuiButton>One</MuiButton>
+                  <MuiButton>Two</MuiButton>
+                  <MuiButton>Three</MuiButton>
+                </ButtonGroup>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Color Variants</h3>
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <ButtonGroup variant="contained" color="primary">
+                  <MuiButton>Primary</MuiButton>
+                  <MuiButton>Group</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="contained" color="secondary">
+                  <MuiButton>Secondary</MuiButton>
+                  <MuiButton>Group</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="contained" color="success">
+                  <MuiButton>Success</MuiButton>
+                  <MuiButton>Group</MuiButton>
+                </ButtonGroup>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <ButtonGroup variant="contained" size="small">
+                  <MuiButton>Small</MuiButton>
+                  <MuiButton>Group</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="contained" size="medium">
+                  <MuiButton>Medium</MuiButton>
+                  <MuiButton>Group</MuiButton>
+                </ButtonGroup>
+                <ButtonGroup variant="contained" size="large">
+                  <MuiButton>Large</MuiButton>
+                  <MuiButton>Group</MuiButton>
+                </ButtonGroup>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Vertical Orientation</h3>
+              <ButtonGroup orientation="vertical" variant="contained">
+                <MuiButton>Button 1</MuiButton>
+                <MuiButton>Button 2</MuiButton>
+                <MuiButton>Button 3</MuiButton>
+              </ButtonGroup>
             </div>
           </div>
         );
