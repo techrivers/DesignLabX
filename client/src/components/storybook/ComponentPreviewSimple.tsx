@@ -156,6 +156,8 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const [progressValue, setProgressValue] = useState(75);
   const [accordionExpanded, setAccordionExpanded] = useState(false);
   const [stepperActiveStep, setStepperActiveStep] = useState(0);
+  // TreeView state
+  const [expandedItems, setExpandedItems] = useState<string[]>(['applications']);
 
   // Update select value when controls change
   useEffect(() => {
@@ -168,7 +170,13 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
 
   const popperOpen = Boolean(popperAnchor);
 
-
+  const toggleExpanded = (itemId: string) => {
+    setExpandedItems(prev => 
+      prev.includes(itemId) 
+        ? prev.filter(id => id !== itemId)
+        : [...prev, itemId]
+    );
+  };
 
   const renderControlledComponent = () => {
     switch (component) {
@@ -1480,16 +1488,6 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "TreeView":
-        const [expandedItems, setExpandedItems] = useState<string[]>(['applications']);
-        
-        const toggleExpanded = (itemId: string) => {
-          setExpandedItems(prev => 
-            prev.includes(itemId) 
-              ? prev.filter(id => id !== itemId)
-              : [...prev, itemId]
-          );
-        };
-
         return (
           <div style={{ maxWidth: 300 }}>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
