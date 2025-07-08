@@ -127,6 +127,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
+  const [selectValue, setSelectValue] = useState(controls.value || "");
 
   const popperOpen = Boolean(popperAnchor);
 
@@ -346,10 +347,10 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           >
             <InputLabel>{controls.label || "Select"}</InputLabel>
             <Select 
-              value={controls.value || ""} 
+              value={selectValue} 
               label={controls.label || "Select"}
               multiple={controls.multiple || false}
-              onChange={() => {}}
+              onChange={(event) => setSelectValue(event.target.value)}
             >
               <MenuItem value="">
                 <em>None</em>
