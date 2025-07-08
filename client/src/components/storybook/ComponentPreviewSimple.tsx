@@ -257,21 +257,64 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "Avatar":
-        return (
-          <Avatar 
-            variant={controls.variant || "circular"}
-            sx={{ 
-              width: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40,
-              height: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40,
-              bgcolor: controls.color === "primary" ? "primary.main" : 
-                       controls.color === "secondary" ? "secondary.main" : 
-                       controls.color === "success" ? "success.main" : 
-                       controls.color === "error" ? "error.main" : "grey.500"
-            }}
-          >
-            {controls.text || "JD"}
-          </Avatar>
-        );
+        if (story === "Basic") {
+          return (
+            <Avatar>
+              {controls.text || "JD"}
+            </Avatar>
+          );
+        } else if (story === "WithImage") {
+          return (
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <Avatar>H</Avatar>
+              <Avatar><PersonIcon /></Avatar>
+              <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
+            </div>
+          );
+        } else if (story === "Group") {
+          return (
+            <AvatarGroup max={4}>
+              <Avatar alt="User 1" sx={{ bgcolor: 'primary.main' }}>R</Avatar>
+              <Avatar alt="User 2" sx={{ bgcolor: 'secondary.main' }}>T</Avatar>
+              <Avatar alt="User 3" sx={{ bgcolor: 'success.main' }}>C</Avatar>
+              <Avatar alt="User 4" sx={{ bgcolor: 'warning.main' }}>A</Avatar>
+              <Avatar alt="User 5" sx={{ bgcolor: 'info.main' }}>T</Avatar>
+            </AvatarGroup>
+          );
+        } else if (story === "SizeVariants") {
+          return (
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <Avatar sx={{ width: 24, height: 24, fontSize: '12px' }}>S</Avatar>
+              <Avatar sx={{ width: 32, height: 32, fontSize: '14px' }}>M</Avatar>
+              <Avatar sx={{ width: 40, height: 40 }}>D</Avatar>
+              <Avatar sx={{ width: 56, height: 56 }}>L</Avatar>
+            </div>
+          );
+        } else if (story === "VariantStyles") {
+          return (
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <Avatar variant="circular">C</Avatar>
+              <Avatar variant="rounded">R</Avatar>
+              <Avatar variant="square">S</Avatar>
+            </div>
+          );
+        } else {
+          return (
+            <Avatar 
+              variant={controls.variant || "circular"}
+              sx={{ 
+                width: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40,
+                height: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40,
+                bgcolor: controls.color === "primary" ? "primary.main" : 
+                         controls.color === "secondary" ? "secondary.main" : 
+                         controls.color === "success" ? "success.main" : 
+                         controls.color === "error" ? "error.main" : "grey.500"
+              }}
+            >
+              {controls.text || "JD"}
+            </Avatar>
+          );
+        }
 
       case "Badge":
         if (story === "Basic") {
