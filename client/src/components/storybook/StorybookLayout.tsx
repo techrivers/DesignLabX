@@ -1178,24 +1178,6 @@ export function StorybookLayout() {
           </div>
           
           <div className="ml-auto flex items-center space-x-2">
-            {/* Viewport Controls */}
-            <div className="flex items-center space-x-1 border border-border rounded-lg p-1">
-              {["mobile", "tablet", "desktop"].map((size) => (
-                <button
-                  key={size}
-                  onClick={() => setViewport(size)}
-                  className={`p-2 rounded ${
-                    viewport === size ? "bg-primary text-white" : "hover:bg-muted"
-                  }`}
-                  title={size}
-                >
-                  <span className="material-icons text-lg">
-                    {size === "mobile" ? "smartphone" : size === "tablet" ? "tablet" : "desktop_windows"}
-                  </span>
-                </button>
-              ))}
-            </div>
-
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}

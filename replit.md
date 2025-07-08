@@ -138,6 +138,8 @@ This is a full-stack application built with React, Express, and Material-UI that
   - Implemented comprehensive controls panels for both Timeline and TreeView with text inputs and color pickers
   - Resolved React hooks error by moving useState declarations outside switch statements
   - All components now maintain consistent layout styling between interactive previews and showcase variants
+  - Removed duplicate viewport controls from StorybookLayout to avoid confusion
+  - Made viewport buttons fully functional with prominent toggle interface (📱💻🖥️) matching Canvas/Docs design
 
 ## User Preferences
 
