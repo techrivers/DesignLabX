@@ -729,6 +729,17 @@ export default ${component}Example;`;
               />
             </div>
 
+            <div>
+              <label className="block text-xs font-medium text-muted-foreground mb-2">title</label>
+              <input
+                type="text"
+                value={controls.title || ""}
+                onChange={(e) => onUpdateControl("title", e.target.value)}
+                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
+                placeholder="Optional title"
+              />
+            </div>
+
             <div className="space-y-3">
               {["onClose", "icon"].map((prop) => (
                 <div key={prop} className="flex items-center justify-between">
@@ -1802,58 +1813,7 @@ export default ${component}Example;`;
           </>
         );
 
-      case "Alert":
-        return (
-          <>
-            <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-2">message</label>
-              <input
-                type="text"
-                value={controls.message || "This is an alert message"}
-                onChange={(e) => onUpdateControl("message", e.target.value)}
-                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
-              />
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-2">severity</label>
-              <select
-                value={controls.severity || "info"}
-                onChange={(e) => onUpdateControl("severity", e.target.value)}
-                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
-              >
-                <option value="error">error</option>
-                <option value="warning">warning</option>
-                <option value="info">info</option>
-                <option value="success">success</option>
-              </select>
-            </div>
-            <div>
-              <label className="block text-xs font-medium text-muted-foreground mb-2">variant</label>
-              <select
-                value={controls.variant || "standard"}
-                onChange={(e) => onUpdateControl("variant", e.target.value)}
-                className="w-full px-3 py-2 border border-border rounded focus:outline-none focus:ring-2 focus:ring-primary text-sm bg-background"
-              >
-                <option value="standard">standard</option>
-                <option value="filled">filled</option>
-                <option value="outlined">outlined</option>
-              </select>
-            </div>
-            <div className="space-y-3">
-              {["icon", "onClose"].map((prop) => (
-                <div key={prop} className="flex items-center justify-between">
-                  <label className="text-xs font-medium text-muted-foreground">{prop}</label>
-                  <input
-                    type="checkbox"
-                    checked={controls[prop] !== false}
-                    onChange={(e) => onUpdateControl(prop, e.target.checked)}
-                    className="h-4 w-4 text-primary focus:ring-primary border-border rounded"
-                  />
-                </div>
-              ))}
-            </div>
-          </>
-        );
+
 
       case "Dialog":
         return (
