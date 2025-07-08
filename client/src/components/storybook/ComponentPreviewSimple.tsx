@@ -1269,31 +1269,106 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "Skeleton":
-        return (
-          <Skeleton
-            variant={controls.variant || "text"}
-            width={controls.width || 210}
-            height={controls.height || 60}
-            animation={controls.animation === "false" ? false : controls.animation || "pulse"}
-          />
-        );
+        switch (story) {
+          case "Text":
+            return (
+              <Skeleton
+                variant="text"
+                width={controls.width || 210}
+                height={controls.height || 40}
+                animation={controls.animation === "false" ? false : controls.animation || "pulse"}
+              />
+            );
+          
+          case "Rectangular":
+            return (
+              <Skeleton
+                variant="rectangular"
+                width={controls.width || 210}
+                height={controls.height || 118}
+                animation={controls.animation === "false" ? false : controls.animation || "pulse"}
+              />
+            );
+          
+          case "Circular":
+            return (
+              <Skeleton
+                variant="circular"
+                width={controls.width || 40}
+                height={controls.height || 40}
+                animation={controls.animation === "false" ? false : controls.animation || "pulse"}
+              />
+            );
+          
+          default:
+            return (
+              <Skeleton
+                variant={controls.variant || "text"}
+                width={controls.width || 210}
+                height={controls.height || 60}
+                animation={controls.animation === "false" ? false : controls.animation || "pulse"}
+              />
+            );
+        }
 
       case "Backdrop":
-        return (
-          <div>
-            <MuiButton variant="contained" onClick={() => {}}>
-              {controls.open ? "Backdrop Open" : "Backdrop Closed"} (Use controls)
-            </MuiButton>
-            <Backdrop
-              sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
-              open={controls.open || false}
-              onClick={() => {}}
-              invisible={controls.invisible || false}
-            >
-              <CircularProgress color="inherit" />
-            </Backdrop>
-          </div>
-        );
+        switch (story) {
+          case "Basic":
+            return (
+              <div>
+                <MuiButton variant="contained" onClick={() => {}}>
+                  Toggle Backdrop (Use controls)
+                </MuiButton>
+                <Backdrop
+                  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                  open={controls.open || false}
+                  onClick={() => {}}
+                >
+                  <CircularProgress color="inherit" />
+                </Backdrop>
+              </div>
+            );
+          
+          case "Custom":
+            return (
+              <div>
+                <MuiButton variant="contained" onClick={() => {}}>
+                  Custom Backdrop (Use controls)
+                </MuiButton>
+                <Backdrop
+                  sx={{ 
+                    color: controls.color || '#fff', 
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)',
+                    zIndex: (theme) => theme.zIndex.drawer + 1 
+                  }}
+                  open={controls.open || false}
+                  onClick={() => {}}
+                  invisible={controls.invisible || false}
+                >
+                  <Typography variant="h6">
+                    {controls.message || "Loading..."}
+                  </Typography>
+                </Backdrop>
+              </div>
+            );
+          
+          default:
+            return (
+              <div>
+                <MuiButton variant="contained" onClick={() => {}}>
+                  {controls.open ? "Backdrop Open" : "Backdrop Closed"} (Use controls)
+                </MuiButton>
+                <Backdrop
+                  sx={{ color: '#fff', zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                  open={controls.open || false}
+                  onClick={() => {}}
+                  invisible={controls.invisible || false}
+                >
+                  <CircularProgress color="inherit" />
+                </Backdrop>
+              </div>
+            );
+        }
 
       case "Grid":
         return (
