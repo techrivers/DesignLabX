@@ -258,113 +258,35 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
 
       case "Avatar":
         return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-            <Avatar 
-              variant={controls.variant || "circular"}
-              sx={{ 
-                width: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40,
-                height: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40
-              }}
-            >
-              {controls.text || "JD"}
-            </Avatar>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '16px' }}>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>Basic Avatars</h3>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <Avatar>H</Avatar>
-                  <Avatar><PersonIcon /></Avatar>
-                  <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
-                </div>
-              </div>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>Sizes</h3>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <Avatar sx={{ width: 24, height: 24, fontSize: '12px' }}>S</Avatar>
-                  <Avatar sx={{ width: 32, height: 32, fontSize: '14px' }}>M</Avatar>
-                  <Avatar sx={{ width: 40, height: 40 }}>D</Avatar>
-                  <Avatar sx={{ width: 56, height: 56 }}>L</Avatar>
-                </div>
-              </div>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>Variants</h3>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <Avatar variant="circular">C</Avatar>
-                  <Avatar variant="rounded">R</Avatar>
-                  <Avatar variant="square">S</Avatar>
-                </div>
-              </div>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>Colors</h3>
-                <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', alignItems: 'center' }}>
-                  <Avatar sx={{ bgcolor: 'primary.main' }}>P</Avatar>
-                  <Avatar sx={{ bgcolor: 'secondary.main' }}>S</Avatar>
-                  <Avatar sx={{ bgcolor: 'success.main' }}>✓</Avatar>
-                  <Avatar sx={{ bgcolor: 'error.main' }}>E</Avatar>
-                </div>
-              </div>
-              <div>
-                <h3 style={{ fontSize: '14px', fontWeight: '600', marginBottom: '8px', color: '#333' }}>Avatar Group</h3>
-                <AvatarGroup max={4}>
-                  <Avatar alt="User 1" sx={{ bgcolor: 'primary.main' }}>R</Avatar>
-                  <Avatar alt="User 2" sx={{ bgcolor: 'secondary.main' }}>T</Avatar>
-                  <Avatar alt="User 3" sx={{ bgcolor: 'success.main' }}>C</Avatar>
-                  <Avatar alt="User 4" sx={{ bgcolor: 'warning.main' }}>A</Avatar>
-                  <Avatar alt="User 5" sx={{ bgcolor: 'info.main' }}>T</Avatar>
-                </AvatarGroup>
-              </div>
-            </div>
-          </div>
+          <Avatar 
+            variant={controls.variant || "circular"}
+            sx={{ 
+              width: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40,
+              height: controls.size === "small" ? 32 : controls.size === "large" ? 56 : 40,
+              bgcolor: controls.color === "primary" ? "primary.main" : 
+                       controls.color === "secondary" ? "secondary.main" : 
+                       controls.color === "success" ? "success.main" : 
+                       controls.color === "error" ? "error.main" : "grey.500"
+            }}
+          >
+            {controls.text || "JD"}
+          </Avatar>
         );
 
       case "Badge":
         return (
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Badges</h3>
-              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
-                <Badge badgeContent={4} color="primary">
-                  <MailIcon />
-                </Badge>
-                <Badge badgeContent={10} color="secondary">
-                  <MailIcon />
-                </Badge>
-                <Badge badgeContent={100} color="error">
-                  <MailIcon />
-                </Badge>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
-              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
-                <Badge badgeContent={4} color="primary"><MailIcon /></Badge>
-                <Badge badgeContent={4} color="secondary"><MailIcon /></Badge>
-                <Badge badgeContent={4} color="success"><MailIcon /></Badge>
-                <Badge badgeContent={4} color="error"><MailIcon /></Badge>
-                <Badge badgeContent={4} color="warning"><MailIcon /></Badge>
-                <Badge badgeContent={4} color="info"><MailIcon /></Badge>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
-              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
-                <Badge badgeContent={4} variant="standard"><MailIcon /></Badge>
-                <Badge badgeContent={4} variant="dot"><MailIcon /></Badge>
-                <Badge color="error" variant="dot"><MailIcon /></Badge>
-              </div>
-            </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Avatar</h3>
-              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
-                <Badge badgeContent={4} color="primary">
-                  <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
-                </Badge>
-                <Badge color="error" variant="dot">
-                  <Avatar sx={{ bgcolor: 'secondary.main' }}>JS</Avatar>
-                </Badge>
-              </div>
-            </div>
-          </div>
+          <Badge 
+            badgeContent={controls.badgeContent || 4}
+            color={controls.color || "primary"}
+            variant={controls.variant || "standard"}
+            invisible={controls.invisible || false}
+          >
+            {controls.children === "avatar" ? (
+              <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
+            ) : (
+              <MailIcon />
+            )}
+          </Badge>
         );
 
       case "Progress":
@@ -2041,10 +1963,105 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
 
+      case "Badge":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Badges</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} color="primary">
+                  <MailIcon />
+                </Badge>
+                <Badge badgeContent={10} color="secondary">
+                  <MailIcon />
+                </Badge>
+                <Badge badgeContent={100} color="error">
+                  <MailIcon />
+                </Badge>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} color="primary"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="secondary"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="success"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="error"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="warning"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="info"><MailIcon /></Badge>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} variant="standard"><MailIcon /></Badge>
+                <Badge badgeContent={4} variant="dot"><MailIcon /></Badge>
+                <Badge color="error" variant="dot"><MailIcon /></Badge>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Avatar</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} color="primary">
+                  <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
+                </Badge>
+                <Badge color="error" variant="dot">
+                  <Avatar sx={{ bgcolor: 'secondary.main' }}>JS</Avatar>
+                </Badge>
+              </div>
+            </div>
+          </div>
+        );
 
-
-
-
+      case "Avatar":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Avatars</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Avatar>H</Avatar>
+                <Avatar><PersonIcon /></Avatar>
+                <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Avatar sx={{ width: 24, height: 24, fontSize: '12px' }}>S</Avatar>
+                <Avatar sx={{ width: 32, height: 32, fontSize: '14px' }}>M</Avatar>
+                <Avatar sx={{ width: 40, height: 40 }}>D</Avatar>
+                <Avatar sx={{ width: 56, height: 56 }}>L</Avatar>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Avatar variant="circular">C</Avatar>
+                <Avatar variant="rounded">R</Avatar>
+                <Avatar variant="square">S</Avatar>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Avatar sx={{ bgcolor: 'primary.main' }}>P</Avatar>
+                <Avatar sx={{ bgcolor: 'secondary.main' }}>S</Avatar>
+                <Avatar sx={{ bgcolor: 'success.main' }}>✓</Avatar>
+                <Avatar sx={{ bgcolor: 'error.main' }}>E</Avatar>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Avatar Group</h3>
+              <AvatarGroup max={4}>
+                <Avatar alt="User 1" sx={{ bgcolor: 'primary.main' }}>R</Avatar>
+                <Avatar alt="User 2" sx={{ bgcolor: 'secondary.main' }}>T</Avatar>
+                <Avatar alt="User 3" sx={{ bgcolor: 'success.main' }}>C</Avatar>
+                <Avatar alt="User 4" sx={{ bgcolor: 'warning.main' }}>A</Avatar>
+                <Avatar alt="User 5" sx={{ bgcolor: 'info.main' }}>T</Avatar>
+              </AvatarGroup>
+            </div>
+          </div>
+        );
 
       case "Tooltip":
         return (

@@ -140,6 +140,9 @@ This is a full-stack application built with React, Express, and Material-UI that
   - All components now maintain consistent layout styling between interactive previews and showcase variants
   - Removed duplicate viewport controls from StorybookLayout to avoid confusion
   - Made viewport buttons fully functional with prominent toggle interface (📱💻🖥️) matching Canvas/Docs design
+  - Fixed Badge and Avatar components to match Button component's organized layout structure
+  - Moved showcase content from main components to renderVariantShowcase for Badge and Avatar
+  - All components now have consistent section headers with proper h3 styling (16px, 600 weight, 12px margin-bottom)
 
 ## User Preferences
 
