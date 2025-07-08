@@ -274,20 +274,60 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
         );
 
       case "Badge":
-        return (
-          <Badge 
-            badgeContent={controls.badgeContent || 4}
-            color={controls.color || "primary"}
-            variant={controls.variant || "standard"}
-            invisible={controls.invisible || false}
-          >
-            {controls.children === "avatar" ? (
-              <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
-            ) : (
+        if (story === "Basic") {
+          return (
+            <Badge badgeContent={4} color="primary">
               <MailIcon />
-            )}
-          </Badge>
-        );
+            </Badge>
+          );
+        } else if (story === "Dot") {
+          return (
+            <Badge variant="dot" color="error">
+              <MailIcon />
+            </Badge>
+          );
+        } else if (story === "Custom") {
+          return (
+            <Badge badgeContent={100} color="secondary">
+              <MailIcon />
+            </Badge>
+          );
+        } else if (story === "ColorVariants") {
+          return (
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <Badge badgeContent={4} color="primary"><MailIcon /></Badge>
+              <Badge badgeContent={4} color="secondary"><MailIcon /></Badge>
+              <Badge badgeContent={4} color="success"><MailIcon /></Badge>
+              <Badge badgeContent={4} color="error"><MailIcon /></Badge>
+            </div>
+          );
+        } else if (story === "WithAvatar") {
+          return (
+            <div style={{ display: 'flex', gap: '16px', flexWrap: 'wrap', alignItems: 'center' }}>
+              <Badge badgeContent={4} color="primary">
+                <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
+              </Badge>
+              <Badge variant="dot" color="error">
+                <Avatar sx={{ bgcolor: 'secondary.main' }}>JS</Avatar>
+              </Badge>
+            </div>
+          );
+        } else {
+          return (
+            <Badge 
+              badgeContent={controls.badgeContent || 4}
+              color={controls.color || "primary"}
+              variant={controls.variant || "standard"}
+              invisible={controls.invisible || false}
+            >
+              {controls.children === "avatar" ? (
+                <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
+              ) : (
+                <MailIcon />
+              )}
+            </Badge>
+          );
+        }
 
       case "Progress":
         return (
@@ -1999,17 +2039,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
                 <Badge color="error" variant="dot"><MailIcon /></Badge>
               </div>
             </div>
-            <div>
-              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Avatar</h3>
-              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
-                <Badge badgeContent={4} color="primary">
-                  <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
-                </Badge>
-                <Badge color="error" variant="dot">
-                  <Avatar sx={{ bgcolor: 'secondary.main' }}>JS</Avatar>
-                </Badge>
-              </div>
-            </div>
+
           </div>
         );
 
