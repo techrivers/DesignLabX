@@ -3403,7 +3403,423 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           </div>
         );
 
+      case "Chip":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Chips</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Chip label="Default" />
+                <Chip label="Clickable" clickable />
+                <Chip label="Deletable" onDelete={() => {}} />
+                <Chip label="Clickable & Deletable" clickable onDelete={() => {}} />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Chip label="Filled" variant="filled" />
+                <Chip label="Outlined" variant="outlined" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Chip label="Default" color="default" />
+                <Chip label="Primary" color="primary" />
+                <Chip label="Secondary" color="secondary" />
+                <Chip label="Success" color="success" />
+                <Chip label="Error" color="error" />
+                <Chip label="Warning" color="warning" />
+                <Chip label="Info" color="info" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Chip label="Small" size="small" />
+                <Chip label="Medium" size="medium" />
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Icons & Avatars</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                <Chip label="With Icon" icon={<FavoriteIcon />} />
+                <Chip label="With Avatar" avatar={<Avatar>M</Avatar>} />
+                <Chip label="Disabled" disabled />
+              </div>
+            </div>
+          </div>
+        );
 
+      case "Table":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Table</h3>
+              <TableContainer component={Paper} sx={{ maxWidth: 650 }}>
+                <Table size="medium">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Name</TableCell>
+                      <TableCell align="right">Age</TableCell>
+                      <TableCell align="right">City</TableCell>
+                      <TableCell align="right">Score</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>John Doe</TableCell>
+                      <TableCell align="right">30</TableCell>
+                      <TableCell align="right">New York</TableCell>
+                      <TableCell align="right">95</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Jane Smith</TableCell>
+                      <TableCell align="right">25</TableCell>
+                      <TableCell align="right">Los Angeles</TableCell>
+                      <TableCell align="right">87</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Bob Johnson</TableCell>
+                      <TableCell align="right">35</TableCell>
+                      <TableCell align="right">Chicago</TableCell>
+                      <TableCell align="right">92</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Dense Table</h3>
+              <TableContainer component={Paper} sx={{ maxWidth: 650 }}>
+                <Table size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Product</TableCell>
+                      <TableCell align="right">Price</TableCell>
+                      <TableCell align="right">Stock</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>Laptop</TableCell>
+                      <TableCell align="right">$999</TableCell>
+                      <TableCell align="right">15</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Phone</TableCell>
+                      <TableCell align="right">$699</TableCell>
+                      <TableCell align="right">25</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Tablet</TableCell>
+                      <TableCell align="right">$399</TableCell>
+                      <TableCell align="right">8</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Status Indicators</h3>
+              <TableContainer component={Paper} sx={{ maxWidth: 650 }}>
+                <Table>
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>Task</TableCell>
+                      <TableCell>Status</TableCell>
+                      <TableCell align="right">Priority</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    <TableRow>
+                      <TableCell>Design Homepage</TableCell>
+                      <TableCell><Chip label="In Progress" color="warning" size="small" /></TableCell>
+                      <TableCell align="right">High</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Code Review</TableCell>
+                      <TableCell><Chip label="Complete" color="success" size="small" /></TableCell>
+                      <TableCell align="right">Medium</TableCell>
+                    </TableRow>
+                    <TableRow>
+                      <TableCell>Testing</TableCell>
+                      <TableCell><Chip label="Pending" color="default" size="small" /></TableCell>
+                      <TableCell align="right">Low</TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            </div>
+          </div>
+        );
+
+      case "Avatar":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Avatars</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Avatar>H</Avatar>
+                <Avatar><PersonIcon /></Avatar>
+                <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Sizes</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Avatar sx={{ width: 24, height: 24, fontSize: '12px' }}>S</Avatar>
+                <Avatar sx={{ width: 32, height: 32, fontSize: '14px' }}>M</Avatar>
+                <Avatar sx={{ width: 40, height: 40 }}>D</Avatar>
+                <Avatar sx={{ width: 56, height: 56 }}>L</Avatar>
+                <Avatar sx={{ width: 64, height: 64 }}>XL</Avatar>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Avatar variant="circular">C</Avatar>
+                <Avatar variant="rounded">R</Avatar>
+                <Avatar variant="square">S</Avatar>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Avatar sx={{ bgcolor: 'primary.main' }}>P</Avatar>
+                <Avatar sx={{ bgcolor: 'secondary.main' }}>S</Avatar>
+                <Avatar sx={{ bgcolor: 'success.main' }}>✓</Avatar>
+                <Avatar sx={{ bgcolor: 'error.main' }}>E</Avatar>
+                <Avatar sx={{ bgcolor: 'warning.main' }}>W</Avatar>
+                <Avatar sx={{ bgcolor: 'info.main' }}>I</Avatar>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Avatar Group</h3>
+              <AvatarGroup max={4}>
+                <Avatar alt="Remy Sharp" sx={{ bgcolor: 'primary.main' }}>R</Avatar>
+                <Avatar alt="Travis Howard" sx={{ bgcolor: 'secondary.main' }}>T</Avatar>
+                <Avatar alt="Cindy Baker" sx={{ bgcolor: 'success.main' }}>C</Avatar>
+                <Avatar alt="Agnes Walker" sx={{ bgcolor: 'warning.main' }}>A</Avatar>
+                <Avatar alt="Trevor Henderson" sx={{ bgcolor: 'info.main' }}>T</Avatar>
+              </AvatarGroup>
+            </div>
+          </div>
+        );
+
+      case "Badge":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Badges</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} color="primary">
+                  <MailIcon />
+                </Badge>
+                <Badge badgeContent={10} color="secondary">
+                  <MailIcon />
+                </Badge>
+                <Badge badgeContent={100} color="error">
+                  <MailIcon />
+                </Badge>
+                <Badge badgeContent={1000} color="warning">
+                  <MailIcon />
+                </Badge>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Colors</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} color="primary"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="secondary"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="success"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="error"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="warning"><MailIcon /></Badge>
+                <Badge badgeContent={4} color="info"><MailIcon /></Badge>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Variants</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} variant="standard"><MailIcon /></Badge>
+                <Badge badgeContent={4} variant="dot"><MailIcon /></Badge>
+                <Badge color="error" variant="dot"><MailIcon /></Badge>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Maximum Value</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={99} color="primary"><MailIcon /></Badge>
+                <Badge badgeContent={100} color="primary"><MailIcon /></Badge>
+                <Badge badgeContent={1000} max={999} color="primary"><MailIcon /></Badge>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>With Avatar</h3>
+              <div style={{ display: 'flex', gap: '24px', flexWrap: 'wrap', alignItems: 'center' }}>
+                <Badge badgeContent={4} color="primary">
+                  <Avatar sx={{ bgcolor: 'primary.main' }}>JD</Avatar>
+                </Badge>
+                <Badge color="error" variant="dot">
+                  <Avatar sx={{ bgcolor: 'secondary.main' }}>JS</Avatar>
+                </Badge>
+                <Badge badgeContent=" " color="success" variant="dot">
+                  <Avatar sx={{ bgcolor: 'info.main' }}>AB</Avatar>
+                </Badge>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "Timeline":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic Timeline</h3>
+              <div style={{ maxWidth: 400 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#1976d2', marginTop: '4px', flexShrink: 0 }}></div>
+                    <div style={{ flex: 1 }}>
+                      <Typography variant="body1" fontWeight="medium">Project Started</Typography>
+                      <Typography variant="body2" color="text.secondary">9:30 AM</Typography>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#388e3c', marginTop: '4px', flexShrink: 0 }}></div>
+                    <div style={{ flex: 1 }}>
+                      <Typography variant="body1" fontWeight="medium">Design Phase Completed</Typography>
+                      <Typography variant="body2" color="text.secondary">2:30 PM</Typography>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ width: '12px', height: '12px', borderRadius: '50%', backgroundColor: '#f57c00', marginTop: '4px', flexShrink: 0 }}></div>
+                    <div style={{ flex: 1 }}>
+                      <Typography variant="body1" fontWeight="medium">Development In Progress</Typography>
+                      <Typography variant="body2" color="text.secondary">4:00 PM</Typography>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Timeline with Icons</h3>
+              <div style={{ maxWidth: 400 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#e3f2fd', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <PersonIcon style={{ fontSize: '16px', color: '#1976d2' }} />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <Typography variant="body1" fontWeight="medium">User Registration</Typography>
+                      <Typography variant="body2" color="text.secondary">New user joined the platform</Typography>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#e8f5e8', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <CheckIcon style={{ fontSize: '16px', color: '#388e3c' }} />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <Typography variant="body1" fontWeight="medium">Email Verified</Typography>
+                      <Typography variant="body2" color="text.secondary">Email verification completed</Typography>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'flex-start', gap: '12px' }}>
+                    <div style={{ width: '32px', height: '32px', borderRadius: '50%', backgroundColor: '#fff3e0', display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0 }}>
+                      <SettingsIcon style={{ fontSize: '16px', color: '#f57c00' }} />
+                    </div>
+                    <div style={{ flex: 1 }}>
+                      <Typography variant="body1" fontWeight="medium">Profile Setup</Typography>
+                      <Typography variant="body2" color="text.secondary">Profile configuration in progress</Typography>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+
+      case "TreeView":
+        return (
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '24px', marginTop: '32px' }}>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>Basic TreeView</h3>
+              <div style={{ maxWidth: 300 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                    <ExpandMoreIcon style={{ fontSize: '16px' }} />
+                    <FolderIcon style={{ fontSize: '16px', color: '#f57c00' }} />
+                    <Typography variant="body2">Applications</Typography>
+                  </div>
+                  <div style={{ marginLeft: '24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                      <div style={{ width: '16px' }}></div>
+                      <InsertDriveFileIcon style={{ fontSize: '16px', color: '#42a5f5' }} />
+                      <Typography variant="body2">app.js</Typography>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                      <div style={{ width: '16px' }}></div>
+                      <InsertDriveFileIcon style={{ fontSize: '16px', color: '#42a5f5' }} />
+                      <Typography variant="body2">index.html</Typography>
+                    </div>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                    <ChevronRightIcon style={{ fontSize: '16px' }} />
+                    <FolderIcon style={{ fontSize: '16px', color: '#f57c00' }} />
+                    <Typography variant="body2">Documents</Typography>
+                  </div>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                    <ExpandMoreIcon style={{ fontSize: '16px' }} />
+                    <FolderIcon style={{ fontSize: '16px', color: '#f57c00' }} />
+                    <Typography variant="body2">Desktop</Typography>
+                  </div>
+                  <div style={{ marginLeft: '24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                      <div style={{ width: '16px' }}></div>
+                      <InsertDriveFileIcon style={{ fontSize: '16px', color: '#66bb6a' }} />
+                      <Typography variant="body2">notes.txt</Typography>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                      <ChevronRightIcon style={{ fontSize: '16px' }} />
+                      <FolderIcon style={{ fontSize: '16px', color: '#f57c00' }} />
+                      <Typography variant="body2">Projects</Typography>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div>
+              <h3 style={{ fontSize: '16px', fontWeight: '600', marginBottom: '12px', color: '#333' }}>TreeView with Selection</h3>
+              <div style={{ maxWidth: 300 }}>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer', backgroundColor: '#e3f2fd', borderRadius: '4px' }}>
+                    <ExpandMoreIcon style={{ fontSize: '16px' }} />
+                    <FolderIcon style={{ fontSize: '16px', color: '#1976d2' }} />
+                    <Typography variant="body2" color="primary">Components</Typography>
+                  </div>
+                  <div style={{ marginLeft: '24px', display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                      <div style={{ width: '16px' }}></div>
+                      <InsertDriveFileIcon style={{ fontSize: '16px', color: '#42a5f5' }} />
+                      <Typography variant="body2">Button.tsx</Typography>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer', backgroundColor: '#fff3e0', borderRadius: '4px' }}>
+                      <div style={{ width: '16px' }}></div>
+                      <InsertDriveFileIcon style={{ fontSize: '16px', color: '#f57c00' }} />
+                      <Typography variant="body2" color="warning.main">Card.tsx</Typography>
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '8px', padding: '4px 8px', cursor: 'pointer' }}>
+                      <div style={{ width: '16px' }}></div>
+                      <InsertDriveFileIcon style={{ fontSize: '16px', color: '#42a5f5' }} />
+                      <Typography variant="body2">Table.tsx</Typography>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
 
       default:
         return (
