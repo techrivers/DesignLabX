@@ -146,7 +146,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
   const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [selectValue, setSelectValue] = useState(controls.multiple ? [] : "");
+  const [selectValue, setSelectValue] = useState<any>(controls.multiple ? [] : "");
   
   // Additional state variables for interactive components
   const [checkboxChecked, setCheckboxChecked] = useState(false);
@@ -582,7 +582,7 @@ export function ComponentPreview({ component, story, controls, viewport, zoom }:
           >
             <InputLabel>{controls.label || "Select"}</InputLabel>
             <Select 
-              value={selectValue} 
+              value={controls.multiple ? (Array.isArray(selectValue) ? selectValue : []) : (Array.isArray(selectValue) ? "" : selectValue)} 
               label={controls.label || "Select"}
               multiple={controls.multiple || false}
               onChange={(event) => {
